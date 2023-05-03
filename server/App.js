@@ -7,15 +7,14 @@ const bcrypt = require("bcrypt");
 require("dotenv").config(".env");
 require('./config/db')
 
+const AuthRoute = require("./routes/Auth.route");
+
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post('/user/register', async (req, res, next) => {
-
-    res.send('User has registered account')
-})
+app.use("/auth", AuthRoute);
 
 app.use((error, req, res, next) => {
     console.error("SERVER ERROR: ", error);
