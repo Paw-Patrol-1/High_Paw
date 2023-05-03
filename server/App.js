@@ -5,7 +5,8 @@ const morgan = require("morgan");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 require("dotenv").config(".env");
-require('./config/db')
+require('./config/db.config');
+const cookieParser=require('cookie-parser');
 
 const AuthRoute = require("./routes/Auth.route");
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use("/auth", AuthRoute);
 

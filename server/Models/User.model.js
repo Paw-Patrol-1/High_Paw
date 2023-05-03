@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
+const jwt=require('jsonwebtoken');
+require("dotenv").config();
+const { JWT_SECRET } = process.env;
 
 const UserSchema = new Schema({
   email: {
@@ -12,6 +15,15 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true,
+    minlength:8,
+  },
+  confirmPassword:{
+    type:String,
+    required: true,
+    minlength:8,
+  },
+  token:{
+    type: String
   },
   address: {
     type: String,
@@ -40,11 +52,16 @@ const UserSchema = new Schema({
 });
 
 UserSchema.pre("save", async function (next) {
+  let user = this;
+
     try {
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(this.password, salt);
-      this.password = hashedPassword;
-      next();
+      if(user.isModified('password')){
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(user.password, salt);
+        user.password = hashedPassword;
+        user.confirmPassword = hashedPassword;
+        next();
+      }
     } catch (error) {
       next(error);
     }
@@ -56,6 +73,15 @@ UserSchema.methods.isValidPassword = async function (password) {
     } catch (error) {
       throw error;
     }
+};
+
+// generate token
+UserSchema.methods.generateToken = async function (){
+  let user = this;
+  let token = jwt.sign(user._id.toHexString(), JWT_SECRET);
+
+  user.token = token;
+
 };
 
 const User = mongoose.model("user", UserSchema);

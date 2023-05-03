@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+router.get('/', async (req, res, next) => {
+    res.status(200).send("Welcome to the login, register and logout APIs")
+})
+
 router.post("/register", async (req, res, next) => {
     
     res.send('register route')
