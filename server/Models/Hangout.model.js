@@ -10,7 +10,7 @@ const HangoutSchema = new Schema({
       type: Number,
       required: true,
     },
-    userID: [{
+    userId: [{
         type: Schema.Types.ObjectId,
         ref: "user"
     }]

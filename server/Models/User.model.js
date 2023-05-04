@@ -53,7 +53,7 @@ const UserSchema = new Schema({
 
 UserSchema.pre("save", async function (next) {
   let user = this;
-
+    // hashes password
     try {
       if(user.isModified('password')){
         const salt = await bcrypt.genSalt(10);
@@ -67,6 +67,7 @@ UserSchema.pre("save", async function (next) {
     }
 });
 
+// compares user input password to hashed password
 UserSchema.methods.isValidPassword = async function (password) {
     try {
       return await bcrypt.compare(password, this.password);
@@ -77,12 +78,41 @@ UserSchema.methods.isValidPassword = async function (password) {
 
 // generate token
 UserSchema.methods.generateToken = async function (){
-  let user = this;
-  let token = jwt.sign(user._id.toHexString(), JWT_SECRET);
-
-  user.token = token;
-
+  try {
+    let user = this;
+    let token = jwt.sign(user._id.toHexString(), JWT_SECRET);
+  
+    user.token = token;
+    user.save(function(err){
+      if(err) return (err);
+  })
+  } catch (error) {
+    throw error;
+  }
 };
+
+// find and verify token
+UserSchema.statics.findToken = async function (token, decode){
+  let user = this;
+
+  try{
+    jwt.verify(token, JWT_SECRET);
+    user.findOne({"_id": decode, "token": token})
+  } catch (error){
+    throw error
+  }
+}
+
+// delete token
+UserSchema.methods.deleteToken = async function () {
+  let user = this;
+
+  try{
+    user.update({$unset : {token :1}})
+  } catch(error) {
+    throw error
+  }
+}
 
 const User = mongoose.model("user", UserSchema);
 module.exports = User;
