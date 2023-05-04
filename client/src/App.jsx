@@ -1,10 +1,14 @@
+import Community from "./components/Community";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline text-cyan-400 text-center">
-        Hello world!
-      </h1>
-    </>
+{/* 
+      <Community /> */}
+      {/* <Login /> */}
+      <Signup /> 
+      </>
   );
 }
 
