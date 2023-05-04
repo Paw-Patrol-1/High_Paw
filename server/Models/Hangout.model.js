@@ -10,16 +10,12 @@ const HangoutSchema = new Schema({
       type: Number,
       required: true,
     },
-    attendees: [{
+    userID: [{
         type: Schema.Types.ObjectId,
         ref: "user"
-    }],
-    owner: {
-        type: Schema.Types.ObjectId,
-        ref: "user"
-    }
+    }]
 });
 
 
-const Dog = mongoose.model("dog", DogSchema);
-module.exports = Dog;
+const Hangout = mongoose.model("hangout", HangoutSchema);
+module.exports = Hangout;

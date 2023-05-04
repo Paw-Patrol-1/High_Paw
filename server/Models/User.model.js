@@ -37,18 +37,18 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  age: { // Do we want to keep this
+  age: {
     type: Number,
+    required: true,
+  },
+  breed: {
+    type: String,
     required: true,
   },
   name: {
     type: String,
     required: true,
-  },
-  dogs: [{
-    type: Schema.Types.ObjectId,
-    ref: "dog"
-  }]
+  }
 });
 
 UserSchema.pre("save", async function (next) {
