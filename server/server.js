@@ -1,6 +1,6 @@
 const { app } = require("./App");
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000 } = process.env || 3000;
 
 app.listen(PORT, () => {
   try {
