@@ -16,8 +16,6 @@ module.exports = {
       const result = await authSchema.validateAsync(req.body);
       console.log(result);
 
-      // if (result.password!=result.confirmPassword) return res.status(400).send({message:"password does not match"})
-
       const doesExist = await User.findOne({ email: result.email });
       if (doesExist)
         throw createError.Conflict(`${result.email} is already regsistered`);

@@ -2,14 +2,12 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 require("dotenv").config(".env");
 require("./config/db.config");
 const cookieParser = require("cookie-parser");
-require("./helpers/init_redis");
 
 const AuthRoute = require("./routes/Auth.route");
+const HangoutRoute = require("./routes/Hangout.route");
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -18,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/auth", AuthRoute);
+app.use("/hangout", HangoutRoute);
 
 app.use((error, req, res, next) => {
   console.error("SERVER ERROR: ", error);
