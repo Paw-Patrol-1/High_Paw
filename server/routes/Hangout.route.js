@@ -11,6 +11,10 @@ router.get("/:id", HangoutController.allHangouts);
 
 router.post("/create", HangoutController.newHangout);
 
+// edit a hangout 
+router.put("/edit")
+
+// when hangout is cancelled or no lonfer needed in db
 router.delete("/:id", HangoutController.deleteHangout);
 
 module.exports = router;

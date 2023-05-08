@@ -29,8 +29,17 @@ const hangoutSchema = Joi.object({
   userId: Joi.array().items(Joi.string()),
 });
 
+const profileSchema = Joi.object({
+    name: Joi.string().required(),
+    breed: Joi.string().required(),
+    age: Joi.number().required(),
+    picture: Joi.string().required(),
+    city: Joi.string().required(),
+})
+
 module.exports = {
   authSchema,
   loginSchema,
   hangoutSchema,
+  profileSchema
 };
