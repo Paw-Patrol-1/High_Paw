@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
 
 function Signup() {
   const [form, setForm] = useState({
@@ -26,8 +27,17 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    const obj = form;
+    delete obj.confirmPassword;
+    console.log(obj);
+    axios
+      .post("http://localhost:8000/auth/register", obj)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {});
   };
+
   return (
     <div className="parentContainer flex items-center w-auto h-auto">
       {/* <div className='parentSvg' style={{border: "1px solid red", height: "100vh", width: "100vw"}}> 
