@@ -34,34 +34,33 @@ module.exports = {
   editProfile: async (req, res, next) => {
     try {
       const result = await profileSchema.validateAsync(req.body);
+      // console.log("result", result);
       const user = await User.findById(req.params.id);
+      // console.log("user", user);
 
       if (result && user) {
-        await User.updateMany(
-          {
-            name: user.name,
-            breed: user.breed,
-            age: user.age,
-            picture: user.picture,
-            city: user.city,
-          },
-          {
-            $set: {
-              name: result.name,
-              breed: result.breed,
-              age: result.age,
-              picture: result.picture,
-              city: result.city,
-            },
-          }
-        );
+        user.name = result.name || user.name;
+        user.breed = result.breed || user.breed;
+        user.age = result.age || user.age;
+        user.picture = result.picture || user.picture
+        user.city = result.city || user.city;
+
+        // if (result.password && result.confirmPassword) {
+        //   user.password = result.password,
+        //   user.confirmPassword = result.confirmPassword
+        // }
+
+        const updatedUser = await user.save();
+
         res.send({
-          name: user.name,
-          breed: user.breed,
-          age: user.age,
-          picture: user.picture,
-          city: user.city,
+          // _id: updatedUser._id,
+          name: updatedUser.name,
+          breed: updatedUser.breed,
+          age: updatedUser.age,
+          picture: updatedUser.picture,
+          city: updatedUser.city,
         });
+         
       } else {
         res.status(404);
         throw new Error("Error Updating Profile Details");

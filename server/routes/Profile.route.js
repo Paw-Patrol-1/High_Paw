@@ -7,7 +7,7 @@ const ProfileController = require("../controllers/Profile.Controller");
 
 router.get("/:id", verifyAccessToken, ProfileController.profileDetails);
 
-router.put("/edit/:id", verifyAccessToken, ProfileController.editProfile);
+router.post("/edit/:id", verifyAccessToken, ProfileController.editProfile);
 
 // ? edit profile
 // router.delete("/remove",);
