@@ -5,8 +5,13 @@ import Signup from "./components/Signup";
 import { Route, Routes } from "react-router-dom";
 import CreateHangout from "./components/CreateHangout";
 import Home from "./components/Home";
+import { useContext, createContext, useState } from "react";
+import Profile from "./components/Profile";
+
+export const UserContext = createContext();
 
 function App() {
+  const [user, setUser] = useState(null);
   // importing env variables(need no installation of dotenv package for this to work, just need to add .env file in root directory, because of VITE_ prefix)
   const API_KEY = import.meta.env.VITE_MAPBOX_API;
   console.log(import.meta.env.VITE_MAPBOX_API);
@@ -21,13 +26,21 @@ function App() {
 
   return (
     <div className="parent-container">
-      <Navbar />
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/create_hangout" element={<CreateHangout />} />
-      </Routes>
+      <UserContext.Provider
+        value={{
+          user: user,
+          setUser: setUser,
+        }}
+      >
+        <Navbar />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/create_hangout" element={<CreateHangout />} />
+        </Routes>
+      </UserContext.Provider>
     </div>
   );
 }

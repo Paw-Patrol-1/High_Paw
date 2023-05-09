@@ -1,9 +1,13 @@
 import React from "react";
 import { ReactComponent as PawSteps } from "../assets/pawSteps.svg";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../App";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -22,7 +26,8 @@ function Login() {
     axios
       .post("http://localhost:8000/auth/login", form)
       .then((res) => {
-        console.log(res.data);
+        setUser(res.data);
+        navigate("/profile");
       })
       .catch((err) => {});
   };

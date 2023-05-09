@@ -2,8 +2,18 @@ import React from "react";
 //
 import { ReactComponent as Logo } from "../assets/Paw_Print.svg";
 import { Link } from "react-router-dom";
+import { UserContext } from "../App";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setUser(null);
+    navigate("/login");
+  };
   return (
     <div className="h-auto flex flex-row justify-between w-full">
       {/* set dimension to div holding the svg */}
@@ -21,9 +31,29 @@ function Navbar() {
       </div>
 
       <div className="logoutBtn mr-3">
-        <button className="outline outline-offset-2 rounded-full mt-2   outline-slate-700 px-4">
-          Logout
-        </button>
+        {user ? (
+          <button
+            className="outline outline-offset-2 rounded-full mt-2   outline-slate-700 px-4"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        ) : (
+          <>
+            <Link
+              className="outline outline-offset-2 rounded-full mt-2   outline-slate-700 px-4"
+              to="/login"
+            >
+              Login
+            </Link>
+            <Link
+              className="outline outline-offset-2 rounded-full mt-2   outline-slate-700 px-4"
+              to="/signup"
+            >
+              Register
+            </Link>{" "}
+          </>
+        )}
       </div>
     </div>
   );
