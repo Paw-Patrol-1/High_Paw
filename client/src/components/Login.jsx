@@ -1,14 +1,16 @@
 import React from 'react';
-import {ReactComponent as PawSteps } from '../assets/pawSteps.svg'
+import {ReactComponent as PawSteps } from './assets/pawSteps.svg'
+// import pawSteps from '../assets/pawSteps.svg'
 
 function Login() {
   return (
 
-    <div className='parentContainer flex items-center w-auto h-auto'>
-        {/* <div className='parentSvg' style={{border: "1px solid red", height: "100vh", width: "100vw"}}> 
-        <PawSteps style={{height: "100%"}} > */}
-        <form className= 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-2/5 flex flex-col mx-auto my-20 z-80'>
-        <h1 className='login font-semibold mb-4' >Login</h1>
+    <div className='parentContainer flex h-screen w-full items-center justify-center bg-cover bg-no-repeat' PawSteps >
+
+        <PawSteps  style={{height: "100%" }}  >
+          
+        <form className= 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-2/5 flex flex-col mx-auto my-20 z-50  '>
+        <h1 className='login font-semibold mb-4' >Login</h1> 
         <div className='childOne mb-4'>
             <input className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder='email'/>
         </div>
@@ -21,8 +23,11 @@ function Login() {
         </div>
         
         </form>
-        {/* </PawSteps>
-        </div> */}
+        
+        </PawSteps>
+        
+
+        {/* </div> */}
    
 
 
