@@ -10,10 +10,11 @@ import { UserContext } from "../App";
 function Home() {
   // importing env variables(need no installation of dotenv package for this to work, just need to add .env file in root directory, because of VITE_ prefix)
   const API_KEY = import.meta.env.VITE_MAPBOX_API;
-  console.log(import.meta.env.VITE_MAPBOX_API);
+  // console.log(import.meta.env.VITE_MAPBOX_API);
 
   const { user } = useContext(UserContext);
   useEffect(() => {
+    // if user is null, redirect to login page
     if (!user) {
       window.location.href = "/login";
     }

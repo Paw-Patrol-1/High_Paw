@@ -11,7 +11,10 @@ function Navbar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    // remove user from state
     setUser(null);
+    // remove user from local storage
+    localStorage.removeItem("user");
     navigate("/login");
   };
   return (

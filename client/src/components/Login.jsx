@@ -27,6 +27,7 @@ function Login() {
       .post("http://localhost:8000/auth/login", form)
       .then((res) => {
         setUser(res.data);
+        localStorage.setItem("user", JSON.stringify(res.data));
         navigate("/profile");
       })
       .catch((err) => {});

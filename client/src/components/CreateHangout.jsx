@@ -6,6 +6,8 @@ import { useMap } from "react-leaflet/hooks";
 import { Marker } from "react-leaflet/Marker";
 import { Popup } from "react-leaflet/Popup";
 import { useMapEvents } from "react-leaflet";
+import { UserContext } from "../App";
+import { useContext, useEffect } from "react";
 
 const icon = L.icon({
   iconSize: [25, 41],
@@ -15,28 +17,32 @@ const icon = L.icon({
   shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
 });
 
-function MyComponent({ saveMarkers }) {
+function MyComponent({ saveMarker }) {
   const map = useMapEvents({
     click: (e) => {
       const { lat, lng } = e.latlng;
       L.marker([lat, lng], { icon }).addTo(map);
-      saveMarkers([lat, lng]);
+      saveMarker([lat, lng]);
     },
   });
   return null;
 }
 
 function CreateHangout() {
+  const { user } = useContext(UserContext);
+  useEffect(() => {
+    // if user is null, redirect to login page
+    if (!user) {
+      window.location.href = "/login";
+    }
+  }, [user]);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [data, setData] = useState({
-    markers: [[40.7, -74]],
-    data: [],
-  });
+  const [marker, setMarker] = useState(null);
 
-  const saveMarkers = (newMarkerCoords) => {
-    const obj = [...data.data, newMarkerCoords];
-    setData((prevState) => ({ ...prevState, obj }));
+  const saveMarker = (newMarkerCoords) => {
+    setMarker(newMarkerCoords);
   };
   return (
     <div className="parent_div flex items-center bg-slate-50 flex-col h-auto">
@@ -93,7 +99,7 @@ function CreateHangout() {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <MyComponent saveMarkers={saveMarkers} />
+              <MyComponent saveMarker={saveMarker} />
               {/* <Marker position={[40.83335, -73.985023]}>
                 <Popup>
                   A pretty CSS3 popup. <br /> Easily customizable.
