@@ -23,6 +23,7 @@ function App() {
     <div className="parent-container">
       <Navbar />
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Home />} />
         <Route path="/create_hangout" element={<CreateHangout />} />

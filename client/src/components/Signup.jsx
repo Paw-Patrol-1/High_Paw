@@ -16,9 +16,6 @@ function Signup() {
   });
 
   const handleChange = (e) => {
-    var name = e.target.getAttribute("name"); //'HOME'
-
-    console.dir(e.target);
     setForm((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -27,11 +24,9 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const obj = form;
-    delete obj.confirmPassword;
-    console.log(obj);
+
     axios
-      .post("http://localhost:8000/auth/register", obj)
+      .post("http://localhost:8000/auth/register", form)
       .then((res) => {
         console.log(res.data);
       })
@@ -69,7 +64,7 @@ function Signup() {
         </div>
         <div className="childThree mb-2">
           <input
-            className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="number"
             placeholder="Age"
             value={form.age}
@@ -77,6 +72,20 @@ function Signup() {
             name="age"
           />
         </div>
+        {/* <div className="relative mb-3" data-te-input-wrapper-init>
+          <input
+            type="number"
+            className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+            id="exampleFormControlInputNumber"
+            placeholder="Example label"
+          />
+          <label
+            htmlFor="exampleFormControlInputNumber"
+            className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+          >
+            Number input
+          </label>
+        </div> */}
         <div className="childFour mb-2">
           <label htmlFor="img">Upload image</label>
           <input
