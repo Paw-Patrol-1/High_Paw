@@ -12,10 +12,10 @@ const authSchema = Joi.object({
   name: Joi.string().required(),
   breed: Joi.string().required(),
   age: Joi.number().required(),
-  picture: Joi.string().required(),
+  // picture: Joi.string().required(),
   city: Joi.string().required(),
   address: Joi.string().required(),
-  latLong: Joi.array().items(Joi.number()).required(),
+  // latLong: Joi.array().items(Joi.number()).required(),
 });
 
 const loginSchema = Joi.object({
@@ -29,7 +29,7 @@ const hangoutSchema = Joi.object({
   city: Joi.string().required(),
   address: Joi.string().required(),
   // userId: Joi.objectId().required(),
-  latLong: Joi.array().items(Joi.number()).required(),
+  // latLong: Joi.array().items(Joi.number()).required(),
   // joining: Joi.array().items(Joi.objectId()).required(),
 });
 
@@ -43,7 +43,7 @@ const profileSchema = Joi.object({
   name: Joi.string().required(),
   breed: Joi.string().required(),
   age: Joi.number().required(),
-  picture: Joi.string().required(),
+  // picture: Joi.string().required(),
   city: Joi.string().required(),
 });
 
