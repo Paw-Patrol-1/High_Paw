@@ -14,6 +14,7 @@ const authSchema = Joi.object({
   picture: Joi.string().required(),
   city: Joi.string().required(),
   address: Joi.string().required(),
+  latLong: Joi.array().items(Joi.number()).required(),
 });
 
 const loginSchema = Joi.object({
@@ -27,25 +28,27 @@ const hangoutSchema = Joi.object({
   city: Joi.string().required(),
   address: Joi.string().required(),
   userId: Joi.array().items(Joi.string()),
+  latLong: Joi.array().items(Joi.number()).required(),
+  joining: Joi.array().items(Joi.object(Joi.ref())),
 });
 
 const profileSchema = Joi.object({
-    // password: Joi.string().min(8).required(),
-    // confirmPassword: Joi.any()
-    //   .equal(Joi.ref("password"))
-    //   .required()
-    //   .label("Confirm password")
-    //   .messages({ "any.only": "{{#label}} does not match. Please try again" }),
-    name: Joi.string().required(),
-    breed: Joi.string().required(),
-    age: Joi.number().required(),
-    picture: Joi.string().required(),
-    city: Joi.string().required(),
-})
+  // password: Joi.string().min(8).required(),
+  // confirmPassword: Joi.any()
+  //   .equal(Joi.ref("password"))
+  //   .required()
+  //   .label("Confirm password")
+  //   .messages({ "any.only": "{{#label}} does not match. Please try again" }),
+  name: Joi.string().required(),
+  breed: Joi.string().required(),
+  age: Joi.number().required(),
+  picture: Joi.string().required(),
+  city: Joi.string().required(),
+});
 
 module.exports = {
   authSchema,
   loginSchema,
   hangoutSchema,
-  profileSchema
+  profileSchema,
 };
