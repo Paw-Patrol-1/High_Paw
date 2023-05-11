@@ -29,8 +29,23 @@ const hangoutSchema = Joi.object({
   userId: Joi.array().items(Joi.string()),
 });
 
+const profileSchema = Joi.object({
+    // password: Joi.string().min(8).required(),
+    // confirmPassword: Joi.any()
+    //   .equal(Joi.ref("password"))
+    //   .required()
+    //   .label("Confirm password")
+    //   .messages({ "any.only": "{{#label}} does not match. Please try again" }),
+    name: Joi.string().required(),
+    breed: Joi.string().required(),
+    age: Joi.number().required(),
+    picture: Joi.string().required(),
+    city: Joi.string().required(),
+})
+
 module.exports = {
   authSchema,
   loginSchema,
   hangoutSchema,
+  profileSchema
 };

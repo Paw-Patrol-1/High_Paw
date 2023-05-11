@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 
 const AuthRoute = require("./routes/Auth.route");
 const HangoutRoute = require("./routes/Hangout.route");
+const ProfileRoute = require("./routes/Profile.route");
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 app.use("/auth", AuthRoute);
 app.use("/hangout", HangoutRoute);
+app.use("/profile", ProfileRoute);
 
 app.use((error, req, res, next) => {
   console.error("SERVER ERROR: ", error);

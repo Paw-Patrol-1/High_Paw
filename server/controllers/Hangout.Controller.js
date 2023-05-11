@@ -61,4 +61,35 @@ module.exports = {
       next(error);
     }
   },
+  editHangout: async (req, res, next) => {
+    try {
+      const result = await hangoutSchema.validateAsync(req.body);
+
+      const hangout = await Hangout.findById(req.params.id);
+
+      if (result && hangout) {
+        hangout.title = result.title || hangout.title;
+        hangout.description = result.description || hangout.description;
+        hangout.city = result.city || hangout.city;
+        hangout.address = result.address || hangout.address;
+        hangout.userId = result.userId || hangout.userId;
+
+        const updatedHangout = await hangout.save();
+
+        res.send({
+          // _id: updatedHangout._id,
+          title: updatedHangout.title,
+          description: updatedHangout.description,
+          city: updatedHangout.city,
+          address: updatedHangout.address,
+          userId: updatedHangout.userId,
+        });
+      } else {
+        res.status(404);
+        throw new Error("Error Updating Profile Details");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
