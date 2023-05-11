@@ -4,13 +4,21 @@ import { useMap } from "react-leaflet/hooks";
 import { Marker } from "react-leaflet/Marker";
 import { Popup } from "react-leaflet/Popup";
 import Community from "./Community";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { UserContext } from "../App";
 
 function Home() {
   // importing env variables(need no installation of dotenv package for this to work, just need to add .env file in root directory, because of VITE_ prefix)
   const API_KEY = import.meta.env.VITE_MAPBOX_API;
-  console.log(import.meta.env.VITE_MAPBOX_API);
+  // console.log(import.meta.env.VITE_MAPBOX_API);
 
+  const { user } = useContext(UserContext);
+  useEffect(() => {
+    // if user is null, redirect to login page
+    if (!user) {
+      window.location.href = "/login";
+    }
+  }, [user]);
   // useEffect(() => {
   //   fetch(
   //     `https://api.mapbox.com/geocoding/v5/mapbox.places/822 fairview lane, new jersey.json?limit=1&access_token=${API_KEY}`

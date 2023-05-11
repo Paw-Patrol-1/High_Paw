@@ -1,6 +1,6 @@
 # High_Paw
 
-High Paw! 🐾 A Full Stack application where users can create and attend puppy playdates with geolocation. 
+High Paw! 🐾 A Full Stack application where users can create and attend puppy playdates with geolocation.
 
 ## Features
 

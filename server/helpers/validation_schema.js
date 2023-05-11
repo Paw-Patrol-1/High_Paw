@@ -28,9 +28,9 @@ const hangoutSchema = Joi.object({
   description: Joi.string().required(),
   city: Joi.string().required(),
   address: Joi.string().required(),
-  userId: Joi.objectId().required(),
+  // userId: Joi.objectId().required(),
   latLong: Joi.array().items(Joi.number()).required(),
-  joining: Joi.array().items(Joi.objectId()).required(),
+  // joining: Joi.array().items(Joi.objectId()).required(),
 });
 
 const profileSchema = Joi.object({
