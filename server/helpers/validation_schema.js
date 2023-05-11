@@ -1,4 +1,5 @@
 const Joi = require("@hapi/joi");
+Joi.objectId = require("joi-objectid")(Joi);
 
 const authSchema = Joi.object({
   email: Joi.string().email().lowercase().required(),
@@ -29,7 +30,7 @@ const hangoutSchema = Joi.object({
   address: Joi.string().required(),
   userId: Joi.array().items(Joi.string()),
   latLong: Joi.array().items(Joi.number()).required(),
-  joining: Joi.array().items(Joi.object(Joi.ref())),
+  joining: Joi.array().items(Joi.objectId()).required(),
 });
 
 const profileSchema = Joi.object({
