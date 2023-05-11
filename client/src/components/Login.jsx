@@ -1,9 +1,11 @@
+
 import React from "react";
 import { ReactComponent as PawSteps } from "../assets/pawSteps.svg";
 import { useState, useContext } from "react";
 import { UserContext } from "../App";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 
 function Login() {
   const { user, setUser } = useContext(UserContext);
@@ -22,6 +24,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
 
     axios
       .post("http://localhost:8000/auth/login", form)
@@ -74,6 +77,6 @@ function Login() {
         </div> */}
     </div>
   );
-}
+
 
 export default Login;

@@ -5,8 +5,9 @@ const morgan = require("morgan");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 require("dotenv").config(".env");
-require('./config/db.config');
-const cookieParser=require('cookie-parser');
+require("./config/db.config");
+const cookieParser = require("cookie-parser");
+require("./helpers/init_redis");
 
 const AuthRoute = require("./routes/Auth.route");
 
@@ -19,9 +20,9 @@ app.use(cookieParser());
 app.use("/auth", AuthRoute);
 
 app.use((error, req, res, next) => {
-    console.error("SERVER ERROR: ", error);
-    if (res.statusCode < 400) res.status(500);
-    res.send({ error: error.message, name: error.name, message: error.message });
+  console.error("SERVER ERROR: ", error);
+  if (res.statusCode < 400) res.status(500);
+  res.send({ error: error.message, name: error.name, message: error.message });
 });
 
-module.exports = { app }
+module.exports = { app };

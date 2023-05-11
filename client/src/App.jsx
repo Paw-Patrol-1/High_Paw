@@ -1,6 +1,7 @@
 import Community from "./components/Community";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
+import Profile from "./components/Profile";
 import Signup from "./components/Signup";
 import { Route, Routes } from "react-router-dom";
 import CreateHangout from "./components/CreateHangout";
@@ -10,6 +11,7 @@ import Profile from "./components/Profile";
 import Hangouts from "./components/Hangouts";
 
 export const UserContext = createContext();
+
 
 function App() {
   // check for user info in local storage
@@ -29,6 +31,7 @@ function App() {
   // }, []);
 
   return (
+
     <div className="parent-container">
       <UserContext.Provider
         value={{
@@ -46,7 +49,9 @@ function App() {
           <Route path="/hangouts" element={<Hangouts />} />
         </Routes>
       </UserContext.Provider>
+
     </div>
+    
   );
 }
 
