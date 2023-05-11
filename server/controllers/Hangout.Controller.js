@@ -73,6 +73,8 @@ module.exports = {
         hangout.city = result.city || hangout.city;
         hangout.address = result.address || hangout.address;
         hangout.userId = result.userId || hangout.userId;
+        hangout.latLong = result.latLong || hangout.latLong;
+        hangout.joining = result.joining || hangout.joining;
 
         const updatedHangout = await hangout.save();
 
@@ -83,6 +85,8 @@ module.exports = {
           city: updatedHangout.city,
           address: updatedHangout.address,
           userId: updatedHangout.userId,
+          latLong: updatedHangout.latLong,
+          joining: updatedHangout.joining,
         });
       } else {
         res.status(404);

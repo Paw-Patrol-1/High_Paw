@@ -16,6 +16,6 @@ router.delete("/:id", verifyAccessToken, HangoutController.deleteHangout);
 router.put("/:id", verifyAccessToken, HangoutController.editHangout);
 
 // when hangout is cancelled or no lonfer needed in db
-router.delete("/:id", HangoutController.deleteHangout);
+router.delete("/:id", verifyAccessToken, HangoutController.deleteHangout);
 
 module.exports = router;
