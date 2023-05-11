@@ -1,6 +1,7 @@
 import Community from "./components/Community";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
+import Profile from "./components/Profile";
 import Signup from "./components/Signup";
 import { Route, Routes } from "react-router-dom";
 import CreateHangout from "./components/CreateHangout";
@@ -26,7 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-
+        <Route path="/profile" element={<Profile />} />
         <Route path="/create_hangout" element={<CreateHangout />} />
       </Routes>
     </div>
