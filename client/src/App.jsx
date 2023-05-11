@@ -1,10 +1,12 @@
 import Community from "./components/Community";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
+import Profile from "./components/Profile";
 import Signup from "./components/Signup";
 import { Route, Routes } from "react-router-dom";
 import CreateHangout from "./components/CreateHangout";
 import Home from "./components/Home";
+
 
 function App() {
   // importing env variables(need no installation of dotenv package for this to work, just need to add .env file in root directory, because of VITE_ prefix)
@@ -20,13 +22,16 @@ function App() {
   // }, []);
 
   return (
-    <div className="parent-container">
-      <Navbar />
+    <div className="parent-container"  class="bg-white dark:bg-gray-700" >
+      <Navbar  />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/create_hangout" element={<CreateHangout />} />
       </Routes>
     </div>
+    
   );
 }
 
