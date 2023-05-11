@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const { JWT_SECRET } = process.env;
 
 const UserSchema = new Schema({
   email: {
@@ -22,10 +21,6 @@ const UserSchema = new Schema({
     required: true,
     minlength: 8,
   },
-
-  token: {
-    type: String,
-  },
   address: {
     type: String,
     required: true,
@@ -34,10 +29,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  // latLong: {
-  //   type: [Number],
-  //   required: true,
-  // },
+  latLong: {
+    type: [Number],
+    required: true,
+  },
   picture: {
     type: String,
     // required: true,
@@ -52,6 +47,10 @@ const UserSchema = new Schema({
   },
   name: {
     type: String,
+    required: true,
+  },
+  latLong: {
+    type: [Number],
     required: true,
   },
 });
@@ -76,44 +75,6 @@ UserSchema.pre("save", async function (next) {
 UserSchema.methods.isValidPassword = async function (password) {
   try {
     return await bcrypt.compare(password, this.password);
-  } catch (error) {
-    throw error;
-  }
-};
-
-// generate token
-UserSchema.methods.generateToken = async function () {
-  try {
-    let user = this;
-    let token = jwt.sign(user._id.toHexString(), JWT_SECRET);
-
-    user.token = token;
-    user.save(function (err) {
-      if (err) return err;
-    });
-  } catch (error) {
-    throw error;
-  }
-};
-
-// find and verify token
-UserSchema.statics.findToken = async function (token, decode) {
-  let user = this;
-
-  try {
-    jwt.verify(token, JWT_SECRET);
-    user.findOne({ _id: decode, token: token });
-  } catch (error) {
-    throw error;
-  }
-};
-
-// delete token
-UserSchema.methods.deleteToken = async function () {
-  let user = this;
-
-  try {
-    user.update({ $unset: { token: 1 } });
   } catch (error) {
     throw error;
   }

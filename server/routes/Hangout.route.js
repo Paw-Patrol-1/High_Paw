@@ -1,0 +1,21 @@
+const express = require("express");
+const router = express.Router();
+
+const { verifyAccessToken } = require("../helpers/jwt_helper");
+
+const HangoutController = require("../controllers/Hangout.Controller");
+
+router.get("/all", verifyAccessToken, HangoutController.allHangouts);
+
+router.get("/:id", verifyAccessToken, HangoutController.singleHangout);
+
+router.post("/create", verifyAccessToken, HangoutController.newHangout);
+
+router.delete("/:id", verifyAccessToken, HangoutController.deleteHangout);
+// edit a hangout
+router.put("/:id", verifyAccessToken, HangoutController.editHangout);
+
+// when hangout is cancelled or no lonfer needed in db
+router.delete("/:id", verifyAccessToken, HangoutController.deleteHangout);
+
+module.exports = router;

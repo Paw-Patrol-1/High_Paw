@@ -16,8 +16,6 @@ module.exports = {
       const result = await authSchema.validateAsync(req.body);
       console.log(result);
 
-      // if (result.password!=result.confirmPassword) return res.status(400).send({message:"password does not match"})
-
       const doesExist = await User.findOne({ email: result.email });
       if (doesExist)
         throw createError.Conflict(`${result.email} is already regsistered`);
@@ -26,7 +24,7 @@ module.exports = {
       const savedUser = await user.save();
       const accessToken = await signAccessToken(savedUser.id);
       const refreshToken = await signRefreshToken(savedUser.id);
-      res.send({ accessToken, refreshToken });
+      res.send({ accessToken, refreshToken, user });
     } catch (error) {
       if (error.isJoi === true) res.status(422);
       next(error);
