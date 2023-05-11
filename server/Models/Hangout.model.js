@@ -18,11 +18,10 @@ const HangoutSchema = new Schema({
     type: String,
     required: true,
   },
-  userId: [
-    {
-      type: String,
-    },
-  ],
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+  },
   latLong: {
     type: [Number],
     require: true,
