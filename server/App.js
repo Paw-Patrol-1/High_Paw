@@ -3,7 +3,6 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 require("dotenv").config(".env");
-require("./config/db.config");
 const cookieParser = require("cookie-parser");
 
 const AuthRoute = require("./routes/Auth.route");

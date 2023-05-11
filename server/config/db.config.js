@@ -7,12 +7,12 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => {
+  .then(async () => {
     console.log("mongodb connected");
   })
   .catch((err) => console.log(err.message));
 
-mongoose.connection.on("connected", () => {
+mongoose.connection.on("connected", async () => {
   console.log("Mongoose connected to db");
 });
 

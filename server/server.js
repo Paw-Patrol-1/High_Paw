@@ -1,4 +1,6 @@
 const { app } = require("./App");
+require("./config/db.config");
+require("redis");
 
 const { PORT = 3000 } = process.env || 3000;
 

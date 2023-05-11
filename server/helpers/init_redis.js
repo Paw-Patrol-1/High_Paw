@@ -8,19 +8,19 @@ const client = redis.createClient({
   legacyMode: true,
 });
 
-client.on("connect", () => {
+client.on("connect", async () => {
   console.log("Client connected to redis");
 });
 
-client.on("ready", () => {
+client.on("ready", async () => {
   console.log("Client connected to redis and ready to use");
 });
 
-client.on("error", (err) => {
+client.on("error", async (err) => {
   console.log(err.message);
 });
 
-client.on("end", () => {
+client.on("end", async () => {
   console.log("Client disconnected from redis");
 });
 
