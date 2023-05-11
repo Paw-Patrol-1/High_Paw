@@ -18,11 +18,10 @@ const HangoutSchema = new Schema({
     type: String,
     required: true,
   },
-  userId: [
+  userId:
     {
       type: String,
     },
-  ],
   latLong: {
     type: [Number],
     require: true,
