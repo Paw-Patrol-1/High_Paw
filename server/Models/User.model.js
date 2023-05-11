@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const { JWT_SECRET } = process.env;
 
 const UserSchema = new Schema({
   email: {
@@ -30,9 +29,13 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  latLong: {
+    type: [Number],
+    required: true,
+  },
   picture: {
     type: String,
-    required: true,
+    // required: true,
   },
   age: {
     type: Number,
