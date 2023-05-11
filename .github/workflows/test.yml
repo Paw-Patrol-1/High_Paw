@@ -20,6 +20,6 @@ jobs:
         # the node version for the setup-node action
         node-version: 16.x
     # Install packages and run tests
-    - run: cd server
-    - run: npm install 
+    - run: cd ./server
+    - run: npm ci 
     - run: npm test
