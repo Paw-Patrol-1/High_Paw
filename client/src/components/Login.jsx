@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as PawSteps } from "./assets/pawsteps.svg";
+// import { ReactComponent as PawSteps } from "./assets/pawsteps.svg";
 import { useState, useContext } from "react";
 import { UserContext } from "../App";
 import axios from "axios";
