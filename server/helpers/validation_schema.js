@@ -26,10 +26,10 @@ const loginSchema = Joi.object({
 const hangoutSchema = Joi.object({
   title: Joi.string().required(),
   description: Joi.string().required(),
-  city: Joi.string().required(),
-  address: Joi.string().required(),
+  // city: Joi.string().required(),
+  // address: Joi.string().required(),
   // userId: Joi.objectId().required(),
-  // latLong: Joi.array().items(Joi.number()).required(),
+  latLong: Joi.array().items(Joi.number()).required(),
   // joining: Joi.array().items(Joi.objectId()).required(),
 });
 

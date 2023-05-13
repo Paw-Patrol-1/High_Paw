@@ -9,7 +9,7 @@ const signAccessToken = (userId) => {
     const payload = {};
     const secret = ACCESS_TOKEN_SECRET;
     const options = {
-      expiresIn: "5m",
+      // expiresIn: "5m",
       audience: userId,
     };
     JWT.sign(payload, secret, options, (err, token) => {
@@ -24,6 +24,7 @@ const signAccessToken = (userId) => {
 
 // middleware to protect routes
 const verifyAccessToken = (req, res, next) => {
+  console.log("hello");
   if (!req.header("Authorization")) return next(createError.Unauthorized());
   const authHeader = req.header("Authorization");
   const splitToken = authHeader.split(" ");

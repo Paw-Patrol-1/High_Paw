@@ -44,10 +44,33 @@ function CreateHangout() {
   const saveMarker = (newMarkerCoords) => {
     setMarker(newMarkerCoords);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newHangout = {
+      title,
+      description,
+      latLong: marker,
+    };
+    const response = await fetch("http://localhost:8000/hangout/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+      body: JSON.stringify(newHangout),
+    });
+    const data = await response.json();
+    console.log(data);
+  };
+
   return (
     <div className="parent_div flex items-center bg-slate-50 flex-col h-auto">
       <h1 className="my-8 text-2xl">Create Hangout</h1>
-      <form className="form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-2/5">
+      <form
+        className="form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-2/5"
+        onSubmit={handleSubmit}
+      >
         <div className="title-div mb-4">
           <label
             htmlFor="title"

@@ -24,7 +24,6 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
 
     axios
       .post("http://localhost:8000/auth/register", form)
