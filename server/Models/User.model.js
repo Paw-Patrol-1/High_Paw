@@ -49,10 +49,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  latLong: {
-    type: [Number],
-    required: true,
-  },
+  // latLong: {
+  //   type: [Number],
+  //   required: true,
+  // },
 });
 
 UserSchema.pre("save", async function (next) {
