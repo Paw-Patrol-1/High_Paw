@@ -8,6 +8,7 @@ import { Popup } from "react-leaflet/Popup";
 import { useMapEvents } from "react-leaflet";
 import { UserContext } from "../App";
 import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const icon = L.icon({
   iconSize: [25, 41],
@@ -29,6 +30,7 @@ function MyComponent({ saveMarker }) {
 }
 
 function CreateHangout() {
+  const navigate = useNavigate();
   const { user } = useContext(UserContext);
   useEffect(() => {
     // if user is null, redirect to login page
@@ -51,6 +53,7 @@ function CreateHangout() {
       title,
       description,
       latLong: marker,
+      userId: user.user._id,
     };
     const response = await fetch("http://localhost:8000/hangout/create", {
       method: "POST",
@@ -62,6 +65,7 @@ function CreateHangout() {
     });
     const data = await response.json();
     console.log(data);
+    navigate("/");
   };
 
   return (

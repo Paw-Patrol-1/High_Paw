@@ -25,6 +25,18 @@ function Hangouts() {
     };
     getHangouts();
   }, []);
+
+  const deleteHangout = async (id) => {
+    const response = await fetch(`http://localhost:8000/hangout/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    window.location.reload();
+  };
   return (
     <div>
       Hangouts
@@ -36,6 +48,23 @@ function Hangouts() {
           <div className="hangout">
             <h2 className="title">{hangout.title}</h2>
             <p className="description">{hangout.description}</p>
+            <p>{hangout.userId}</p>
+            {hangout.userId === user.user._id && (
+              <div className="parent-btn">
+                <button
+                  className="btn my-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  onClick={() => updateHangout(hangout._id)}
+                >
+                  update
+                </button>
+                <button
+                  className="btn my-8 bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded"
+                  onClick={() => deleteHangout(hangout._id)}
+                >
+                  delete
+                </button>
+              </div>
+            )}
           </div>
           <div className="img border border-black h-auto w-3/12">
             {/* <img src={hangout.img} alt="hangout" /> */}

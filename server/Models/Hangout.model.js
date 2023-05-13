@@ -16,10 +16,10 @@ const HangoutSchema = new Schema({
   address: {
     type: String,
   },
-  // userId: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "user",
-  // },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+  },
   latLong: {
     type: [Number],
     require: true,
