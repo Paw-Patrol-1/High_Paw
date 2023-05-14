@@ -20,7 +20,7 @@ module.exports = {
           name: user.name,
           breed: user.breed,
           age: user.age,
-          picture: user.picture,
+          // picture: user.picture,
           city: user.city,
         });
       } else {
@@ -57,7 +57,7 @@ module.exports = {
           name: updatedUser.name,
           breed: updatedUser.breed,
           age: updatedUser.age,
-          picture: updatedUser.picture,
+          // picture: updatedUser.picture,
           city: updatedUser.city,
         });
       } else {
