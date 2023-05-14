@@ -15,7 +15,7 @@ const authSchema = Joi.object({
   // picture: Joi.string().required(),
   city: Joi.string().required(),
   address: Joi.string().required(),
-  // latLong: Joi.array().items(Joi.number()).required(),
+  latLong: Joi.array().items(Joi.number()).required(),
 });
 
 const loginSchema = Joi.object({

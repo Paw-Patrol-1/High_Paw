@@ -32,7 +32,7 @@ function Home() {
       <div className="containerMapAndCommunity  w-screen flex justify-evenly">
         <div className="mapContainer w-9/12" style={{ marginTop: "2em" }}>
           <MapContainer
-            center={[40.83335, -73.985023]}
+            center={user.user.latLong}
             zoom={20}
             scrollWheelZoom={false}
             style={{ height: "70vh", width: "100%" }}
@@ -41,7 +41,7 @@ function Home() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={[40.83335, -73.985023]}>
+            <Marker position={user.user.latLong}>
               <Popup>
                 A pretty CSS3 popup. <br /> Easily customizable.
               </Popup>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import adressToLatLong from "../../utils/adressToLatLong";
 
 function Signup() {
   const [form, setForm] = useState({
@@ -22,11 +23,12 @@ function Signup() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const latLong = await adressToLatLong(form.address, form.city);
+    console.log(latLong);
     axios
-      .post("http://localhost:8000/auth/register", form)
+      .post("http://localhost:8000/auth/register", { ...form, latLong })
       .then((res) => {
         console.log(res.data);
       })
