@@ -1,10 +1,5 @@
-import React from "react";
-import { useState } from "react";
-import { MapContainer } from "react-leaflet/MapContainer";
-import { TileLayer } from "react-leaflet/TileLayer";
-import { useMap } from "react-leaflet/hooks";
-import { Marker } from "react-leaflet/Marker";
-import { Popup } from "react-leaflet/Popup";
+import React, { useState } from "react";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { useMapEvents } from "react-leaflet";
 import { UserContext } from "../App";
 import { useContext, useEffect } from "react";
@@ -22,10 +17,20 @@ function MyComponent({ saveMarker }) {
   const map = useMapEvents({
     click: (e) => {
       const { lat, lng } = e.latlng;
-      L.marker([lat, lng], { icon }).addTo(map);
-      saveMarker([lat, lng]);
+
+      // Remove any existing marker on the map
+      map.eachLayer((layer) => {
+        if (layer instanceof L.Marker) {
+          map.removeLayer(layer);
+        }
+      });
+
+      // Add a new marker to the map
+      const newMarker = L.marker([lat, lng], { icon }).addTo(map);
+      saveMarker([lat, lng, newMarker]);
     },
   });
+
   return null;
 }
 
@@ -46,13 +51,12 @@ function CreateHangout() {
   const saveMarker = (newMarkerCoords) => {
     setMarker(newMarkerCoords);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newHangout = {
       title,
       description,
-      latLong: marker,
+      latLong: marker.slice(0, 2),
       userId: user.user._id,
     };
     const response = await fetch("http://localhost:8000/hangout/create", {
@@ -127,11 +131,6 @@ function CreateHangout() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               <MyComponent saveMarker={saveMarker} />
-              {/* <Marker position={[40.83335, -73.985023]}>
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-              </Marker> */}
             </MapContainer>
           </div>
         </div>
