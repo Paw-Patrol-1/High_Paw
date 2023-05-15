@@ -1,6 +1,8 @@
 import React from "react";
 import { UserContext } from "../App";
 import { useContext, useEffect, useState } from "react";
+import SmallMap from "./SmallMap";
+import { Link } from "react-router-dom";
 
 function Hangouts() {
   const [hangouts, setHangouts] = useState([]);
@@ -26,6 +28,10 @@ function Hangouts() {
     getHangouts();
   }, []);
 
+  const updateHangout = (id) => {
+    console.log(id);
+  };
+
   const deleteHangout = async (id) => {
     const response = await fetch(`http://localhost:8000/hangout/${id}`, {
       method: "DELETE",
@@ -46,29 +52,15 @@ function Hangouts() {
           key={hangout._id}
         >
           <div className="hangout">
-            <h2 className="title">{hangout.title}</h2>
+            <Link to={`/hangout/${hangout._id}`}>
+              <h2 className="title">{hangout.title}</h2>
+            </Link>
             <p className="description">{hangout.description}</p>
             <p>{hangout.userId}</p>
-            {hangout.userId === user.user._id && (
-              <div className="parent-btn">
-                <button
-                  className="btn my-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => updateHangout(hangout._id)}
-                >
-                  update
-                </button>
-                <button
-                  className="btn my-8 bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => deleteHangout(hangout._id)}
-                >
-                  delete
-                </button>
-              </div>
-            )}
           </div>
-          <div className="img border border-black h-auto w-3/12">
+          <div className="img border border-black  w-3/12 h-auto">
             {/* <img src={hangout.img} alt="hangout" /> */}
-            <p>{hangout.latLong}</p>
+            <SmallMap latLong={hangout.latLong} />
           </div>
         </div>
       ))}

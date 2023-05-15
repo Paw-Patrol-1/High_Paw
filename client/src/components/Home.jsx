@@ -4,10 +4,20 @@ import { useMap } from "react-leaflet/hooks";
 import { Marker } from "react-leaflet/Marker";
 import { Popup } from "react-leaflet/Popup";
 import Community from "./Community";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { UserContext } from "../App";
 
+const icon = L.icon({
+  iconSize: [25, 41],
+  iconAnchor: [10, 41],
+  popupAnchor: [2, -40],
+  iconUrl:
+    "https://www.pngkit.com/png/detail/41-413073_5422c3418a632d4241caa626-home-icon-home-icons-for-website-png.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
+});
+
 function Home() {
+  const [hangouts, setHangouts] = useState([]);
   // importing env variables(need no installation of dotenv package for this to work, just need to add .env file in root directory, because of VITE_ prefix)
   const API_KEY = import.meta.env.VITE_MAPBOX_API;
   // console.log(import.meta.env.VITE_MAPBOX_API);
@@ -19,13 +29,20 @@ function Home() {
       window.location.href = "/login";
     }
   }, [user]);
-  // useEffect(() => {
-  //   fetch(
-  //     `https://api.mapbox.com/geocoding/v5/mapbox.places/822 fairview lane, new jersey.json?limit=1&access_token=${API_KEY}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data.features[0].geometry.coordinates));
-  // }, []);
+
+  useEffect(() => {
+    const getHangouts = async () => {
+      const response = await fetch("http://localhost:8000/hangout/all", {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
+      const data = await response.json();
+      setHangouts(data.hangouts);
+      // console.log(data);
+    };
+    getHangouts();
+  }, []);
 
   return (
     <div className="parent-container h-screen">
@@ -33,7 +50,7 @@ function Home() {
         <div className="mapContainer w-9/12" style={{ marginTop: "2em" }}>
           <MapContainer
             center={user.user.latLong}
-            zoom={20}
+            zoom={14}
             scrollWheelZoom={false}
             style={{ height: "70vh", width: "100%" }}
           >
@@ -41,11 +58,36 @@ function Home() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={user.user.latLong}>
+            <Marker position={user.user.latLong} icon={icon}>
               <Popup>
                 A pretty CSS3 popup. <br /> Easily customizable.
               </Popup>
             </Marker>
+            {hangouts.map((hangout) => (
+              <Marker position={hangout.latLong} key={hangout._id}>
+                <Popup>
+                  <h2 className="title">{hangout.title}</h2>
+                  <p className="description">{hangout.description}</p>
+                  <p>{hangout.userId}</p>
+                  {hangout.userId === user.user._id && (
+                    <div className="parent-btn">
+                      <button
+                        className="btn my-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={() => updateHangout(hangout._id)}
+                      >
+                        update
+                      </button>
+                      <button
+                        className="btn my-8 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={() => deleteHangout(hangout._id)}
+                      >
+                        delete
+                      </button>
+                    </div>
+                  )}
+                </Popup>
+              </Marker>
+            ))}
           </MapContainer>
         </div>
         <div className="communityContainer">

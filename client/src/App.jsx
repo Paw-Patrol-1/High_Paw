@@ -9,6 +9,8 @@ import Home from "./components/Home";
 import { useContext, createContext, useState } from "react";
 import Profile from "./components/Profile";
 import Hangouts from "./components/Hangouts";
+import Hangout from "./components/Hangout";
+import UpdateHangout from "./components/UpdateHangout";
 
 export const UserContext = createContext();
 
@@ -40,6 +42,8 @@ function App() {
         <Navbar />
 
         <Routes>
+          <Route path="/update_hangout/:id" element={<UpdateHangout />} />
+          <Route path="/hangout/:id" element={<Hangout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<Home />} />
