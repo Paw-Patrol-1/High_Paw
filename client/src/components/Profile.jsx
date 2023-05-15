@@ -2,6 +2,10 @@ import React from "react";
 import {UserContext} from "../App"
 import { useState, useContext, useEffect } from "react";
 
+import { useParams } from "react-router-dom";
+
+
+
 
 function Profile() {
   const { user, setUser } = useContext(UserContext);
@@ -15,7 +19,15 @@ function Profile() {
   }, [user]);
 
 
-  const editProfile = async (id) => {
+  const editProfile = async () => {
+    const { id } = useParams();
+    const [picture, setPicture] = useState("");
+    const [name, setName] = useState("");
+    const [age, setAge] = useState("");
+    const [breed, setBreed] = useState("");
+    const [address, setAddress] = useState("");
+    const [city, setCity] = useState("");
+  
   const response = await fetch(`http://localhost:8000/profile//edit/${id}`, {
        method: "POST",
       headers: {
@@ -34,7 +46,9 @@ function Profile() {
 
     <div className="parent_div flex items-center bg-slate-50 flex-col h-auto">
     <h1 className="my-8 text-2xl">Profile</h1>
-
+    <div className="name-div mb-4">
+      <label htmlFor="name"> {user.user.picture}</label>
+    </div>
     <div className="name-div mb-4">
       <label htmlFor="name">Name: {user.user.name}</label>
     </div>
@@ -62,6 +76,7 @@ function Profile() {
     {/* <div className="communityContainer mr-3 ">
       <Community />
     </div> */}
+   
   </div>
 );
 }
