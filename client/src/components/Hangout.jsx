@@ -85,9 +85,11 @@ function Hangout() {
                 profile && (
                   <p className="text-xs">
                     Post created by{" "}
-                    <em className="font-bold underline cursor-pointer">
-                      {profile.name}
-                    </em>
+                    <Link to={`/profile/${hangout.userId}`}>
+                      <em className="font-bold underline cursor-pointer">
+                        {profile.name}
+                      </em>
+                    </Link>
                   </p>
                 )
               }
