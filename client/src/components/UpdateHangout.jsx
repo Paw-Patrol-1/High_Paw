@@ -145,25 +145,26 @@ function UpdateHangout() {
             Select location
           </p>
           <div className="mapContainer w-auto" style={{ marginBottom: "2em" }}>
-            <MapContainer
-              center={[40.83335, -73.985023]}
-              zoom={16}
-              scrollWheelZoom={false}
-              style={{ height: "50vh", width: "100%" }}
-            >
-              <TileLayer
-                onClick={() => console.log("test")}
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              {marker && (
+            {marker && (
+              <MapContainer
+                center={marker}
+                zoom={16}
+                scrollWheelZoom={false}
+                style={{ height: "50vh", width: "100%" }}
+              >
+                <TileLayer
+                  onClick={() => console.log("test")}
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+
                 <MyComponent saveMarker={saveMarker} marker={marker} />
-              )}
-            </MapContainer>
+              </MapContainer>
+            )}
           </div>
         </div>
         <button className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          create hangout
+          Update hangout
         </button>
       </form>
     </div>

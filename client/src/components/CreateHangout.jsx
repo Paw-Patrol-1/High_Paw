@@ -82,9 +82,9 @@ function CreateHangout() {
         <div className="title-div mb-4">
           <label
             htmlFor="title"
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-sm font-semibold mb-2"
           >
-            title
+            Title
           </label>
           <input
             onChange={(e) => setTitle(e.target.value)}
@@ -99,9 +99,9 @@ function CreateHangout() {
         <div className="description-div mb-4">
           <label
             htmlFor="description"
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-sm font-semibold mb-2"
           >
-            description
+            Description
           </label>
           <textarea
             onChange={(e) => setDescription(e.target.value)}
@@ -120,8 +120,8 @@ function CreateHangout() {
           </p>
           <div className="mapContainer w-auto" style={{ marginBottom: "2em" }}>
             <MapContainer
-              center={[40.83335, -73.985023]}
-              zoom={16}
+              center={user.user.latLong}
+              zoom={14}
               scrollWheelZoom={false}
               style={{ height: "50vh", width: "100%" }}
             >
@@ -134,8 +134,8 @@ function CreateHangout() {
             </MapContainer>
           </div>
         </div>
-        <button className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          create hangout
+        <button className="btn bg-green-700 hover:bg-green-900 text-white font-medium py-2 px-4 rounded">
+          Create hangout
         </button>
       </form>
     </div>

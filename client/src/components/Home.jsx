@@ -6,6 +6,7 @@ import { Popup } from "react-leaflet/Popup";
 import Community from "./Community";
 import { useEffect, useContext, useState } from "react";
 import { UserContext } from "../App";
+import { Link } from "react-router-dom";
 
 const icon = L.icon({
   iconSize: [25, 41],
@@ -69,22 +70,7 @@ function Home() {
                   <h2 className="title">{hangout.title}</h2>
                   <p className="description">{hangout.description}</p>
                   <p>{hangout.userId}</p>
-                  {hangout.userId === user.user._id && (
-                    <div className="parent-btn">
-                      <button
-                        className="btn my-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={() => updateHangout(hangout._id)}
-                      >
-                        update
-                      </button>
-                      <button
-                        className="btn my-8 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={() => deleteHangout(hangout._id)}
-                      >
-                        delete
-                      </button>
-                    </div>
-                  )}
+                  <Link to={`/hangout/${hangout._id}`}>See more details</Link>
                 </Popup>
               </Marker>
             ))}

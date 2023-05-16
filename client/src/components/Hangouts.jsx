@@ -3,6 +3,7 @@ import { UserContext } from "../App";
 import { useContext, useEffect, useState } from "react";
 import SmallMap from "./SmallMap";
 import { Link } from "react-router-dom";
+// import "tailwindcss/tailwind.css";
 
 function Hangouts() {
   const [hangouts, setHangouts] = useState([]);
@@ -44,21 +45,25 @@ function Hangouts() {
     window.location.reload();
   };
   return (
-    <div>
+    <div className="h-screen bg-slate-50">
       Hangouts
-      {hangouts.map((hangout) => (
+      {hangouts.map((hangout, index) => (
         <div
-          className="parent border border-black w-10/12 m-auto mt-14 flex justify-between"
+          className={` shadow-xl w-10/12 m-auto mt-14 flex justify-between ${
+            index % 2 === 0 ? "flex-row-reverse" : "flex-row"
+          }`}
           key={hangout._id}
         >
-          <div className="hangout">
+          <div className="hangout  w-3/4 px-6 ">
             <Link to={`/hangout/${hangout._id}`}>
-              <h2 className="title">{hangout.title}</h2>
+              <h2 className="title text-3xl text-stone-700 underline mb-6">
+                {hangout.title}
+              </h2>
             </Link>
-            <p className="description">{hangout.description}</p>
-            <p>{hangout.userId}</p>
+            <p className="description text-stone-600">{hangout.description}</p>
+            {/* <p>{hangout.userId}</p> */}
           </div>
-          <div className="img border border-black  w-3/12 h-auto">
+          <div className="img border border-black  w-3/12 h-auto mr">
             {/* <img src={hangout.img} alt="hangout" /> */}
             <SmallMap latLong={hangout.latLong} />
           </div>

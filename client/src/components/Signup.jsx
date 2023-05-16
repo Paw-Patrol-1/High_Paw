@@ -26,6 +26,9 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const latLong = await adressToLatLong(form.address, form.city);
+    if (!latLong || !latLong.length) {
+      return alert("Please enter a valid address");
+    }
     console.log(latLong);
     axios
       .post("http://localhost:8000/auth/register", { ...form, latLong })
