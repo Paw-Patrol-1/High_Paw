@@ -1,13 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+// import UploadWidget from "./UploadImage";
+// // const cloudinary = require("./config/cloudinary")
 
 function Signup() {
   const [form, setForm] = useState({
     name: "",
     breed: "",
     age: "",
-
+    picture: "",
     address: "",
     city: "",
     email: "",
@@ -15,6 +17,7 @@ function Signup() {
     confirmPassword: "",
   });
 
+  
   const handleChange = (e) => {
     setForm((prevState) => ({
       ...prevState,
@@ -33,6 +36,7 @@ function Signup() {
       })
       .catch((err) => {});
   };
+  
 
   return (
     <div className="parentContainer flex items-center w-auto h-auto">
@@ -93,7 +97,15 @@ function Signup() {
             id="img"
             className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="file"
+            placeholder="123 Address Street"
+            value={form.picture}
+            onChange={handleChange}
+          
+           
+            accept="image/png, image/jpeg, image/jpg"
           />
+      
+           
         </div>
         <div className="childFive mb-2">
           <input
@@ -157,7 +169,9 @@ function Signup() {
           </p>
         </div>
       </form>
+      
     </div>
+    
   );
 }
 
