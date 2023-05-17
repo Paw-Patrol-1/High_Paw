@@ -7,14 +7,15 @@ const {
   signRefreshToken,
   verifyRefreshToken,
 } = require("../helpers/jwt_helper");
-const cloudinary = require("../config/cloudinary.js")
+// const cloudinary = require("../config/cloudinary.js")
 
 const client = require("../helpers/init_redis");
 
 module.exports = {
   register: async (req, res, next) => {
     try {
-      const result = await authSchema.validateAsync.cloudinary(req.body);
+      // const result = await authSchema.validateAsync.cloudinary(req.body);
+      const result = await authSchema.validateAsync(req.body);
       console.log(result);
       
 

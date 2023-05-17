@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ setUpCIandCD ]
+    branches: [ deploymentAndCD ]
 jobs:
   build:
     name: Build and Deploy
