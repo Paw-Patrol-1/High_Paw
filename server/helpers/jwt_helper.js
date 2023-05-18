@@ -30,7 +30,7 @@ const verifyAccessToken = (req, res, next) => {
   const authHeader = req.header("Authorization");
   const splitToken = authHeader.split(" ");
   const token = splitToken[1];
-  JWT.verify(token, ACCESS_TOKEN_SECRET, (err, payload) => {
+  JWT.verify(token, `${ACCESS_TOKEN_SECRET}`, (err, payload) => {
     if (err) {
       const message =
         err.name === "JsonWebTokenError" ? "Unauthorized" : err.message;
@@ -73,7 +73,7 @@ const signRefreshToken = (userId) => {
 
 const verifyRefreshToken = (refreshToken) => {
   return new Promise((resolve, reject) => {
-    JWT.verify(refreshToken, REFRESH_TOKEN_SECRET, async (err, payload) => {
+    JWT.verify(refreshToken, `${REFRESH_TOKEN_SECRET}`, async (err, payload) => {
       if (err) return reject(createError.Unauthorized());
       const userId = payload.aud;
       const userToken = await UserToken.findOne({ userId });
@@ -90,30 +90,6 @@ const verifyRefreshToken = (refreshToken) => {
   });
 };
 
-// const generateTokens = async (user) => {
-//     try {
-//         const payload = { };
-
-//         const accessToken = JWT.sign(
-//             payload,
-//             ACCESS_TOKEN_SECRET,
-//             { expiresIn: "14m" }
-//         );
-//         const refreshToken = JWT.sign(
-//             payload,
-//             REFRESH_TOKEN_SECRET,
-//             { expiresIn: "30d" }
-//         );
-
-//         const userToken = await UserToken.findOne({ userId: user._id });
-//         if (userToken) await userToken.deleteOne();
-
-//         await new UserToken({ userId: user._id, token: refreshToken }).save();
-//         return Promise.resolve({ accessToken, refreshToken });
-//     } catch (err) {
-//         return Promise.reject(err);
-//     }
-// };
 
 module.exports = {
   signAccessToken,
