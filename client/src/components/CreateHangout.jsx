@@ -58,6 +58,7 @@ function CreateHangout() {
       description,
       latLong: marker.slice(0, 2),
       userId: user.user._id,
+      joining: [],
     };
     const response = await fetch("http://localhost:8000/hangout/create", {
       method: "POST",

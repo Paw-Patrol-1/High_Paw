@@ -24,12 +24,12 @@ const HangoutSchema = new Schema({
     type: [Number],
     require: true,
   },
-  // joining: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "user",
-  //   },
-  // ],
+  joining: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
+  ],
 });
 
 const Hangout = mongoose.model("hangout", HangoutSchema);

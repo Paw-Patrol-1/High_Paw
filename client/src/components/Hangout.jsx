@@ -58,6 +58,33 @@ function Hangout() {
     console.log(data);
     navigate("/hangouts");
   };
+
+  const handleJoin = async (e) => {
+    e.preventDefault();
+    if (hangout.joining.includes(user.user._id)) {
+      alert("You have already joined this hangout");
+      return;
+    }
+    const joinedHangout = {
+      title: hangout.title,
+      description: hangout.description,
+      latLong: hangout.latLong,
+      userId: hangout.userId,
+      joining: [...hangout.joining, user.user._id],
+    };
+    const response = await fetch(`http://localhost:8000/hangout/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+      body: JSON.stringify(joinedHangout),
+    });
+    const data = await response.json();
+    console.log(data);
+    window.location.href = `/hangout/${id}`;
+  };
+
   return (
     <div className="bg-slate-50 ">
       {hangout && (
@@ -70,6 +97,13 @@ function Hangout() {
             <p className="description text-stone-600 pb-10">
               {hangout.description}
             </p>
+            <p>number of joiners {hangout.joining.length}</p>
+            <button
+              className="btn my-8 bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl"
+              onClick={handleJoin}
+            >
+              Join
+            </button>
             <div className="user">
               {/* {
                

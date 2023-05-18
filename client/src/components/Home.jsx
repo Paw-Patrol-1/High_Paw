@@ -48,7 +48,10 @@ function Home() {
   return (
     <div className="parent-container h-screen">
       <div className="containerMapAndCommunity  w-screen flex justify-evenly">
-        <div className="mapContainer w-9/12" style={{ marginTop: "2em" }}>
+        <div
+          className="mapContainer w-9/12 shadow-xl"
+          style={{ marginTop: "2em" }}
+        >
           <MapContainer
             center={user.user.latLong}
             zoom={14}

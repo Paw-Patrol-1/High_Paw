@@ -84,6 +84,7 @@ function UpdateHangout() {
       description,
       latLong: marker.slice(0, 2),
       userId: user.user._id,
+      joining: hangout.joining,
     };
     const response = await fetch(`http://localhost:8000/hangout/${id}`, {
       method: "PUT",

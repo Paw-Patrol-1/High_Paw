@@ -30,7 +30,7 @@ const hangoutSchema = Joi.object({
   // address: Joi.string().required(),
   userId: Joi.objectId().required(),
   latLong: Joi.array().items(Joi.number()).required(),
-  // joining: Joi.array().items(Joi.objectId()).required(),
+  joining: Joi.array().items(Joi.objectId()).required(),
 });
 
 const profileSchema = Joi.object({
