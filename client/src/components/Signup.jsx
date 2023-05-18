@@ -2,8 +2,10 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import adressToLatLong from "../../utils/adressToLatLong";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     breed: "",
@@ -36,6 +38,7 @@ function Signup() {
         console.log(res.data);
       })
       .catch((err) => {});
+    navigate("/login");
   };
 
   return (

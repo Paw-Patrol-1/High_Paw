@@ -56,26 +56,30 @@ function Home() {
             center={user.user.latLong}
             zoom={14}
             scrollWheelZoom={false}
-            style={{ height: "70vh", width: "100%" }}
+            style={{ height: "70vh", width: "100%", zIndex: "0 !important" }}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={user.user.latLong} icon={icon}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
+            <Marker position={user.user.latLong} icon={icon}></Marker>
+
             {hangouts.map((hangout) => (
-              <Marker position={hangout.latLong} key={hangout._id}>
-                <Popup>
-                  <h2 className="title">{hangout.title}</h2>
-                  <p className="description">{hangout.description}</p>
-                  <p>{hangout.userId}</p>
-                  <Link to={`/hangout/${hangout._id}`}>See more details</Link>
-                </Popup>
-              </Marker>
+              <div key={hangout._id} className="bg-slate-500">
+                <span style={{ zIndex: "1000 !important", background: "red" }}>
+                  {hangout.joining.length}sdsdsdsdsdsd
+                </span>
+                <Marker position={hangout.latLong}>
+                  <Popup>
+                    <h2 className="title">{hangout.title}</h2>
+                    <p className="description">
+                      {hangout.description.slice(0, 100)}...
+                    </p>
+
+                    <Link to={`/hangout/${hangout._id}`}>See more details</Link>
+                  </Popup>
+                </Marker>
+              </div>
             ))}
           </MapContainer>
         </div>

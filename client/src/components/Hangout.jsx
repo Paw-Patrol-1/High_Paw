@@ -5,6 +5,7 @@ import SmallMap from "./SmallMap";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
 function Hangout() {
+  const [joiners, setJoiners] = useState({});
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
   //taking id from route
@@ -26,6 +27,19 @@ function Hangout() {
     const data = await response.json();
     setProfile(data);
   };
+  const getJoiners = async (joiners) => {
+    for (let joiner of joiners) {
+      const response = await fetch(`http://localhost:8000/profile/${joiner}`, {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
+      const data = await response.json();
+      setJoiners((prev) => {
+        return { ...prev, [joiner]: data };
+      });
+    }
+  };
 
   useEffect(() => {
     const getHangout = async () => {
@@ -39,6 +53,7 @@ function Hangout() {
       getHangoutUser(data.hangout.userId);
       setHangout(data.hangout);
       console.log(data);
+      getJoiners(data.hangout.joining);
     };
     getHangout();
   }, []);
@@ -97,7 +112,23 @@ function Hangout() {
             <p className="description text-stone-600 pb-10">
               {hangout.description}
             </p>
-            <p>number of joiners {hangout.joining.length}</p>
+            <p>number of joiners: {hangout.joining.length}</p>
+            <div className="joiners">
+              {hangout.joining.map((joiner) => (
+                <div className="joiner" key={joiner}>
+                  {joiners[joiner] && (
+                    <Link to={`/profile/${joiner}`}>
+                      <p className="text-xs">
+                        <em className="font-bold underline cursor-pointer">
+                          {joiners[joiner].name}
+                        </em>
+                      </p>
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+
             <button
               className="btn my-8 bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl"
               onClick={handleJoin}
