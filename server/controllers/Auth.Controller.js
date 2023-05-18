@@ -19,7 +19,6 @@ module.exports = {
       // const result = await authSchema.validateAsync.cloudinary(req.body);
       const result = await authSchema.validateAsync(req.body);
       console.log(result);
-      
 
       const doesExist = await User.findOne({ email: result.email });
       if (doesExist)
