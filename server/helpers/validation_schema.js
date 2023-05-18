@@ -47,9 +47,14 @@ const profileSchema = Joi.object({
   city: Joi.string().required(),
 });
 
+const refreshTokenSchema = Joi.object({
+  refreshToken: Joi.string().required().label("Refresh Token")
+})
+
 module.exports = {
   authSchema,
   loginSchema,
   hangoutSchema,
-  profileSchema
+  profileSchema,
+  refreshTokenSchema
 };

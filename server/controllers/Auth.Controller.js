@@ -1,4 +1,5 @@
 const User = require("../Models/User.model");
+// const UserToken = require("../Models/Token.model")
 const createError = require("http-errors");
 const { authSchema, loginSchema } = require(`../helpers/validation_schema`);
 const {
@@ -6,10 +7,11 @@ const {
   verifyAccessToken,
   signRefreshToken,
   verifyRefreshToken,
+  generateTokens,
 } = require("../helpers/jwt_helper");
 // const cloudinary = require("../config/cloudinary.js")
 
-const client = require("../helpers/init_redis");
+// const client = require("../helpers/init_redis");
 
 module.exports = {
   register: async (req, res, next) => {
@@ -27,6 +29,7 @@ module.exports = {
       const savedUser = await user.save();
       const accessToken = await signAccessToken(savedUser.id);
       const refreshToken = await signRefreshToken(savedUser.id);
+      // const {accessToken, refreshToken} = await generateTokens(savedUser.id);
       res.send({ accessToken, refreshToken, user });
     } catch (error) {
       if (error.isJoi === true) res.status(422);
