@@ -28,7 +28,7 @@ function Profile() {
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
   
-  const response = await fetch(`http://localhost:8000/profile//edit/${id}`, {
+  const response = await fetch(`https://high-paw-production.up.railway.app/profile//edit/${id}`, {
        method: "POST",
       headers: {
         Authorization: `Bearer ${user.accessToken}`,

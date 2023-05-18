@@ -24,7 +24,7 @@ function Login() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8000/auth/login", form)
+      .post("https://high-paw-production.up.railway.app/auth/login", form)
       .then((res) => {
         setUser(res.data);
         localStorage.setItem("user", JSON.stringify(res.data));

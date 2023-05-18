@@ -25,7 +25,7 @@ export const updateProfile = async (id, address, name, email, city, age, breed, 
 
   try {
     const res = await axios.post(
-      `http://localhost:8000/profile//edit/${id}`,
+      `https://high-paw-production.up.railway.app/profile//edit/${id}`,
       {
         data: {
           email: email,

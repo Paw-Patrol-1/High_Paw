@@ -25,7 +25,7 @@ import { useState } from "react";
   function uploadSingleImage(base64) {
     setLoading(true);
     axios
-      .post("http://localhost:8000/profile/edit/${id}", { image: base64 })
+      .post("https://high-paw-production.up.railway.app/profile/edit/${id}", { image: base64 })
       .then((res) => {
         setUrl(res.data);
         alert("Image uploaded Successfully");

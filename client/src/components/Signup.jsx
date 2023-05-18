@@ -30,7 +30,7 @@ function Signup() {
     console.log(form);
 
     axios
-      .post("http://localhost:8000/auth/register", form)
+      .post("https://high-paw-production.up.railway.app/auth/register", form)
       .then((res) => {
         console.log(res.data);
       })
