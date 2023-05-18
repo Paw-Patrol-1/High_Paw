@@ -10,6 +10,7 @@ function Hangouts() {
   const { user } = useContext(UserContext);
   useEffect(() => {
     // if user is null, redirect to login page
+    // delete later
     if (!user) {
       window.location.href = "/login";
     }

@@ -33,10 +33,10 @@ const UserSchema = new Schema({
     type: [Number],
     required: true,
   },
-  picture: {
-    type: String,
-    // required: true,
-  },
+  // picture: {
+  //   type: String,
+  //   // required: true,
+  // },
   age: {
     type: Number,
     required: true,

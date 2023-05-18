@@ -67,7 +67,7 @@ function Home() {
             {hangouts.map((hangout) => (
               <div key={hangout._id} className="bg-slate-500">
                 <span style={{ zIndex: "1000 !important", background: "red" }}>
-                  {hangout.joining.length}sdsdsdsdsdsd
+                  {hangout.joining.length}
                 </span>
                 <Marker position={hangout.latLong}>
                   <Popup>
