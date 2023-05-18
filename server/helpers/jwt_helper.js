@@ -9,7 +9,7 @@ const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = process.env;
 const signAccessToken = (userId) => {
   return new Promise((resolve, reject) => {
     const payload = {};
-    const secret = ACCESS_TOKEN_SECRET;
+    const secret = `${ACCESS_TOKEN_SECRET}`;
     const options = {
       expiresIn: "5m",
       audience: userId,
@@ -44,7 +44,7 @@ const verifyAccessToken = (req, res, next) => {
 const signRefreshToken = (userId) => {
   return new Promise((resolve, reject) => {
     const payload = {};
-    const secret = REFRESH_TOKEN_SECRET;
+    const secret = `${REFRESH_TOKEN_SECRET}`;
     const options = {
       expiresIn: "1y",
       audience: userId,
