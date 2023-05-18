@@ -37,4 +37,4 @@ Install High Paw with npm
 
 ## Acknoledgements
 
-- [Awesome Readme Templates](https://readme.so/editor)
+- [Awesome Readme Templates](https://readme.so/editor)   
