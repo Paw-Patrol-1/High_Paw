@@ -9,6 +9,9 @@ import Home from "./components/Home";
 import { useContext, createContext, useState } from "react";
 import Profile from "./components/Profile";
 import Hangouts from "./components/Hangouts";
+import Hangout from "./components/Hangout";
+import UpdateHangout from "./components/UpdateHangout";
+import PaginatedItems from "./components/Pagination";
 
 export const UserContext = createContext();
 
@@ -30,7 +33,7 @@ function App() {
   // }, []);
 
   return (
-    <div className="parent-container">
+    <div className="parent-container ">
       <UserContext.Provider
         value={{
           user: user,
@@ -38,12 +41,18 @@ function App() {
         }}
       >
         <Navbar />
+
         <Routes>
+          <Route path="/pagination" element={<PaginatedItems />} />
+          <Route path="/update_hangout/:id" element={<UpdateHangout />} />
+          <Route path="/hangout/:id" element={<Hangout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-        
+
+          <Route path="/profile/:id" element={<Profile />} />
+
           <Route path="/create_hangout" element={<CreateHangout />} />
           <Route path="/hangouts" element={<Hangouts />} />
         </Routes>

@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { useMapEvents } from "react-leaflet";
 import { UserContext } from "../App";
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const icon = L.icon({
   iconSize: [25, 41],
@@ -13,7 +13,12 @@ const icon = L.icon({
   shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
 });
 
-function MyComponent({ saveMarker }) {
+function MyComponent({ saveMarker, marker }) {
+  useEffect(() => {
+    const newMarker = L.marker(marker, { icon }).addTo(map);
+    saveMarker([marker[0], marker[1], newMarker]);
+  }, []);
+
   const map = useMapEvents({
     click: (e) => {
       const { lat, lng } = e.latlng;
@@ -34,7 +39,13 @@ function MyComponent({ saveMarker }) {
   return null;
 }
 
-function CreateHangout() {
+function UpdateHangout() {
+  const [hangout, setHangout] = useState(null);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [marker, setMarker] = useState(null);
+
+  const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   useEffect(() => {
@@ -44,48 +55,63 @@ function CreateHangout() {
     }
   }, [user]);
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [marker, setMarker] = useState(null);
+  useEffect(() => {
+    const getHangout = async () => {
+      const response = await fetch(`http://localhost:8000/hangout/${id}`, {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
+      const data = await response.json();
+      setHangout(data.hangout);
+      setTitle(data.hangout.title);
+      setDescription(data.hangout.description);
+      setMarker(data.hangout.latLong);
+
+      console.log(data);
+    };
+    getHangout();
+  }, []);
 
   const saveMarker = (newMarkerCoords) => {
     setMarker(newMarkerCoords);
   };
-  const handleSubmit = async (e) => {
+
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    const newHangout = {
+    const updatedHangout = {
       title,
       description,
       latLong: marker.slice(0, 2),
       userId: user.user._id,
-      joining: [],
+      joining: hangout.joining,
     };
-    const response = await fetch("http://localhost:8000/hangout/create", {
-      method: "POST",
+    const response = await fetch(`http://localhost:8000/hangout/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user.accessToken}`,
       },
-      body: JSON.stringify(newHangout),
+      body: JSON.stringify(updatedHangout),
     });
     const data = await response.json();
     console.log(data);
-    navigate("/");
+    navigate(`/hangout/${id}`);
   };
 
   return (
     <div className="parent_div flex items-center bg-slate-50 flex-col h-auto">
-      <h1 className="my-8 text-2xl">Create Hangout</h1>
+      <h1 className="my-8 text-2xl">Update Hangout</h1>
       <form
         className="form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-2/5"
-        onSubmit={handleSubmit}
+        onSubmit={handleUpdate}
       >
         <div className="title-div mb-4">
           <label
             htmlFor="title"
-            className="block text-gray-700 text-sm font-semibold mb-2"
+            className="block text-gray-700 text-sm font-bold mb-2"
           >
-            Title
+            title
           </label>
           <input
             onChange={(e) => setTitle(e.target.value)}
@@ -100,9 +126,9 @@ function CreateHangout() {
         <div className="description-div mb-4">
           <label
             htmlFor="description"
-            className="block text-gray-700 text-sm font-semibold mb-2"
+            className="block text-gray-700 text-sm font-bold mb-2"
           >
-            Description
+            description
           </label>
           <textarea
             onChange={(e) => setDescription(e.target.value)}
@@ -120,27 +146,30 @@ function CreateHangout() {
             Select location
           </p>
           <div className="mapContainer w-auto" style={{ marginBottom: "2em" }}>
-            <MapContainer
-              center={user.user.latLong}
-              zoom={14}
-              scrollWheelZoom={false}
-              style={{ height: "50vh", width: "100%" }}
-            >
-              <TileLayer
-                onClick={() => console.log("test")}
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <MyComponent saveMarker={saveMarker} />
-            </MapContainer>
+            {marker && (
+              <MapContainer
+                center={marker}
+                zoom={16}
+                scrollWheelZoom={false}
+                style={{ height: "50vh", width: "100%" }}
+              >
+                <TileLayer
+                  onClick={() => console.log("test")}
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+
+                <MyComponent saveMarker={saveMarker} marker={marker} />
+              </MapContainer>
+            )}
           </div>
         </div>
-        <button className="btn bg-green-700 hover:bg-green-900 text-white font-medium py-2 px-4 rounded">
-          Create hangout
+        <button className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Update hangout
         </button>
       </form>
     </div>
   );
 }
 
-export default CreateHangout;
+export default UpdateHangout;

@@ -1,10 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+
+import adressToLatLong from "../../utils/adressToLatLong";
+import { useNavigate } from "react-router-dom";
+
 // import UploadWidget from "./UploadImage";
 // // const cloudinary = require("./config/cloudinary")
 
+
 function Signup() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     breed: "",
@@ -25,16 +31,20 @@ function Signup() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
-
+    const latLong = await adressToLatLong(form.address, form.city);
+    if (!latLong || !latLong.length) {
+      return alert("Please enter a valid address");
+    }
+    console.log(latLong);
     axios
-      .post("http://localhost:8000/auth/register", form)
+      .post("http://localhost:8000/auth/register", { ...form, latLong })
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => {});
+    navigate("/login");
   };
   
 

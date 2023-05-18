@@ -1,16 +1,15 @@
 import React from "react";
-import {UserContext} from "../App"
-import { useState, useContext, useEffect } from "react";
+
+import { UserContext } from "../App";
+import { useContext, useEffect } from "react";
+import { useState } from "react";
 
 import { useParams } from "react-router-dom";
 
-
-
-
 function Profile() {
-  const { user, setUser } = useContext(UserContext);
-  const [profiles, setProfiles] = useState ([]);
-
+  const [profile, setProfile] = useState(null);
+  let { id } = useParams();
+  const { user } = useContext(UserContext);
   useEffect(() => {
     // if user is null, redirect to login page
     if (!user) {
@@ -18,69 +17,54 @@ function Profile() {
     }
   }, [user]);
 
+  if (!id) {
+    id = user.user._id;
+  }
+  useEffect(() => {
+    const getProfile = async () => {
+      const response = await fetch(`http://localhost:8000/profile/${id}`, {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
+      const data = await response.json();
+      setProfile(data);
+      console.log(data);
+    };
+    getProfile();
+  }, []);
 
-  const editProfile = async () => {
-    const { id } = useParams();
-    const [picture, setPicture] = useState("");
-    const [name, setName] = useState("");
-    const [age, setAge] = useState("");
-    const [breed, setBreed] = useState("");
-    const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-  
-  const response = await fetch(`http://localhost:8000/profile//edit/${id}`, {
-       method: "POST",
-      headers: {
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-     });
-    const data = await response.json();
-    console.log(data);
-     window.location.reload();
-   };
-
-
+  const userStorage = localStorage.getItem("user");
 
   return (
+    <>
+      {profile && (
+        <div className="parent_div flex flex-row items-center bg-slate-50 flex-coljustify-between h-auto gap-20 justify-start ">
+          <div className="img-div border border-black h-60 w-40 ml-20"></div>
+          <div className="info">
+            <h1 className="my-8 text-2xl">Profile</h1>
 
+            <div className="name-div mb-4">
+              <h3>Name: {profile.name}</h3>
+            </div>
 
-    <div className="parent_div flex items-center bg-slate-50 flex-col h-auto">
-    <h1 className="my-8 text-2xl">Profile</h1>
-    <div className="name-div mb-4">
-      <label htmlFor="name"> {user.user.picture}</label>
-    </div>
-    <div className="name-div mb-4">
-      <label htmlFor="name">Name: {user.user.name}</label>
-    </div>
+            <div className="age-div mb-4">
+              <h3>Age: {profile.age}</h3>
+            </div>
+            <div className="breed-div mb-4">
+              <h3>Breed: {profile.breed}</h3>
+            </div>
 
-    <div className="age-div mb-4">
-      <label htmlFor="age">Age: {user.user.age}</label>
-    </div>
-    <div className="breed-div mb-4">
-      <label htmlFor="breed">Breed: {user.user.breed}</label>
-    </div>
-    <div className="address-div mb-4">
-      <label htmlFor="address">
-        <address>Address: {user.user.address}</address>
-      </label>
-    </div>
-    <div className="city-div mb-4">
-      <label htmlFor="city">City: {user.user.city}</label>
-    </div>
-    <button
-                  className="btn my-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => editProfile(user.user._id)}
-                >
-                  update
-                </button>
-    {/* <div className="communityContainer mr-3 ">
-      <Community />
-    </div> */}
-   
-  </div>
-);
+            <div className="city-div mb-4">
+              <h3>City: {profile.city}</h3>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+
 }
 
 
 export default Profile;
-
