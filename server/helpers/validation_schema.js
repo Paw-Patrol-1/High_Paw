@@ -51,5 +51,5 @@ module.exports = {
   authSchema,
   loginSchema,
   hangoutSchema,
-  profileSchema,
+  profileSchema
 };

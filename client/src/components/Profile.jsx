@@ -1,4 +1,5 @@
 import React from "react";
+
 import { UserContext } from "../App";
 import { useContext, useEffect } from "react";
 import { useState } from "react";
@@ -62,6 +63,8 @@ function Profile() {
       )}
     </>
   );
+
 }
+
 
 export default Profile;

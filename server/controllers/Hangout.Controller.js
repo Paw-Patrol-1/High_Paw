@@ -17,7 +17,7 @@ module.exports = {
 
       const hangouts = await Hangout.find();
 
-      res.send({ hangouts });
+      res.send({ savedHangout });
     } catch (error) {
       next(error);
     }

@@ -33,10 +33,10 @@ const UserSchema = new Schema({
     type: [Number],
     required: true,
   },
-  // picture: {
-  //   type: String,
-  //   // required: true,
-  // },
+  picture: {
+    type: String,
+    // required: true,
+  },
   age: {
     type: Number,
     required: true,
@@ -49,6 +49,8 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+
+
 });
 
 UserSchema.pre("save", async function (next) {

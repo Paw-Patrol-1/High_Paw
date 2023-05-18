@@ -53,6 +53,7 @@ function Navbar() {
             >
               Login
             </Link>
+       
             <Link
               className="outline outline-offset-2 rounded-full mt-2   outline-slate-700 px-4"
               to="/signup"
