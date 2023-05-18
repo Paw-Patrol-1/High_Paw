@@ -1,15 +1,15 @@
-# FROM node:16-alpine
+FROM node:16-alpine
 
-# ENV NODE_ENV=development
+ENV NODE_ENV=development
 
-# COPY . /client
+COPY . /client
 
-# WORKDIR /client
+WORKDIR /client
 
-# RUN npm install
+RUN npm install
 
-# RUN npm run build
+RUN npm run build
 
-# EXPOSE 5173
+EXPOSE 5173
 
-# CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "dev"]

@@ -1,13 +1,13 @@
-# FROM node:16-alpine
+FROM node:16-alpine
 
-# ENV NODE_ENV=development
+ENV NODE_ENV=development
 
-# COPY . /server
+COPY . /server
 
-# WORKDIR /server
+WORKDIR /server
 
-# RUN npm install
+RUN npm install
 
-# EXPOSE 8000
+EXPOSE 8000
 
-# CMD [ "node", "server.js" ]
+CMD [ "node", "server.js" ]
