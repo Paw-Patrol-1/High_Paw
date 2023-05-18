@@ -78,7 +78,7 @@ const verifyRefreshToken = (refreshToken) => {
       const userId = payload.aud;
       const userToken = await UserToken.findOne({ userId });
 
-      console.log(userToken);
+      if (userToken == null) return reject(createError.Unauthorized());
       if (err) {
         console.log(err.message);
         reject(createError.InternalServerError());
