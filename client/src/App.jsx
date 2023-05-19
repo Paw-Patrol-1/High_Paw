@@ -12,6 +12,7 @@ import Hangouts from "./components/Hangouts";
 import Hangout from "./components/Hangout";
 import UpdateHangout from "./components/UpdateHangout";
 import PaginatedItems from "./components/Pagination";
+import ImageUpload from "./components/ImageUpload";
 
 export const UserContext = createContext();
 
@@ -43,6 +44,7 @@ function App() {
         <Navbar />
 
         <Routes>
+          <Route path="/image" element={<ImageUpload />} />
           <Route path="/pagination" element={<PaginatedItems />} />
           <Route path="/update_hangout/:id" element={<UpdateHangout />} />
           <Route path="/hangout/:id" element={<Hangout />} />

@@ -40,7 +40,9 @@ function Profile() {
     <>
       {profile && (
         <div className="parent_div flex flex-row items-center bg-slate-50 flex-coljustify-between h-auto gap-20 justify-start ">
-          <div className="img-div border border-black h-60 w-40 ml-20"></div>
+          <div className="img-div border border-black h-60 w-40 ml-20">
+            <img src={profile.picture} alt="profile picture" />
+          </div>
           <div className="info">
             <h1 className="my-8 text-2xl">Profile</h1>
 
@@ -63,8 +65,6 @@ function Profile() {
       )}
     </>
   );
-
 }
-
 
 export default Profile;

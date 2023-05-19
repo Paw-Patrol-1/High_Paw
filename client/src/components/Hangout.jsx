@@ -117,12 +117,19 @@ function Hangout() {
               {hangout.joining.map((joiner) => (
                 <div className="joiner" key={joiner}>
                   {joiners[joiner] && (
-                    <Link to={`/profile/${joiner}`}>
+                    <Link to={`/profile/${joiner}`} className="flex">
                       <p className="text-xs">
                         <em className="font-bold underline cursor-pointer">
                           {joiners[joiner].name}
                         </em>
                       </p>
+                      <div className="avatar w-10 h-10 rounded-full ">
+                        <img
+                          src={joiners[joiner].picture}
+                          alt="profile picture"
+                          className="rounded-full object-cover w-10 h-10"
+                        />
+                      </div>
                     </Link>
                   )}
                 </div>
@@ -148,14 +155,21 @@ function Hangout() {
               {
                 /* if profile is not null, display the profile picture */
                 profile && (
-                  <p className="text-xs">
+                  <div className="text-xs flex w-52">
                     Post created by{" "}
-                    <Link to={`/profile/${hangout.userId}`}>
+                    <Link to={`/profile/${hangout.userId}`} className="flex">
                       <em className="font-bold underline cursor-pointer">
                         {profile.name}
                       </em>
+                      <div className="avatar w-10 h-10 rounded-full ">
+                        <img
+                          src={profile.picture}
+                          alt="profile picture"
+                          className="rounded-full object-cover w-10 h-10"
+                        />
+                      </div>
                     </Link>
-                  </p>
+                  </div>
                 )
               }
             </div>
