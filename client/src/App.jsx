@@ -23,18 +23,9 @@ function App() {
   const [user, setUser] = useState(userStorage);
   // importing env variables(need no installation of dotenv package for this to work, just need to add .env file in root directory, because of VITE_ prefix)
   const API_KEY = import.meta.env.VITE_MAPBOX_API;
-  // console.log(import.meta.env.VITE_MAPBOX_API);
-
-  // useEffect(() => {
-  //   fetch(
-  //     `https://api.mapbox.com/geocoding/v5/mapbox.places/822 fairview lane, new jersey.json?limit=1&access_token=${API_KEY}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data.features[0].geometry.coordinates));
-  // }, []);
 
   return (
-    <div className="parent-container ">
+    <div className="parent-container border border-red-500  w-screen">
       <UserContext.Provider
         value={{
           user: user,
@@ -42,25 +33,23 @@ function App() {
         }}
       >
         <Navbar />
-        <div className="main flex flex-col">
-          <div className="route border border-black">
-            <Routes>
-              <Route path="/image" element={<ImageUpload />} />
-              <Route path="/pagination" element={<PaginatedItems />} />
-              <Route path="/update_hangout/:id" element={<UpdateHangout />} />
-              <Route path="/hangout/:id" element={<Hangout />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/profile" element={<Profile />} />
 
-              <Route path="/profile/:id" element={<Profile />} />
+        <Routes>
+          <Route path="/image" element={<ImageUpload />} />
+          <Route path="/pagination" element={<PaginatedItems />} />
+          <Route path="/update_hangout/:id" element={<UpdateHangout />} />
+          <Route path="/hangout/:id" element={<Hangout />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
 
-              <Route path="/create_hangout" element={<CreateHangout />} />
-              <Route path="/hangouts" element={<Hangouts />} />
-            </Routes>
-          </div>
+          <Route path="/profile/:id" element={<Profile />} />
 
+          <Route path="/create_hangout" element={<CreateHangout />} />
+          <Route path="/hangouts" element={<Hangouts />} />
+        </Routes>
+        <div className="community flex ">
           <Community />
         </div>
       </UserContext.Provider>
