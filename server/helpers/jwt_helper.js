@@ -61,6 +61,7 @@ const signRefreshToken = (userId) => {
       const userToken = new UserToken({ userId, token });
 
       const saveToken = await userToken.save();
+      console.log(saveToken);
       if (err) {
         console.log(err.message);
         reject(createError.InternalServerError());
@@ -73,23 +74,26 @@ const signRefreshToken = (userId) => {
 
 const verifyRefreshToken = (refreshToken) => {
   return new Promise((resolve, reject) => {
-    JWT.verify(refreshToken, `${REFRESH_TOKEN_SECRET}`, async (err, payload) => {
-      if (err) return reject(createError.Unauthorized());
-      const userId = payload.aud;
-      const userToken = await UserToken.findOne({ userId });
+    JWT.verify(
+      refreshToken,
+      `${REFRESH_TOKEN_SECRET}`,
+      async (err, payload) => {
+        if (err) return reject(createError.Unauthorized());
+        const userId = payload.aud;
+        const userToken = await UserToken.findOne({ userId });
 
-      if (userToken == null) return reject(createError.Unauthorized());
-      if (err) {
-        console.log(err.message);
-        reject(createError.InternalServerError());
-        return;
+        if (userToken == null) return reject(createError.Unauthorized());
+        if (err) {
+          console.log(err.message);
+          reject(createError.InternalServerError());
+          return;
+        }
+        if (refreshToken === userToken.token) return resolve(userId);
+        reject(createError.Unauthorized());
       }
-      if (refreshToken === userToken.token) return resolve(userId);
-      reject(createError.Unauthorized());
-    });
+    );
   });
 };
-
 
 module.exports = {
   signAccessToken,
