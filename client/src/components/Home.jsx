@@ -3,7 +3,7 @@ import { TileLayer } from "react-leaflet/TileLayer";
 import { useMap } from "react-leaflet/hooks";
 import { Marker } from "react-leaflet/Marker";
 import { Popup } from "react-leaflet/Popup";
-import Community from "./Community";
+
 import { useEffect, useContext, useState } from "react";
 import { UserContext } from "../App";
 import { Link } from "react-router-dom";
@@ -82,9 +82,6 @@ function Home() {
               </div>
             ))}
           </MapContainer>
-        </div>
-        <div className="communityContainer">
-          <Community />
         </div>
       </div>
     </div>

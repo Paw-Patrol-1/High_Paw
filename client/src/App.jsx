@@ -42,22 +42,27 @@ function App() {
         }}
       >
         <Navbar />
+        <div className="main flex flex-col">
+          <div className="route border border-black">
+            <Routes>
+              <Route path="/image" element={<ImageUpload />} />
+              <Route path="/pagination" element={<PaginatedItems />} />
+              <Route path="/update_hangout/:id" element={<UpdateHangout />} />
+              <Route path="/hangout/:id" element={<Hangout />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/profile" element={<Profile />} />
 
-        <Routes>
-          <Route path="/image" element={<ImageUpload />} />
-          <Route path="/pagination" element={<PaginatedItems />} />
-          <Route path="/update_hangout/:id" element={<UpdateHangout />} />
-          <Route path="/hangout/:id" element={<Hangout />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/:id" element={<Profile />} />
 
-          <Route path="/profile/:id" element={<Profile />} />
+              <Route path="/create_hangout" element={<CreateHangout />} />
+              <Route path="/hangouts" element={<Hangouts />} />
+            </Routes>
+          </div>
 
-          <Route path="/create_hangout" element={<CreateHangout />} />
-          <Route path="/hangouts" element={<Hangouts />} />
-        </Routes>
+          <Community />
+        </div>
       </UserContext.Provider>
     </div>
   );
