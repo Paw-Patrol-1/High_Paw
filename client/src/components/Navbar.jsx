@@ -19,7 +19,7 @@ function Navbar() {
   };
 
   return (
-    <div className="h-auto flex flex-row justify-between w-full">
+    <div className=" flex flex-row  w-full justify-between sticky">
       {/* set dimension to div holding the svg */}
       <div className="logo " style={{ height: "40px", width: "40px" }}>
         {/* give 100% w / h for the svg to fill its parent */}
@@ -40,7 +40,7 @@ function Navbar() {
       <div className="logoutBtn mr-3">
         {user ? (
           <button
-            className=" fill-stone-800 outline outline-offset-2 rounded-full mt-2   outline-red-900 px-4 shadow-2xl hover:bg-red-950 hover:text-white"
+            className=" fill-stone-800 outline outline-offset-2 rounded-full mt-2   outline-red-900 px-4 shadow-2xl hover:bg-red-950 hover:text-white transition-all"
             onClick={handleLogout}
           >
             Logout
@@ -53,7 +53,6 @@ function Navbar() {
             >
               Login
             </Link>
-       
             <Link
               className="outline outline-offset-2 rounded-full mt-2   outline-slate-700 px-4"
               to="/signup"

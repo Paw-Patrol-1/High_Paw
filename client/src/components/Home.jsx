@@ -3,7 +3,7 @@ import { TileLayer } from "react-leaflet/TileLayer";
 import { useMap } from "react-leaflet/hooks";
 import { Marker } from "react-leaflet/Marker";
 import { Popup } from "react-leaflet/Popup";
-import Community from "./Community";
+
 import { useEffect, useContext, useState } from "react";
 import { UserContext } from "../App";
 import { Link } from "react-router-dom";
@@ -33,11 +33,14 @@ function Home() {
 
   useEffect(() => {
     const getHangouts = async () => {
-      const response = await fetch("http://localhost:8000/hangout/all", {
-        headers: {
-          Authorization: `Bearer ${user.accessToken}`,
-        },
-      });
+      const response = await fetch(
+        "https://high-paw-production.up.railway.app/hangout/all",
+        {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        }
+      );
       const data = await response.json();
       setHangouts(data.hangouts);
       // console.log(data);
@@ -46,17 +49,17 @@ function Home() {
   }, []);
 
   return (
-    <div className="parent-container h-screen">
-      <div className="containerMapAndCommunity  w-screen flex justify-evenly">
+    <div>
+      <div className="containerMapAndCommunity   w-3/4  m-auto mt-14 bg-slate-50 ">
         <div
-          className="mapContainer w-9/12 shadow-xl"
-          style={{ marginTop: "2em" }}
+          className="mapContainer shadow-xl  justify-center "
+          // style={{ marginTop: "8em" }}
         >
           <MapContainer
             center={user.user.latLong}
             zoom={14}
             scrollWheelZoom={false}
-            style={{ height: "70vh", width: "100%", zIndex: "0 !important" }}
+            style={{ height: "80vh", width: "100%" }}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -82,9 +85,6 @@ function Home() {
               </div>
             ))}
           </MapContainer>
-        </div>
-        <div className="communityContainer">
-          <Community />
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ const authSchema = Joi.object({
   name: Joi.string().required(),
   breed: Joi.string().required(),
   age: Joi.number().required(),
-  // picture: Joi.string().required(),
+  picture: Joi.string().required(),
   city: Joi.string().required(),
   address: Joi.string().required(),
   latLong: Joi.array().items(Joi.number()).required(),
@@ -43,7 +43,7 @@ const profileSchema = Joi.object({
   name: Joi.string().required(),
   breed: Joi.string().required(),
   age: Joi.number().required(),
-  // picture: Joi.string().required(),
+  picture: Joi.string().required(),
   city: Joi.string().required(),
 });
 
@@ -51,5 +51,5 @@ module.exports = {
   authSchema,
   loginSchema,
   hangoutSchema,
-  profileSchema
+  profileSchema,
 };

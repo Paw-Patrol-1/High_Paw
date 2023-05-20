@@ -60,24 +60,26 @@ function CreateHangout() {
       userId: user.user._id,
       joining: [],
     };
-    const response = await fetch("http://localhost:8000/hangout/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-      body: JSON.stringify(newHangout),
-    });
+    const response = await fetch(
+      "https://high-paw-production.up.railway.app/hangout/create",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify(newHangout),
+      }
+    );
     const data = await response.json();
     console.log(data);
     navigate("/");
   };
 
   return (
-    <div className="parent_div flex items-center bg-slate-50 flex-col h-auto">
-      <h1 className="my-8 text-2xl">Create Hangout</h1>
+    <div className="parent_div flex items-center  flex-col h-auto">
       <form
-        className="form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-2/5"
+        className="form bg-white shadow-md rounded px-6 pt-6 pb-6 mb-2 w-2/5 "
         onSubmit={handleSubmit}
       >
         <div className="title-div mb-4">
@@ -92,7 +94,7 @@ function CreateHangout() {
             value={title}
             type="text"
             id="title"
-            className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text"
             placeholder="add your title here..."
           />
         </div>
@@ -100,7 +102,7 @@ function CreateHangout() {
         <div className="description-div mb-4">
           <label
             htmlFor="description"
-            className="block text-gray-700 text-sm font-semibold mb-2"
+            className="block text-gray-700  font-semibold mb-2 text-xs"
           >
             Description
           </label>
@@ -111,7 +113,7 @@ function CreateHangout() {
             id="description"
             cols="30"
             rows="auto"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
             placeholder="add your description here..."
           ></textarea>
         </div>
@@ -124,7 +126,7 @@ function CreateHangout() {
               center={user.user.latLong}
               zoom={14}
               scrollWheelZoom={false}
-              style={{ height: "50vh", width: "100%" }}
+              style={{ height: "40vh", width: "100%" }}
             >
               <TileLayer
                 onClick={() => console.log("test")}
@@ -135,7 +137,7 @@ function CreateHangout() {
             </MapContainer>
           </div>
         </div>
-        <button className="btn bg-green-700 hover:bg-green-900 text-white font-medium py-2 px-4 rounded">
+        <button className="btn bg-green-700 hover:bg-green-900 text-white font-medium py-2 px-4 rounded w-full">
           Create hangout
         </button>
       </form>

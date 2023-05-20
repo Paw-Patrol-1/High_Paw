@@ -57,11 +57,14 @@ function UpdateHangout() {
 
   useEffect(() => {
     const getHangout = async () => {
-      const response = await fetch(`http://localhost:8000/hangout/${id}`, {
-        headers: {
-          Authorization: `Bearer ${user.accessToken}`,
-        },
-      });
+      const response = await fetch(
+        `https://high-paw-production.up.railway.app/hangout/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        }
+      );
       const data = await response.json();
       setHangout(data.hangout);
       setTitle(data.hangout.title);
@@ -86,14 +89,17 @@ function UpdateHangout() {
       userId: user.user._id,
       joining: hangout.joining,
     };
-    const response = await fetch(`http://localhost:8000/hangout/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-      body: JSON.stringify(updatedHangout),
-    });
+    const response = await fetch(
+      `https://high-paw-production.up.railway.app/hangout/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify(updatedHangout),
+      }
+    );
     const data = await response.json();
     console.log(data);
     navigate(`/hangout/${id}`);
