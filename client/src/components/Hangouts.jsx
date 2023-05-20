@@ -84,6 +84,7 @@ import { UserContext } from "../App";
 import ReactPaginate from "react-paginate";
 
 function Hangouts() {
+  const [searchTerm, setSearchTerm] = useState("");
   const [hangouts, setHangouts] = useState([]);
   const { user } = useContext(UserContext);
 
@@ -136,9 +137,31 @@ function Hangouts() {
   //   window.location.reload();
   // };
   return (
-    <div className="parent-container ">
+    <div className="parent-container w-screen">
+      <div className="search flex justify-center">
+        <input
+          type="text"
+          placeholder="Search hangouts by user..."
+          className=" w-8/12 border rounded-md px-4 py-2 mt-10 focus:outline-green-500 transition text-xs shadow-md cursor-pointer hover:border-green-400"
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       {hangouts
         .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
+        // needs to be fixed
+        // filter by user name to show hangouts created by that user
+
+        .filter((hangout) => {
+          if (searchTerm === "") {
+            return hangout;
+          } else if (
+            hangout.userId === searchTerm ||
+            user.user._id.toLowerCase().includes(searchTerm.toLowerCase())
+          ) {
+            return setSearchTerm(hangout);
+          }
+        })
+
         .map((hangout, index) => (
           <div
             className={` shadow-md w-8/12 h-52 bg-white rounded-md m-auto mt-16 flex justify-between  border-l-2 border-t border-green-500 ${
@@ -163,6 +186,7 @@ function Hangouts() {
             </div>
           </div>
         ))}
+
       <ReactPaginate
         className="flex justify-center mt-6 gap-4 "
         pageCount={Math.ceil(hangouts.length / itemsPerPage)}
