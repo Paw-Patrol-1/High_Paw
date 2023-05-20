@@ -6,7 +6,6 @@ import adressToLatLong from "../../utils/adressToLatLong";
 import { useNavigate } from "react-router-dom";
 
 // import UploadWidget from "./UploadImage";
-// // const cloudinary = require("./config/cloudinary")
 
 function Signup() {
   const preset_key = "rmfpv4pk";
@@ -28,7 +27,7 @@ function Signup() {
     name: "",
     breed: "",
     age: "",
-    picture: "",
+    // picture: "",
     address: "",
     city: "",
     email: "",
