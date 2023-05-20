@@ -101,47 +101,63 @@ function Hangout() {
   };
 
   return (
-    <div className="bg-slate-50 ">
+    <div className="parent-container h-screen">
       {hangout && (
         <div
           className="parent  w-10/12 m-auto mt-8 flex justify-between"
           key={hangout._id}
         >
-          <div className="hangout  w-10/12 m-auto">
-            <h2 className="title text-stone-700 text-2xl">{hangout.title}</h2>
-            <p className="description text-stone-600 pb-10">
-              {hangout.description}
-            </p>
-            <p>number of joiners: {hangout.joining.length}</p>
-            <div className="joiners">
-              {hangout.joining.map((joiner) => (
-                <div className="joiner" key={joiner}>
-                  {joiners[joiner] && (
-                    <Link to={`/profile/${joiner}`} className="flex">
-                      <p className="text-xs">
-                        <em className="font-bold underline cursor-pointer">
-                          {joiners[joiner].name}
-                        </em>
-                      </p>
-                      <div className="avatar w-10 h-10 rounded-full ">
-                        <img
-                          src={joiners[joiner].picture}
-                          alt="profile picture"
-                          className="rounded-full object-cover w-10 h-10"
-                        />
-                      </div>
-                    </Link>
-                  )}
+          <div className="hangout  w-10/12 m-auto ">
+            <div className="wrapper-parent flex justify-between">
+              <div className="wrapperTitleDescription">
+                <h2 className="title text-stone-700 text-2xl">
+                  {hangout.title}
+                </h2>
+                <p className="description text-stone-600 pb-10 w-11/12 leading-5 mt-5 text-sm">
+                  {hangout.description}
+                </p>
+              </div>
+
+              <div className="wrapperJoinersImg">
+                <p>
+                  <span className="font-semibold">Number of joiners: </span>
+                  {hangout.joining.length}
+                </p>
+                {/* joiners */}
+                <div className="joiners mt-10">
+                  {hangout.joining.map((joiner) => (
+                    <div className="joiner" key={joiner}>
+                      {joiners[joiner] && (
+                        <Link to={`/profile/${joiner}`} className="flex">
+                          <p className="text-xs">
+                            <em className="font-bold underline cursor-pointer mr-5">
+                              {joiners[joiner].name}
+                            </em>
+                          </p>
+                          <div className="avatar w-8 h-8 rounded-full drop-shadow-md">
+                            <figure className="overflow-clip rounded-full border border-solid w-full h-full -mt-2 shadow-2xl">
+                              <img
+                                src={joiners[joiner].picture}
+                                alt="profile picture"
+                                className="rounded-full object-cover w-8 h-8  hover:scale-150  transition-all"
+                              />
+                            </figure>
+                          </div>
+                        </Link>
+                      )}
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
 
             <button
-              className="btn my-8 bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl"
+              className="btn my-8 bg-green-600 transition-all hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl w-full"
               onClick={handleJoin}
             >
               Join
             </button>
+
             <div className="user">
               {/* {
                
@@ -155,18 +171,23 @@ function Hangout() {
               {
                 /* if profile is not null, display the profile picture */
                 profile && (
-                  <div className="text-xs flex w-52">
-                    Post created by{" "}
-                    <Link to={`/profile/${hangout.userId}`} className="flex">
+                  <div className="text-xs flex w-52 mt-5 ">
+                    <span className="font-light">Post created by: </span>
+                    <Link
+                      to={`/profile/${hangout.userId}`}
+                      className="flex ml-4"
+                    >
                       <em className="font-bold underline cursor-pointer">
                         {profile.name}
                       </em>
-                      <div className="avatar w-10 h-10 rounded-full ">
-                        <img
-                          src={profile.picture}
-                          alt="profile picture"
-                          className="rounded-full object-cover w-10 h-10"
-                        />
+                      <div className="avatar w-8 h-8 rounded-full ">
+                        <figure className="overflow-clip rounded-full border border-solid w-full h-full -mt-2 drop-shadow-md ml-3">
+                          <img
+                            src={profile.picture}
+                            alt="profile picture"
+                            className="rounded-full object-cover w-8 h-8 hover:scale-150 transition-all"
+                          />
+                        </figure>
                       </div>
                     </Link>
                   </div>
@@ -175,11 +196,11 @@ function Hangout() {
             </div>
 
             {hangout.userId === user.user._id && (
-              <div className="parent-btn flex gap-4 ">
+              <div className="parent-btn flex   justify-between  ">
                 <Link to={`/update_hangout/${id}`}>
                   {" "}
                   <button
-                    className="btn my-8 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl"
+                    className="btn my-8 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl w-96"
                     onClick={() => updateHangout(hangout._id)}
                   >
                     Update
@@ -187,7 +208,7 @@ function Hangout() {
                 </Link>
 
                 <button
-                  className="btn my-8 bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl"
+                  className="btn my-8 bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl w-96 "
                   onClick={() => deleteHangout(hangout._id)}
                 >
                   Delete

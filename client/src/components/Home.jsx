@@ -46,17 +46,17 @@ function Home() {
   }, []);
 
   return (
-    <div className="parent-container flex justify-center items-center h-screen bg-slate-50">
-      <div className="containerMapAndCommunity  w-9/12 border border-red  items-center">
+    <div>
+      <div className="containerMapAndCommunity   w-3/4  m-auto mt-14 bg-slate-50 ">
         <div
-          className="mapContainer w-full shadow-xl  "
+          className="mapContainer shadow-xl  justify-center "
           // style={{ marginTop: "8em" }}
         >
           <MapContainer
             center={user.user.latLong}
             zoom={14}
             scrollWheelZoom={false}
-            style={{ height: "60vh", width: "100%" }}
+            style={{ height: "80vh", width: "100%" }}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

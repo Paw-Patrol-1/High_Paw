@@ -6,12 +6,12 @@ import Signup from "./components/Signup";
 import { Route, Routes } from "react-router-dom";
 import CreateHangout from "./components/CreateHangout";
 import Home from "./components/Home";
-import { useContext, createContext, useState } from "react";
+import { createContext, useState } from "react";
 import Profile from "./components/Profile";
 import Hangouts from "./components/Hangouts";
 import Hangout from "./components/Hangout";
 import UpdateHangout from "./components/UpdateHangout";
-import PaginatedItems from "./components/Pagination";
+// import PaginatedItems from "./components/Pagination";
 import ImageUpload from "./components/ImageUpload";
 
 export const UserContext = createContext();
@@ -25,7 +25,7 @@ function App() {
   const API_KEY = import.meta.env.VITE_MAPBOX_API;
 
   return (
-    <div className="parent-container border border-red-500  w-screen">
+    <div className="parent-container  h-screen">
       <UserContext.Provider
         value={{
           user: user,
@@ -36,7 +36,6 @@ function App() {
 
         <Routes>
           <Route path="/image" element={<ImageUpload />} />
-          <Route path="/pagination" element={<PaginatedItems />} />
           <Route path="/update_hangout/:id" element={<UpdateHangout />} />
           <Route path="/hangout/:id" element={<Hangout />} />
           <Route path="/login" element={<Login />} />
@@ -49,7 +48,7 @@ function App() {
           <Route path="/create_hangout" element={<CreateHangout />} />
           <Route path="/hangouts" element={<Hangouts />} />
         </Routes>
-        <div className="community flex ">
+        <div className="community">
           <Community />
         </div>
       </UserContext.Provider>
