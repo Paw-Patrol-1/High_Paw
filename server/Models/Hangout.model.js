@@ -10,14 +10,14 @@ const HangoutSchema = new Schema({
     type: String,
     required: true,
   },
-  city: {
-    type: String,
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
+  // city: {
+  //   type: String,
+  //   required: true,
+  // },
+  // address: {
+  //   type: String,
+  //   required: true,
+  // },
   userId: {
     type: Schema.Types.ObjectId,
     ref: "user",

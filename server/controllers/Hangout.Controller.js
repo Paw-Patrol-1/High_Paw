@@ -70,8 +70,8 @@ module.exports = {
       if (result && hangout) {
         hangout.title = result.title || hangout.title;
         hangout.description = result.description || hangout.description;
-        hangout.city = result.city || hangout.city;
-        hangout.address = result.address || hangout.address;
+        // hangout.city = result.city || hangout.city;
+        // hangout.address = result.address || hangout.address;
         hangout.userId = result.userId || hangout.userId;
         hangout.latLong = result.latLong || hangout.latLong;
         hangout.joining = result.joining || hangout.joining;
@@ -82,8 +82,8 @@ module.exports = {
           // _id: updatedHangout._id,
           title: updatedHangout.title,
           description: updatedHangout.description,
-          city: updatedHangout.city,
-          address: updatedHangout.address,
+          // city: updatedHangout.city,
+          // address: updatedHangout.address,
           userId: updatedHangout.userId,
           latLong: updatedHangout.latLong,
           joining: updatedHangout.joining,
