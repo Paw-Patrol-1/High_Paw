@@ -19,21 +19,27 @@ function Hangout() {
     }
   }, [user]);
   const getHangoutUser = async (id) => {
-    const response = await fetch(`http://localhost:8000/profile/${id}`, {
-      headers: {
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-    });
+    const response = await fetch(
+      `https://high-paw-production.up.railway.app/profile/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      }
+    );
     const data = await response.json();
     setProfile(data);
   };
   const getJoiners = async (joiners) => {
     for (let joiner of joiners) {
-      const response = await fetch(`http://localhost:8000/profile/${joiner}`, {
-        headers: {
-          Authorization: `Bearer ${user.accessToken}`,
-        },
-      });
+      const response = await fetch(
+        `https://high-paw-production.up.railway.app/profile/${joiner}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        }
+      );
       const data = await response.json();
       setJoiners((prev) => {
         return { ...prev, [joiner]: data };
@@ -43,11 +49,14 @@ function Hangout() {
 
   useEffect(() => {
     const getHangout = async () => {
-      const response = await fetch(`http://localhost:8000/hangout/${id}`, {
-        headers: {
-          Authorization: `Bearer ${user.accessToken}`,
-        },
-      });
+      const response = await fetch(
+        `https://high-paw-production.up.railway.app/hangout/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        }
+      );
       const data = await response.json();
       // get the user who created the hangout
       getHangoutUser(data.hangout.userId);
@@ -63,12 +72,15 @@ function Hangout() {
   };
 
   const deleteHangout = async (id) => {
-    const response = await fetch(`http://localhost:8000/hangout/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-    });
+    const response = await fetch(
+      `https://high-paw-production.up.railway.app/hangout/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      }
+    );
     const data = await response.json();
     console.log(data);
     navigate("/hangouts");
@@ -87,14 +99,17 @@ function Hangout() {
       userId: hangout.userId,
       joining: [...hangout.joining, user.user._id],
     };
-    const response = await fetch(`http://localhost:8000/hangout/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-      body: JSON.stringify(joinedHangout),
-    });
+    const response = await fetch(
+      `https://high-paw-production.up.railway.app/hangout/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify(joinedHangout),
+      }
+    );
     const data = await response.json();
     console.log(data);
     window.location.href = `/hangout/${id}`;

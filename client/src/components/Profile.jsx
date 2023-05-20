@@ -23,11 +23,14 @@ function Profile() {
   }
   useEffect(() => {
     const getProfile = async () => {
-      const response = await fetch(`http://localhost:8000/profile/${id}`, {
-        headers: {
-          Authorization: `Bearer ${user.accessToken}`,
-        },
-      });
+      const response = await fetch(
+        `https://high-paw-production.up.railway.app/profile/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        }
+      );
       const data = await response.json();
       setProfile(data);
       console.log(data);

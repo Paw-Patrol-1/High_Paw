@@ -33,11 +33,14 @@ function Home() {
 
   useEffect(() => {
     const getHangouts = async () => {
-      const response = await fetch("http://localhost:8000/hangout/all", {
-        headers: {
-          Authorization: `Bearer ${user.accessToken}`,
-        },
-      });
+      const response = await fetch(
+        "https://high-paw-production.up.railway.app/hangout/all",
+        {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        }
+      );
       const data = await response.json();
       setHangouts(data.hangouts);
       // console.log(data);

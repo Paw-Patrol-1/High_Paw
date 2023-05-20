@@ -60,14 +60,17 @@ function CreateHangout() {
       userId: user.user._id,
       joining: [],
     };
-    const response = await fetch("http://localhost:8000/hangout/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-      body: JSON.stringify(newHangout),
-    });
+    const response = await fetch(
+      "https://high-paw-production.up.railway.app/hangout/create",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify(newHangout),
+      }
+    );
     const data = await response.json();
     console.log(data);
     navigate("/");
@@ -91,7 +94,7 @@ function CreateHangout() {
             value={title}
             type="text"
             id="title"
-            className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
+            className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text"
             placeholder="add your title here..."
           />
         </div>

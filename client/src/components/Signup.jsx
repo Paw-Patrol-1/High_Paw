@@ -51,7 +51,10 @@ function Signup() {
     }
     console.log(latLong);
     axios
-      .post("http://localhost:8000/auth/register", { ...form, latLong })
+      .post("https://high-paw-production.up.railway.app/auth/register", {
+        ...form,
+        latLong,
+      })
       .then((res) => {
         console.log(res.data);
       })

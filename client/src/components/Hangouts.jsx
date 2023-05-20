@@ -102,7 +102,7 @@ function Hangouts() {
   useEffect(() => {
     const getHangouts = async () => {
       const response = await fetch(
-        `http://localhost:8000/hangout/all?page=${
+        `https://high-paw-production.up.railway.app/hangout/all?page=${
           currentPage + 1
         }&limit=${itemsPerPage}`,
         {
