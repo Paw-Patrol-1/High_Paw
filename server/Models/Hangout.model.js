@@ -10,28 +10,20 @@ const HangoutSchema = new Schema({
     type: String,
     required: true,
   },
-  city: {
-    type: String,
-    required: true,
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
   },
-  address: {
-    type: String,
-    required: true,
-  },
-  // userId: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "user",
-  // },
   latLong: {
     type: [Number],
     require: true,
   },
-  // joining: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "user",
-  //   },
-  // ],
+  joining: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
+  ],
 });
 
 const Hangout = mongoose.model("hangout", HangoutSchema);

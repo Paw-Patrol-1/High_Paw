@@ -42,8 +42,12 @@ module.exports = {
         user.name = result.name || user.name;
         user.breed = result.breed || user.breed;
         user.age = result.age || user.age;
-        user.picture = result.picture || user.picture
+        user.picture = result.picture || user.picture;
         user.city = result.city || user.city;
+
+        // for being able to update the user profile details
+        // user.address = result.address || user.address;
+        // user.latLong = result.latLong || user.latLong;
 
         // if (result.password && result.confirmPassword) {
         //   user.password = result.password,
@@ -60,7 +64,6 @@ module.exports = {
           picture: updatedUser.picture,
           city: updatedUser.city,
         });
-         
       } else {
         res.status(404);
         throw new Error("Error Updating Profile Details");

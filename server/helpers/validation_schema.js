@@ -26,11 +26,9 @@ const loginSchema = Joi.object({
 const hangoutSchema = Joi.object({
   title: Joi.string().required(),
   description: Joi.string().required(),
-  city: Joi.string().required(),
-  address: Joi.string().required(),
-  // userId: Joi.objectId().required(),
+  userId: Joi.objectId().required(),
   latLong: Joi.array().items(Joi.number()).required(),
-  // joining: Joi.array().items(Joi.objectId()).required(),
+  joining: Joi.array().items(Joi.objectId()).required(),
 });
 
 const profileSchema = Joi.object({
@@ -47,9 +45,14 @@ const profileSchema = Joi.object({
   city: Joi.string().required(),
 });
 
+const refreshTokenSchema = Joi.object({
+  refreshToken: Joi.string().required().label("Refresh Token"),
+});
+
 module.exports = {
   authSchema,
   loginSchema,
   hangoutSchema,
   profileSchema,
+  refreshTokenSchema,
 };

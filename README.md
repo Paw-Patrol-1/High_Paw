@@ -1,5 +1,6 @@
 # High_Paw
-
+    
+    
 High Paw! 🐾 A Full Stack application where users can create and attend puppy playdates with geolocation.
 
 ## Features
@@ -10,7 +11,8 @@ MVP
 Stretch Goals
 - Blog feature including posts, recipes, facts, etc
 
-## Environment Variables
+## Environment Variables     
+
 
 To run this project, you will need to add the following environment variables to your .env file
 
@@ -37,4 +39,4 @@ Install High Paw with npm
 
 ## Acknoledgements
 
-- [Awesome Readme Templates](https://readme.so/editor)
+- [Awesome Readme Templates](https://readme.so/editor)   

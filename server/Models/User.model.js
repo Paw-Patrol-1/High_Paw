@@ -35,7 +35,7 @@ const UserSchema = new Schema({
   },
   picture: {
     type: String,
-    // required: true,
+    required: true,
   },
   age: {
     type: Number,
@@ -47,10 +47,6 @@ const UserSchema = new Schema({
   },
   name: {
     type: String,
-    required: true,
-  },
-  latLong: {
-    type: [Number],
     required: true,
   },
 });

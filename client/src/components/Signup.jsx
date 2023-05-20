@@ -2,12 +2,32 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 
+import adressToLatLong from "../../utils/adressToLatLong";
+import { useNavigate } from "react-router-dom";
+
+// import UploadWidget from "./UploadImage";
+
 function Signup() {
+  const preset_key = "rmfpv4pk";
+
+  function handleFile(event) {
+    const selectedImages = event.target.files[0];
+    const formData = new FormData();
+    formData.append("file", selectedImages);
+    formData.append("upload_preset", preset_key);
+    axios
+      .post("https://api.cloudinary.com/v1_1/dhknz3izf/image/upload", formData)
+      .then((response) =>
+        setForm({ ...form, picture: response.data.secure_url })
+      )
+      .catch((error) => console.log(error));
+  }
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     breed: "",
     age: "",
-
+    picture: "",
     address: "",
     city: "",
     email: "",
@@ -22,15 +42,23 @@ function Signup() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const latLong = await adressToLatLong(form.address, form.city);
+    if (!latLong || !latLong.length) {
+      return alert("Please enter a valid address");
+    }
+    console.log(latLong);
     axios
-      .post("http://localhost:8000/auth/register", form)
+      .post("https://high-paw-production.up.railway.app/auth/register", {
+        ...form,
+        latLong,
+      })
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => {});
+    navigate("/login");
   };
 
   return (
@@ -92,6 +120,9 @@ function Signup() {
             id="img"
             className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="file"
+            placeholder="123 Address Street"
+            onChange={handleFile}
+            accept="image/png, image/jpeg, image/jpg"
           />
         </div>
         <div className="childFive mb-2">

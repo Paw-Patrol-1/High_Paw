@@ -1,13 +1,9 @@
-import React from "react";
-import { useState } from "react";
-import { MapContainer } from "react-leaflet/MapContainer";
-import { TileLayer } from "react-leaflet/TileLayer";
-import { useMap } from "react-leaflet/hooks";
-import { Marker } from "react-leaflet/Marker";
-import { Popup } from "react-leaflet/Popup";
+import React, { useState } from "react";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { useMapEvents } from "react-leaflet";
 import { UserContext } from "../App";
 import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const icon = L.icon({
   iconSize: [25, 41],
@@ -21,14 +17,25 @@ function MyComponent({ saveMarker }) {
   const map = useMapEvents({
     click: (e) => {
       const { lat, lng } = e.latlng;
-      L.marker([lat, lng], { icon }).addTo(map);
-      saveMarker([lat, lng]);
+
+      // Remove any existing marker on the map
+      map.eachLayer((layer) => {
+        if (layer instanceof L.Marker) {
+          map.removeLayer(layer);
+        }
+      });
+
+      // Add a new marker to the map
+      const newMarker = L.marker([lat, lng], { icon }).addTo(map);
+      saveMarker([lat, lng, newMarker]);
     },
   });
+
   return null;
 }
 
 function CreateHangout() {
+  const navigate = useNavigate();
   const { user } = useContext(UserContext);
   useEffect(() => {
     // if user is null, redirect to login page
@@ -44,23 +51,50 @@ function CreateHangout() {
   const saveMarker = (newMarkerCoords) => {
     setMarker(newMarkerCoords);
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newHangout = {
+      title,
+      description,
+      latLong: marker.slice(0, 2),
+      userId: user.user._id,
+      joining: [],
+    };
+    const response = await fetch(
+      "https://high-paw-production.up.railway.app/hangout/create",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify(newHangout),
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    navigate("/");
+  };
+
   return (
-    <div className="parent_div flex items-center bg-slate-50 flex-col h-auto">
-      <h1 className="my-8 text-2xl">Create Hangout</h1>
-      <form className="form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-2/5">
+    <div className="parent_div flex items-center  flex-col h-auto">
+      <form
+        className="form bg-white shadow-md rounded px-6 pt-6 pb-6 mb-2 w-2/5 "
+        onSubmit={handleSubmit}
+      >
         <div className="title-div mb-4">
           <label
             htmlFor="title"
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-sm font-semibold mb-2"
           >
-            title
+            Title
           </label>
           <input
             onChange={(e) => setTitle(e.target.value)}
             value={title}
             type="text"
             id="title"
-            className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text"
             placeholder="add your title here..."
           />
         </div>
@@ -68,9 +102,9 @@ function CreateHangout() {
         <div className="description-div mb-4">
           <label
             htmlFor="description"
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700  font-semibold mb-2 text-xs"
           >
-            description
+            Description
           </label>
           <textarea
             onChange={(e) => setDescription(e.target.value)}
@@ -79,7 +113,7 @@ function CreateHangout() {
             id="description"
             cols="30"
             rows="auto"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
             placeholder="add your description here..."
           ></textarea>
         </div>
@@ -89,10 +123,10 @@ function CreateHangout() {
           </p>
           <div className="mapContainer w-auto" style={{ marginBottom: "2em" }}>
             <MapContainer
-              center={[40.83335, -73.985023]}
-              zoom={16}
+              center={user.user.latLong}
+              zoom={14}
               scrollWheelZoom={false}
-              style={{ height: "50vh", width: "100%" }}
+              style={{ height: "40vh", width: "100%" }}
             >
               <TileLayer
                 onClick={() => console.log("test")}
@@ -100,16 +134,11 @@ function CreateHangout() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               <MyComponent saveMarker={saveMarker} />
-              {/* <Marker position={[40.83335, -73.985023]}>
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-              </Marker> */}
             </MapContainer>
           </div>
         </div>
-        <button className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          create hangout
+        <button className="btn bg-green-700 hover:bg-green-900 text-white font-medium py-2 px-4 rounded w-full">
+          Create hangout
         </button>
       </form>
     </div>

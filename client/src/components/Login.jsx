@@ -1,11 +1,9 @@
-
 import React from "react";
-import { ReactComponent as PawSteps } from "../assets/pawSteps.svg";
+// import { ReactComponent as PawSteps } from "./assets/pawsteps.svg";
 import { useState, useContext } from "react";
 import { UserContext } from "../App";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 
 function Login() {
   const { user, setUser } = useContext(UserContext);
@@ -25,9 +23,8 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-
     axios
-      .post("http://localhost:8000/auth/login", form)
+      .post("https://high-paw-production.up.railway.app/auth/login", form)
       .then((res) => {
         setUser(res.data);
         localStorage.setItem("user", JSON.stringify(res.data));
@@ -77,6 +74,6 @@ function Login() {
         </div> */}
     </div>
   );
-
+}
 
 export default Login;
