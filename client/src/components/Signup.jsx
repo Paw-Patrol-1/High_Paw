@@ -27,7 +27,7 @@ function Signup() {
     name: "",
     breed: "",
     age: "",
-    // picture: "",
+    picture: "",
     address: "",
     city: "",
     email: "",
