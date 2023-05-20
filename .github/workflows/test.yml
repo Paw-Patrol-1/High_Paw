@@ -2,7 +2,7 @@ name: Test
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 # top-level call-out of the different tasks within the workflow
 jobs:
@@ -13,16 +13,16 @@ jobs:
 
     # list of steps to complete in the workflow, in order
     steps:
-    # extend from these published, pre-configured actions
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        # the node version for the setup-node action
-        node-version: 16.x
-    # Install packages and run tests
-    - run: npm install
-      working-directory: ./client
-    - run: npm install
-      working-directory: ./server
-    - run: npm test
-      working-directory: ./server
+      # extend from these published, pre-configured actions
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          # the node version for the setup-node action
+          node-version: 16.x
+      # Install packages and run tests
+      - run: npm install
+        working-directory: ./client
+      - run: npm install
+        working-directory: ./server
+      - run: npm test
+        working-directory: ./server
