@@ -12,10 +12,10 @@ const authSchema = Joi.object({
   name: Joi.string().required(),
   breed: Joi.string().required(),
   age: Joi.number().required(),
-  // picture: Joi.string().required(),
+  picture: Joi.string().required(),
   city: Joi.string().required(),
   address: Joi.string().required(),
-  // latLong: Joi.array().items(Joi.number()).required(),
+  latLong: Joi.array().items(Joi.number()).required(),
 });
 
 const loginSchema = Joi.object({
@@ -26,11 +26,11 @@ const loginSchema = Joi.object({
 const hangoutSchema = Joi.object({
   title: Joi.string().required(),
   description: Joi.string().required(),
-  city: Joi.string().required(),
-  address: Joi.string().required(),
-  // userId: Joi.objectId().required(),
-  // latLong: Joi.array().items(Joi.number()).required(),
-  // joining: Joi.array().items(Joi.objectId()).required(),
+  // city: Joi.string().required(),
+  // address: Joi.string().required(),
+  userId: Joi.objectId().required(),
+  latLong: Joi.array().items(Joi.number()).required(),
+  joining: Joi.array().items(Joi.objectId()).required(),
 });
 
 const profileSchema = Joi.object({
@@ -43,18 +43,18 @@ const profileSchema = Joi.object({
   name: Joi.string().required(),
   breed: Joi.string().required(),
   age: Joi.number().required(),
-  // picture: Joi.string().required(),
+  picture: Joi.string().required(),
   city: Joi.string().required(),
 });
 
 const refreshTokenSchema = Joi.object({
-  refreshToken: Joi.string().required().label("Refresh Token")
-})
+  refreshToken: Joi.string().required().label("Refresh Token"),
+});
 
 module.exports = {
   authSchema,
   loginSchema,
   hangoutSchema,
   profileSchema,
-  refreshTokenSchema
+  refreshTokenSchema,
 };
