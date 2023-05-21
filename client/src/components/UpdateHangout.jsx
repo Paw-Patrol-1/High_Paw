@@ -48,12 +48,12 @@ function UpdateHangout() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  useEffect(() => {
-    // if user is null, redirect to login page
-    if (!user) {
-      window.location.href = "/login";
-    }
-  }, [user]);
+  // useEffect(() => {
+  // if user is null, redirect to login page
+  if (!user) {
+    window.location.href = "/login";
+  }
+  // }, [user]);
 
   useEffect(() => {
     const getHangout = async () => {

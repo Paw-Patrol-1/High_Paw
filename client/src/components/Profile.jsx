@@ -11,12 +11,12 @@ function Profile() {
   const [profile, setProfile] = useState(null);
   let { id } = useParams();
   const { user } = useContext(UserContext);
-  useEffect(() => {
-    // if user is null, redirect to login page
-    if (!user) {
-      window.location.href = "/login";
-    }
-  }, [user]);
+  // useEffect(() => {
+  // if user is null, redirect to login page
+  if (!user) {
+    window.location.href = "/login";
+  }
+  // }, [user]);
 
   if (!id) {
     id = user.user._id;
