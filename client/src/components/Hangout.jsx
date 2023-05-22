@@ -116,7 +116,7 @@ function Hangout() {
   };
 
   return (
-    <div className="parent-container h-screen">
+    <div className="parent-container w-screen   md:flex-1  m-auto mt-14 bg-slate-50 border-orange-700 border-4  ">
       {hangout && (
         <div
           className="parent  w-10/12 m-auto mt-8 flex justify-between"

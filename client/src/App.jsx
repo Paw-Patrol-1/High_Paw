@@ -38,26 +38,26 @@ function App() {
         }}
       >
         <Navbar />
+        <div className="parentRoutesCommunity flex flex-col md:flex-row h-full w-full border border-blue-400">
+          <Routes>
+            <Route path="/mainpage" element={<MainPage />} />
+            <Route path="/image" element={<ImageUpload />} />
+            <Route path="/update_hangout/:id" element={<UpdateHangout />} />
+            <Route path="/hangout/:id" element={<Hangout />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:id" element={<Profile />} />
+            <Route path="/update_profile/:id" element={<UpdateProfile />} />
+            <Route path="/create_hangout" element={<CreateHangout />} />
+            <Route path="/hangouts" element={<Hangouts />} />
+            <Route path="/lifestyle" element={<LifeStyle />} />
+            <Route path="/recipes" element={<Recipes />} />
+            <Route path="/facts" element={<Facts />} />
+            <Route path="/:name" element={<SingleFact />} />
+          </Routes>
 
-        <Routes>
-          <Route path="/mainpage" element={<MainPage />} />
-          <Route path="/image" element={<ImageUpload />} />
-          <Route path="/update_hangout/:id" element={<UpdateHangout />} />
-          <Route path="/hangout/:id" element={<Hangout />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/update_profile/:id" element={<UpdateProfile />} />
-          <Route path="/create_hangout" element={<CreateHangout />} />
-          <Route path="/hangouts" element={<Hangouts />} />
-          <Route path="/lifestyle" element={<LifeStyle />} />
-          <Route path="/recipes" element={<Recipes />} />
-          <Route path="/facts" element={<Facts />} />
-          <Route path="/:name" element={<SingleFact />} />
-        </Routes>
-        <div className="community">
           <Community />
         </div>
       </UserContext.Provider>

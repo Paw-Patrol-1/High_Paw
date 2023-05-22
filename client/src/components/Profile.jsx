@@ -41,7 +41,7 @@ function Profile() {
   const userStorage = localStorage.getItem("user");
 
   return (
-    <>
+    <div className="w-screen   md:flex-1  m-auto mt-14 bg-slate-50 border-orange-700 border-4">
       {profile && (
         <div className="parent_div flex flex-row items-center  h-auto gap-20 justify-start ">
           <div className="blop  ml-20 ">
@@ -178,7 +178,7 @@ function Profile() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

@@ -77,9 +77,9 @@ function CreateHangout() {
   };
 
   return (
-    <div className="parent_div flex items-center  flex-col h-auto">
+    <div className="parent_div  w-screen   md:flex-1  m-auto mt-14 bg-slate-50 border-orange-700 border-4">
       <form
-        className="form bg-white shadow-md rounded px-6 pt-6 pb-6 mb-2 w-2/5 "
+        className="form bg-white shadow-md rounded px-6 pt-6 pb-6 mb-2 md:w-4/5 lg:w-3/5 xl:w-2/5 m-auto w-screen"
         onSubmit={handleSubmit}
       >
         <div className="title-div mb-4">

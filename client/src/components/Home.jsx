@@ -50,46 +50,37 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <div className="containerMapAndCommunity   w-3/4  m-auto mt-14 bg-slate-50 ">
-        <div
-          className="mapContainer shadow-xl  justify-center "
-          // style={{ marginTop: "8em" }}
+    <div className="containerMap w-screen pt-28  md:flex-1  m-auto mt-14 bg-slate-50 border-orange-700 border-4 md:pt-0">
+      {/* if user exists show map, otherwise no map*/}
+      {user.user && (
+        <MapContainer
+          center={user.user.latLong}
+          zoom={14}
+          scrollWheelZoom={false}
+          style={{ height: "80vh", width: "100%" }}
         >
-          {/* if user exists show map, otherwise no map*/}
-          {user.user && (
-            <MapContainer
-              center={user.user.latLong}
-              zoom={14}
-              scrollWheelZoom={false}
-              style={{ height: "80vh", width: "100%" }}
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <Marker position={user.user.latLong} icon={icon}></Marker>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={user.user.latLong} icon={icon}></Marker>
 
-              {hangouts.map((hangout) => (
-                <div key={hangout._id} className="bg-slate-500">
-                  <Marker position={hangout.latLong}>
-                    <Popup>
-                      <h2 className="title">{hangout.title}</h2>
-                      <p className="description">
-                        {hangout.description.slice(0, 100)}...
-                      </p>
+          {hangouts.map((hangout) => (
+            <div key={hangout._id} className="bg-slate-500">
+              <Marker position={hangout.latLong}>
+                <Popup>
+                  <h2 className="title">{hangout.title}</h2>
+                  <p className="description">
+                    {hangout.description.slice(0, 100)}...
+                  </p>
 
-                      <Link to={`/hangout/${hangout._id}`}>
-                        See more details
-                      </Link>
-                    </Popup>
-                  </Marker>
-                </div>
-              ))}
-            </MapContainer>
-          )}
-        </div>
-      </div>
+                  <Link to={`/hangout/${hangout._id}`}>See more details</Link>
+                </Popup>
+              </Marker>
+            </div>
+          ))}
+        </MapContainer>
+      )}
     </div>
   );
 }
