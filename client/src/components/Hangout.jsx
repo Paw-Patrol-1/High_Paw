@@ -12,12 +12,12 @@ function Hangout() {
   const { id } = useParams();
   const [hangout, setHangout] = useState(null);
   const { user } = useContext(UserContext);
-  useEffect(() => {
-    // if user is null, redirect to login page
-    if (!user) {
-      window.location.href = "/login";
-    }
-  }, [user]);
+  // useEffect(() => {
+  // if user is null, redirect to login page
+  if (!user) {
+    window.location.href = "/login";
+  }
+  // }, [user]);
   const getHangoutUser = async (id) => {
     const response = await fetch(
       `https://high-paw-production.up.railway.app/profile/${id}`,
