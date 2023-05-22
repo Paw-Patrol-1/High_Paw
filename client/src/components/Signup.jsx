@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 
 import adressToLatLong from "../../utils/adressToLatLong";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // import UploadWidget from "./UploadImage";
 
@@ -57,7 +57,7 @@ function Signup() {
       .then((res) => {
         console.log(res.data);
       })
-      .catch((err) => {});
+      .catch((err) => { });
     navigate("/login");
   };
 
@@ -183,7 +183,9 @@ function Signup() {
             Signup
           </button>
           <p>
-            Already have an account? click here to <strong>Login</strong>
+            Already have an account? click here to <Link to="/login">
+              <strong>Login</strong>
+            </Link>
           </p>
         </div>
       </form>

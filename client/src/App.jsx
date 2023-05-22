@@ -11,8 +11,14 @@ import Profile from "./components/Profile";
 import Hangouts from "./components/Hangouts";
 import Hangout from "./components/Hangout";
 import UpdateHangout from "./components/UpdateHangout";
-// import PaginatedItems from "./components/Pagination";
 import ImageUpload from "./components/ImageUpload";
+import UpdateProfile from "./components/UpdateProfile";
+// import ThemeSwitcher from "./components/ThemeSwitcher";
+import LifeStyle from "./components/LifeStyle";
+import Recipes from "./components/Recipes";
+import Facts from "./components/Facts";
+import SingleFact from "./components/SingleFact";
+
 
 export const UserContext = createContext();
 
@@ -42,11 +48,15 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-
           <Route path="/profile/:id" element={<Profile />} />
-
+          <Route path="/update_profile/:id" element={<UpdateProfile />} />
           <Route path="/create_hangout" element={<CreateHangout />} />
-          <Route path="/hangouts" element={<Hangouts />} />
+          <Route path="/hangouts" element={<Hangouts />} />         
+          <Route path="/lifestyle" element={<LifeStyle />} />
+          <Route path="/recipes" element={<Recipes />} />
+          <Route path="/facts" element={<Facts />} />
+          <Route path="/:name" element={<SingleFact />} />
+          
         </Routes>
         <div className="community">
           <Community />

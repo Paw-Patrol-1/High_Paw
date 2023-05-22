@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useContext } from "react";
 import { UserContext } from "../App";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
   const { user, setUser } = useContext(UserContext);
@@ -30,7 +30,7 @@ function Login() {
         localStorage.setItem("user", JSON.stringify(res.data));
         navigate("/profile");
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
   return (
     <div className="parentContainer flex items-center w-auto h-auto">
@@ -66,7 +66,8 @@ function Login() {
             Login
           </button>
           <p>
-            No account? click here to <strong>register</strong>
+            No account? click here to <Link to="/signup"><strong>Register</strong>
+            </Link>
           </p>
         </div>
       </form>
