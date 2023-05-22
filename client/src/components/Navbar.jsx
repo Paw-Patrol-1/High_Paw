@@ -11,6 +11,16 @@ function Navbar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    //send refresh token to backend to blacklist it
+    console.log(user);
+    fetch("https://high-paw-production.up.railway.app/auth/refresh-token", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${user.refreshToken}`,
+      },
+      body: JSON.stringify({ refreshToken: user.refreshToken }),
+    });
+
     // remove user from state
     setUser(null);
     // remove user from local storage
