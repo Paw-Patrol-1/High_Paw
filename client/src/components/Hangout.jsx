@@ -15,7 +15,7 @@ function Hangout() {
   // useEffect(() => {
   // if user is null, redirect to login page
   if (!user) {
-    window.location.href = "/login";
+    window.location.href = "/mainpage";
   }
   // }, [user]);
   const getHangoutUser = async (id) => {

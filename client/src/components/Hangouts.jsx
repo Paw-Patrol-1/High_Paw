@@ -18,7 +18,7 @@ function Hangouts() {
   // if user is null, redirect to login page
   // delete later
   if (!user) {
-    window.location.href = "/login";
+    window.location.href = "/mainpage";
   }
   // }, [user]);
   // get user name for a userId

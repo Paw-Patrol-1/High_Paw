@@ -28,7 +28,7 @@ function Home() {
   // useEffect(() => {
   // if user is null, redirect to login page
   if (!user) {
-    window.location.href = "/login";
+    window.location.href = "/mainpage";
   }
   // }, [user]);
 
@@ -72,11 +72,6 @@ function Home() {
 
               {hangouts.map((hangout) => (
                 <div key={hangout._id} className="bg-slate-500">
-                  <span
-                    style={{ zIndex: "1000 !important", background: "red" }}
-                  >
-                    {hangout.joining.length}
-                  </span>
                   <Marker position={hangout.latLong}>
                     <Popup>
                       <h2 className="title">{hangout.title}</h2>
