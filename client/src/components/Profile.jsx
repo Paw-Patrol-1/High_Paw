@@ -41,14 +41,14 @@ function Profile() {
   const userStorage = localStorage.getItem("user");
 
   return (
-    <div className="w-screen   md:flex-1  m-auto mt-14 bg-slate-50 border-orange-700 border-4">
+    <div className="w-screen  -z-30  md:flex-1  m-auto mt-14 bg-slate-50 border-orange-700 border-4 ">
       {profile && (
-        <div className="parent_div  md:flex-row items-center  h-auto justify-start m-0 px-0 flex flex-col">
-          <div className="blop  w-4/5 md:w-3/5 lg:w-2/5  h-auto ">
+        <div className="parent_div  md:flex-row items-center  h-auto justify-start m-0 px-0 flex flex-col relative">
+          <div className="blop  w-4/5 md:w-3/5 lg:w-2/5  h-auto border border-red-400">
             <svg
               viewBox="0 0 1000 1000"
               xmlns="http://www.w3.org/2000/svg"
-              className="w-full h-full shadow-2xl"
+              className="w-full h-full "
             >
               <defs>
                 <clipPath id="a">
@@ -92,18 +92,19 @@ function Profile() {
                 clipPath="url(#a)"
                 width="100%"
                 height="100%"
+                // strech image size
               />
             </svg>
           </div>
           {/* add glow */}
           <div
-            className="blop  absolute -z-10"
-            style={{ filter: "blur(50px)" }}
+            className="blop  w-4/5 md:w-3/5 lg:w-2/5  h-auto border border-red-400 absolute -z-10"
+            style={{ filter: "blur(15px)" }}
           >
             <svg
               viewBox="0 0 1000 1000"
               xmlns="http://www.w3.org/2000/svg"
-              style={{ width: "100%", height: "100%" }}
+              className="w-full h-full "
             >
               <defs>
                 <clipPath id="a">

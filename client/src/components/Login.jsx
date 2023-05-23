@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
+  const [err, setErr] = useState({ email: null, password: null });
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -22,6 +23,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
 
     axios
       .post("https://high-paw-production.up.railway.app/auth/login", form)
@@ -32,6 +34,30 @@ function Login() {
       })
       .catch((err) => {});
   };
+
+  const validateForm = () => {
+    let noErr = true;
+    if (!form.email) {
+      // err.email = "Please enter email";
+      setErr({ ...err, email: "Please enter email" });
+      noErr = false;
+    }
+
+    if (!form.password) {
+      // err.password = "Please enter password";
+      setErr({ ...err, password: "Please enter password" });
+      noErr = false;
+    }
+    if (form.password.length < 8) {
+      setErr({
+        ...err,
+        password: "Password must be at least 8 characters long",
+      });
+      noErr = false;
+    }
+    return noErr;
+  };
+
   return (
     <div className="parentContainer w-screen   md:flex-1  m-auto   md:pt-0 px-5 lg:w-2/5">
       {/* <div className='parentSvg' style={{border: "1px solid red", height: "100vh", width: "100vw"}}> 
@@ -52,6 +78,7 @@ function Login() {
             onChange={handleChange}
             name="email"
           />
+          {err.email && <p className="text-red-500 text-sm">{err.email}</p>}
         </div>
         <div className="childTwo mb-4">
           <input
@@ -62,6 +89,9 @@ function Login() {
             onChange={handleChange}
             name="password"
           />
+          {err.password && (
+            <p className="text-red-500 text-sm">{err.password}</p>
+          )}
         </div>
         <div>
           <button className="btnbg-transparent border border-green-700 hover:border-0 hover:bg-green-600 text-green-900 hover:text-green-50 transition delay-0 text-xl font-normal py-2 px-4 rounded-full w-full mt-8 shadow-green-700 shadow-sm">
