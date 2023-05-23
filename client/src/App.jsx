@@ -38,7 +38,7 @@ function App() {
         }}
       >
         <Navbar />
-        <div className="parentRoutesCommunity flex flex-col md:flex-row h-full w-full border border-blue-400">
+        <div className="parentRoutesCommunity flex flex-col md:flex-row h-full w-full ">
           <Routes>
             <Route path="/mainpage" element={<MainPage />} />
             <Route path="/image" element={<ImageUpload />} />
