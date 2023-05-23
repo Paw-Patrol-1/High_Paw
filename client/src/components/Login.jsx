@@ -30,10 +30,10 @@ function Login() {
         localStorage.setItem("user", JSON.stringify(res.data));
         navigate("/profile");
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
   return (
-    <div className="parentContainer flex items-center w-auto h-auto">
+    <div className="parentContainer w-screen pt-28  md:flex-1  m-auto mt-14 bg-slate-50 border-orange-700 border-4 md:pt-0">
       {/* <div className='parentSvg' style={{border: "1px solid red", height: "100vh", width: "100vw"}}> 
         <PawSteps style={{height: "100%"}} > */}
       <form
@@ -66,7 +66,9 @@ function Login() {
             Login
           </button>
           <p>
-            No account? click here to <Link to="/signup"><strong>Register</strong>
+            No account? click here to{" "}
+            <Link to="/signup">
+              <strong>Register</strong>
             </Link>
           </p>
         </div>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Community() {
   return (
-    <div className="communityContainer  bg-white shadow-sm  border border-red-800 h-60 w-full md:w-48 md:h-full">
+    <div className="communityContainer  bg-white shadow-sm  border border-red-800 h-56 w-full md:w-48 md:h-3/4 px-4 pb-0 ">
       <h1 className="h1 mb-2 font-bold">Community</h1>
       <Link to="/recipes">
         <h2>Recipes</h2>
