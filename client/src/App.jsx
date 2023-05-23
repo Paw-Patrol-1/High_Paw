@@ -30,7 +30,7 @@ function App() {
   const API_KEY = import.meta.env.VITE_MAPBOX_API;
 
   return (
-    <div className="parent-container  h-screen">
+    <div className="parent-container">
       <UserContext.Provider
         value={{
           user: user,

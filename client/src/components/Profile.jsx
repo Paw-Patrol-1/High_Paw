@@ -5,7 +5,7 @@ import { useContext, useEffect } from "react";
 import { useState } from "react";
 
 import { useParams } from "react-router-dom";
-import Community from "./Community";
+// import Community from "./Community";
 
 function Profile() {
   const [profile, setProfile] = useState(null);
@@ -43,12 +43,12 @@ function Profile() {
   return (
     <div className="w-screen   md:flex-1  m-auto mt-14 bg-slate-50 border-orange-700 border-4">
       {profile && (
-        <div className="parent_div flex flex-row items-center  h-auto gap-20 justify-start ">
-          <div className="blop  ml-20 ">
+        <div className="parent_div  md:flex-row items-center  h-auto justify-start m-0 px-0 flex flex-col">
+          <div className="blop  w-4/5 md:w-3/5 lg:w-2/5  h-auto ">
             <svg
               viewBox="0 0 1000 1000"
               xmlns="http://www.w3.org/2000/svg"
-              style={{ width: "100%", height: "100%" }}
+              className="w-full h-full shadow-2xl"
             >
               <defs>
                 <clipPath id="a">
@@ -97,8 +97,8 @@ function Profile() {
           </div>
           {/* add glow */}
           <div
-            className="blop  ml-20 absolute -z-10"
-            style={{ filter: "blur(30px)" }}
+            className="blop  absolute -z-10"
+            style={{ filter: "blur(50px)" }}
           >
             <svg
               viewBox="0 0 1000 1000"
