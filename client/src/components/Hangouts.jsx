@@ -18,7 +18,7 @@ function Hangouts() {
   // if user is null, redirect to login page
   // delete later
   if (!user) {
-    window.location.href = "/login";
+    window.location.href = "/mainpage";
   }
   // }, [user]);
   // get user name for a userId
@@ -109,7 +109,7 @@ function Hangouts() {
           >
             <div className="hangout  w-3/4 px-6 ">
               <Link to={`/hangout/${hangout._id}`}>
-                <h2 className="title text-3xl text-stone-700 underline mb-6">
+                <h2 className="title text-3xl text-green-700  mb-6 animate-pulse">
                   {hangout.title}
                 </h2>
               </Link>
@@ -119,7 +119,7 @@ function Hangouts() {
               {/* show user name if it is in  all users
                */}
               {allUsers[hangout.userId] && (
-                <p className="text-xs mt-5">
+                <p className="text-xs  text-green-600 mt-24">
                   <em className="font-bold underline cursor-pointer mr-5">
                     {allUsers[hangout.userId]}
                   </em>

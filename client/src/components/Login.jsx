@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
+  const [err, setErr] = useState({ email: null, password: null });
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -22,6 +23,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
 
     axios
       .post("https://high-paw-production.up.railway.app/auth/login", form)
@@ -30,43 +32,75 @@ function Login() {
         localStorage.setItem("user", JSON.stringify(res.data));
         navigate("/profile");
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
+
+  const validateForm = () => {
+    let noErr = true;
+    if (!form.email) {
+      // err.email = "Please enter email";
+      setErr({ ...err, email: "Please enter email" });
+      noErr = false;
+    }
+
+    if (!form.password) {
+      // err.password = "Please enter password";
+      setErr({ ...err, password: "Please enter password" });
+      noErr = false;
+    }
+    if (form.password.length < 8) {
+      setErr({
+        ...err,
+        password: "Password must be at least 8 characters long",
+      });
+      noErr = false;
+    }
+    return noErr;
+  };
+
   return (
-    <div className="parentContainer flex items-center w-auto h-auto">
+    <div className="parentContainer w-screen   md:flex-1  m-auto   md:pt-0 px-5 lg:w-2/5">
       {/* <div className='parentSvg' style={{border: "1px solid red", height: "100vh", width: "100vw"}}> 
         <PawSteps style={{height: "100%"}} > */}
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-2/5 flex flex-col mx-auto my-20 z-80"
+        className="bg-white shadow-md rounded md:px-8 md:pt-6 px-2 pb-8 mb-4  md:w-4/5 flex flex-col mx-auto md:my-20 z-80 xl:w-2/5 lg:w-3/5"
         onSubmit={handleSubmit}
       >
-        <h1 className="login font-semibold mb-4">Login</h1>
+        <h1 className="login font-semibold mb-4 text-2xl text-stone-700">
+          Login
+        </h1>
         <div className="childOne mb-4">
           <input
-            className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-green-500"
             type="email"
             placeholder="email"
             value={form.email}
             onChange={handleChange}
             name="email"
           />
+          {err.email && <p className="text-red-500 text-sm">{err.email}</p>}
         </div>
         <div className="childTwo mb-4">
           <input
-            className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-green-500"
             type="password"
             placeholder="Please enter password"
             value={form.password}
             onChange={handleChange}
             name="password"
           />
+          {err.password && (
+            <p className="text-red-500 text-sm">{err.password}</p>
+          )}
         </div>
         <div>
-          <button className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button className="btnbg-transparent border border-green-700 hover:border-0 hover:bg-green-600 text-green-900 hover:text-green-50 transition delay-0 text-xl font-normal py-2 px-4 rounded-full w-full mt-8 shadow-green-700 shadow-sm">
             Login
           </button>
-          <p>
-            No account? click here to <Link to="/signup"><strong>Register</strong>
+          <p className="text-stone-700">
+            No account? Click here to{" "}
+            <Link to="/signup">
+              <strong>Register</strong>
             </Link>
           </p>
         </div>
