@@ -98,15 +98,15 @@ function Navbar() {
               Logout
             </a>
           ) : (
-            <div className="flex flex-col md:flex-row">
+            <div className="flex flex-col md:flex-row gap-3">
               <Link
-                className="outline outline-offset-2 rounded-full mt-2   outline-slate-700 px-4"
+                className=" mt-2  text-green-500 hover:text-green-600 text-lg"
                 to="/login"
               >
                 Login
               </Link>
               <Link
-                className="outline outline-offset-2 rounded-full mt-2   outline-slate-700 px-4"
+                className="mt-2  text-green-500 hover:text-green-600 text-lg"
                 to="/signup"
               >
                 Register
