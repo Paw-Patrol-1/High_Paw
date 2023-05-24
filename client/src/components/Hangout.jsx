@@ -215,7 +215,7 @@ function Hangout() {
                 <Link to={`/update_hangout/${id}`}>
                   {" "}
                   <button
-                    className="btn my-8 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl md:w-96 "
+                    className="btn my-8 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl md:w-32  "
                     onClick={() => updateHangout(hangout._id)}
                   >
                     Update
@@ -223,7 +223,7 @@ function Hangout() {
                 </Link>
 
                 <button
-                  className="btn my-8 bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl w-96 md:w-24"
+                  className="btn my-8 bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl md:w-32 "
                   onClick={() => deleteHangout(hangout._id)}
                 >
                   Delete

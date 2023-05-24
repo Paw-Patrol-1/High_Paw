@@ -91,12 +91,12 @@ function Navbar() {
 
         <div className="logoutBtn mr-3 md:absolute md:right-0">
           {user ? (
-            <button
-              className=" fill-stone-800 outline outline-offset-2 rounded-full mt-2   outline-red-700 px-4 shadow-2xl hover:bg-red-900 hover:text-white transition-all text-sm"
+            <a
+              className=" text-red-600 text-xl font-semibold hover:text-red-700 cursor-pointer"
               onClick={handleLogout}
             >
               Logout
-            </button>
+            </a>
           ) : (
             <div className="flex flex-col md:flex-row">
               <Link
