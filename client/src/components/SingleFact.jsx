@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
+import Default from '../components/assets/Default.jpg'
 
 function SingleFact() {
   const [dog, setDog] = useState([])
@@ -34,10 +35,13 @@ function SingleFact() {
               <img
                 src={`https://cdn2.thedogapi.com/images/${item.reference_image_id}.jpg`}
                 alt={item.name}
+                onError={(e) => {
+                  e.target.src =Default
+                }}
               />
             </article>
             <article>
-              <h1 className="text-3xl font-bold text-white mb-8 lg:text-5xl">
+              <h1 className="text-3xl font-bold text-black mb-8 lg:text-5xl">
                 {item.name}
               </h1>
               {item.description && (
@@ -46,36 +50,36 @@ function SingleFact() {
                 </p>
               )}
 
-              <ul className="text-sm text-slate-400 leading-loose lg:text-base lg:leading-relaxed">
+              <ul className="text-sm text-slate-800 leading-loose lg:text-base lg:leading-relaxed">
                 <li>
-                  <span className="font-bold text-slate-200">Bred For:</span>{" "}
+                  <span className="font-bold text-slate-400">Bred For:</span>{" "}
                   {item.bred_for}
                 </li>
                 <li>
-                  <span className="font-bold text-slate-200">Height:</span>{" "}
+                  <span className="font-bold text-slate-400">Height:</span>{" "}
                   {item.height.metric} cm
                 </li>
                 <li>
-                  <span className="font-bold text-slate-200">Weight:</span>{" "}
+                  <span className="font-bold text-slate-400">Weight:</span>{" "}
                   {item.weight.metric} kgs
                 </li>
                 <li>
-                  <span className="font-bold text-slate-200">Breed Group:</span>{" "}
+                  <span className="font-bold text-slate-400">Breed Group:</span>{" "}
                   {item.breed_group}
                 </li>
                 <li>
-                  <span className="font-bold text-slate-200">Lifespan:</span>{" "}
+                  <span className="font-bold text-slate-400">Lifespan:</span>{" "}
                   {item.life_span}
                 </li>
                 <li>
-                  <span className="font-bold text-slate-200">Temperament:</span>{" "}
+                  <span className="font-bold text-slate-400">Temperament:</span>{" "}
                   {item.temperament}
                 </li>
               </ul>
 
               <Link
                 to="/facts"
-                className="inline-block bg-slate-600 py-2 px-6 rounded mt-8 text-white hover:bg-slate-500 transition-all duration-200"
+                className="inline-block btn bg-blue-500 py-2 px-6 rounded mt-8 text-black hover:bg-slate-500 transition-all duration-200"
               >
                 &larr; Back
               </Link>

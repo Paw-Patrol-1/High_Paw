@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import Default from '../components/assets/Default.jpg'
 
 
 function Facts() {
@@ -84,11 +85,14 @@ function Facts() {
                         alt={dog.name}
                         loading="lazy"
                         className="rounded md:h-72 w-full object-cover"
+                        onError={(e) => {
+                          e.target.src =Default
+                        }}
                       />
                       <h3 className="text-black text-lg font-bold mt-4">
                         {dog.name}
                       </h3>
-                      <p className="text-slate-400">Bred For: {dog.bred_for}</p>
+                      <p className="text-black text-slate-800">Bred For: {dog.bred_for}</p>
                     </article>
                   </Link>
                 ))
@@ -98,18 +102,21 @@ function Facts() {
                     <Link
                       to={`/${dog.name}`}
                       key={dog.id}
-                      className="bg-slate-700 p-4 rounded hover:bg-slate-600 transition-all duration-200"
+                      className="p-4 rounded hover:bg-slate-200 transition-all duration-200"
                     >
                       <article>
                         <img
                           src={`https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`}
                           alt={dog.name}
                           className="rounded md:h-72 w-full object-cover"
+                          onError={(e) => {
+                            e.target.src =Default
+                          }}
                         />
-                        <h3 className="text-white text-lg font-bold mt-4">
+                        <h3 className="text-black text-lg font-bold mt-4">
                           {dog.name}
                         </h3>
-                        <p className="text-slate-400">
+                        <p className="text-slate-800">
                           Bred For: {dog.bred_for}
                         </p>
                       </article>
