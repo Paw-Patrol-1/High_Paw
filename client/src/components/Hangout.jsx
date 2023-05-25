@@ -3,11 +3,13 @@ import { UserContext } from "../App";
 import { useContext, useEffect, useState } from "react";
 import SmallMap from "./SmallMap";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { useThemeContext } from "./ThemeProvider";
 
 function Hangout() {
   const [joiners, setJoiners] = useState({});
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
+  const { theme } = useThemeContext();
   //taking id from route
   const { id } = useParams();
   const [hangout, setHangout] = useState(null);
@@ -116,19 +118,39 @@ function Hangout() {
   };
 
   return (
-    <div className="parent-container w-screen   md:flex-1  m-auto mt-14 ">
+    <div
+      className="parent-container w-screen
+     
+       md:flex-1  m-auto mt-14"
+    >
       {hangout && (
         <div
-          className="parent  w-full m-auto mt-8 flex justify-between"
+          className="parent  w-full m-auto mt-8 flex justify-between  "
           key={hangout._id}
         >
           <div className="hangout  w-10/12 m-auto ">
             <div className="wrapper-parent flex justify-between">
-              <div className="wrapperTitleDescription">
-                <h2 className="title text-stone-700 text-2xl">
+              <div
+                className="wrapperTitleDescription
+                  
+                "
+              >
+                <h2
+                  className={`title  text-2xl ${
+                    theme === "light"
+                      ? "bg-white text-stone-700"
+                      : "text-green-100"
+                  }`}
+                >
                   {hangout.title}
                 </h2>
-                <p className="description text-stone-600 pb-10 w-11/12 leading-5 mt-5 text-sm">
+                <p
+                  className={`description  pb-10 w-11/12 leading-5 mt-5 text-sm ${
+                    theme === "light"
+                      ? "bg-white text-stone-700"
+                      : "text-green-100"
+                  }`}
+                >
                   {hangout.description}
                 </p>
               </div>

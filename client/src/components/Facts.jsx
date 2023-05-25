@@ -1,46 +1,45 @@
-import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import Default from '../components/assets/Default.jpg'
-
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Default from "../components/assets/Default.jpg";
 
 function Facts() {
-  const [dogs, setDogs] = useState([])
-  const [text, setText] = useState("")
-  const [searched, setSearched] = useState(false)
+  const [dogs, setDogs] = useState([]);
+  const [text, setText] = useState("");
+  const [searched, setSearched] = useState(false);
 
   useEffect(() => {
     const fetchDogData = async () => {
       try {
-        const res = await fetch("https://api.thedogapi.com/v1/breeds")
-        const data = await res.json()
-        setDogs(data)
+        const res = await fetch("https://api.thedogapi.com/v1/breeds");
+        const data = await res.json();
+        setDogs(data);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-    }
+    };
 
-    setSearched(false)
-    fetchDogData()
-  }, [])
+    setSearched(false);
+    fetchDogData();
+  }, []);
 
   const searchForDog = async () => {
     try {
       const res = await fetch(
         `https://api.thedogapi.com/v1/breeds/search?q=${text}`
-      )
-      const data = await res.json()
-      setDogs(data)
+      );
+      const data = await res.json();
+      setDogs(data);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    searchForDog()
-    setSearched(true)
-  }
+    searchForDog();
+    setSearched(true);
+  };
 
   return (
     <>
@@ -52,8 +51,6 @@ function Facts() {
         <>
           <section className="p-8 max-w-7xl mx-auto">
             <div className="text-center">
-           
-
               <form
                 onSubmit={handleSubmit}
                 className="max-w-xl mx-auto"
@@ -86,13 +83,15 @@ function Facts() {
                         loading="lazy"
                         className="rounded md:h-72 w-full object-cover"
                         onError={(e) => {
-                          e.target.src =Default
+                          e.target.src = Default;
                         }}
                       />
                       <h3 className="text-black text-lg font-bold mt-4">
                         {dog.name}
                       </h3>
-                      <p className="text-black text-slate-800">Bred For: {dog.bred_for}</p>
+                      <p className=" text-slate-800">
+                        Bred For: {dog.bred_for}
+                      </p>
                     </article>
                   </Link>
                 ))
@@ -110,7 +109,7 @@ function Facts() {
                           alt={dog.name}
                           className="rounded md:h-72 w-full object-cover"
                           onError={(e) => {
-                            e.target.src =Default
+                            e.target.src = Default;
                           }}
                         />
                         <h3 className="text-black text-lg font-bold mt-4">
@@ -128,8 +127,7 @@ function Facts() {
           </section>
         </>
       )}
-      
     </>
-  )
+  );
 }
 export default Facts;
