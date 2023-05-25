@@ -7,10 +7,10 @@ function MainPage() {
     <div className="w-screen  h-[70vh] ">
       <section className="   h-full flex flex-col justify-center items-center">
         {/* <h1 className="text-5xl -ml-40 mb-5">high</h1> */}
-        <div className="svg relative">
+        <div className="svg relative ">
           <svg
-            width="168"
-            height="134"
+            width="148"
+            height="114"
             viewBox="0 0 268 134"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -23,15 +23,15 @@ function MainPage() {
             />
           </svg>
           <div
-            className="logo absolute -top-16 -right-28 rotate-45 "
-            style={{ height: "150px", width: "150px" }}
+            className="logo absolute -top-4 -right-16  rotate-45 h-16 w-16 md:w-24 md:h-24 md:-top-16 md:-right-6 "
+            // style={{ height: "60px", width: "60px" }}
           >
             {/* give 100% w / h for the svg to fill its parent */}
 
             <Logo style={{ width: "100%", height: "100%" }} />
           </div>
         </div>
-        <div className="btn ml-6 w-auto space-x-3">
+        <div className="btn ml-6 w-auto space-x-3 md:mt-4">
           <Link to="/login" className="">
             <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded w-32 ring-2 ring-green-600 ring-offset-2 ring-offset-slate-50 shadow-2xl shadow-green-900">
               login

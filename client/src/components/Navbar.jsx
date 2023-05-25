@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 import { useContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { RxHamburgerMenu } from "react-icons/rx";
+import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 
 function Navbar() {
   const [clickedLink, setClickedLink] = useState("");
@@ -44,7 +44,7 @@ function Navbar() {
   }, [location]);
 
   return (
-    <div className=" flex flex-row  w-full justify-between shadow-green-500 shadow-lg">
+    <div className=" flex flex-row  w-screen justify-between shadow-green-500 shadow-lg">
       {/* set dimension to div holding the svg */}
       <div className="logo" style={{ height: "40px", width: "40px" }}>
         {/* give 100% w / h for the svg to fill its parent */}
@@ -58,7 +58,7 @@ function Navbar() {
       <div
         className={`links gap-5  text-stone-600 z-50   absolute ${
           showLinks ? "top-10" : "-top-96"
-        } right-0 flex flex-col bg-white opacity-70 md:static text-lg px-4  md:flex-row md:mx-auto transition-all duration-500`}
+        } right-0 flex flex-col bg-white opacity-90 md:static text-lg px-4  md:flex-row md:mx-auto transition-all duration-500`}
       >
         <Link
           onClick={() => handleClick("profile")}
@@ -180,7 +180,7 @@ function Navbar() {
         className="md:hidden  text-2xl text-green-500"
         onClick={toggleNavbar}
       >
-        <RxHamburgerMenu />
+        {showLinks ? <RxCross1 /> : <RxHamburgerMenu />}
       </button>
     </div>
   );
