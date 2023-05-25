@@ -48,12 +48,12 @@ function UpdateHangout() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  useEffect(() => {
-    // if user is null, redirect to login page
-    if (!user) {
-      window.location.href = "/login";
-    }
-  }, [user]);
+  // useEffect(() => {
+  // if user is null, redirect to login page
+  if (!user) {
+    window.location.href = "/login";
+  }
+  // }, [user]);
 
   useEffect(() => {
     const getHangout = async () => {
@@ -106,10 +106,10 @@ function UpdateHangout() {
   };
 
   return (
-    <div className="parent_div flex items-center bg-slate-50 flex-col h-auto">
-      <h1 className="my-8 text-2xl">Update Hangout</h1>
+    <div className="parent_div w-screen   md:flex-1  m-auto mt-14">
+      <h1 className="my-8 text-2xl text-center">Update Hangout</h1>
       <form
-        className="form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-2/5"
+        className="form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 md:w-4/5"
         onSubmit={handleUpdate}
       >
         <div className="title-div mb-4">
@@ -117,7 +117,7 @@ function UpdateHangout() {
             htmlFor="title"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
-            title
+            Title
           </label>
           <input
             onChange={(e) => setTitle(e.target.value)}
@@ -134,7 +134,7 @@ function UpdateHangout() {
             htmlFor="description"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
-            description
+            Description
           </label>
           <textarea
             onChange={(e) => setDescription(e.target.value)}
@@ -170,7 +170,7 @@ function UpdateHangout() {
             )}
           </div>
         </div>
-        <button className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button className="btn bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded w-full">
           Update hangout
         </button>
       </form>

@@ -37,12 +37,12 @@ function MyComponent({ saveMarker }) {
 function CreateHangout() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  useEffect(() => {
-    // if user is null, redirect to login page
-    if (!user) {
-      window.location.href = "/login";
-    }
-  }, [user]);
+  // useEffect(() => {
+  // if user is null, redirect to login page
+  if (!user) {
+    window.location.href = "/mainpage";
+  }
+  // }, [user]);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -77,15 +77,15 @@ function CreateHangout() {
   };
 
   return (
-    <div className="parent_div flex items-center  flex-col h-auto">
+    <div className="parent_div  w-screen   md:flex-1  m-auto mt-14 ">
       <form
-        className="form bg-white shadow-md rounded px-6 pt-6 pb-6 mb-2 w-2/5 "
+        className="form bg-white shadow-md rounded px-6 pt-6 pb-6 mb-2 md:w-4/5 lg:w-3/5 xl:w-2/5 m-auto w-screen"
         onSubmit={handleSubmit}
       >
         <div className="title-div mb-4">
           <label
             htmlFor="title"
-            className="block text-gray-700 text-sm font-semibold mb-2"
+            className="block text-gray-700 text-md font-semibold mb-2"
           >
             Title
           </label>
@@ -94,7 +94,7 @@ function CreateHangout() {
             value={title}
             type="text"
             id="title"
-            className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text"
+            className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:shadow-outline text"
             placeholder="add your title here..."
           />
         </div>
@@ -102,7 +102,7 @@ function CreateHangout() {
         <div className="description-div mb-4">
           <label
             htmlFor="description"
-            className="block text-gray-700  font-semibold mb-2 text-xs"
+            className="block text-gray-700  font-semibold mb-2 text-md"
           >
             Description
           </label>
@@ -113,7 +113,7 @@ function CreateHangout() {
             id="description"
             cols="30"
             rows="auto"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-sm"
             placeholder="add your description here..."
           ></textarea>
         </div>

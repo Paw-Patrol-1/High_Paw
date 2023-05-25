@@ -5,18 +5,20 @@ import { useContext, useEffect } from "react";
 import { useState } from "react";
 
 import { useParams } from "react-router-dom";
-import Community from "./Community";
+import { useThemeContext } from "./ThemeProvider";
+// import Community from "./Community";
 
 function Profile() {
   const [profile, setProfile] = useState(null);
   let { id } = useParams();
   const { user } = useContext(UserContext);
-  useEffect(() => {
-    // if user is null, redirect to login page
-    if (!user) {
-      window.location.href = "/login";
-    }
-  }, [user]);
+  const { theme } = useThemeContext();
+  // useEffect(() => {
+  // if user is null, redirect to login page
+  if (!user) {
+    window.location.href = "/mainpage";
+  }
+  // }, [user]);
 
   if (!id) {
     id = user.user._id;
@@ -33,7 +35,6 @@ function Profile() {
       );
       const data = await response.json();
       setProfile(data);
-      console.log(data);
     };
     getProfile();
   }, []);
@@ -41,14 +42,18 @@ function Profile() {
   const userStorage = localStorage.getItem("user");
 
   return (
-    <>
+    <div
+      className={`w-screen  z-0 ${
+        theme === "light" ? "bg-white text-gray-700" : "bg-black text-white"
+      }   md:flex-1  m-auto mt-14 `}
+    >
       {profile && (
-        <div className="parent_div flex flex-row items-center  h-auto gap-20 justify-start ">
-          <div className="blop  ml-20 ">
+        <div className="parent_div md:flex-col  lg:flex-row items-center h-auto justify-start m-0 px-0 flex flex-col relative">
+          <div className="blop  w-4/5 md:w-3/5 lg:w-2/5  h-auto ">
             <svg
               viewBox="0 0 1000 1000"
               xmlns="http://www.w3.org/2000/svg"
-              style={{ width: "100%", height: "100%" }}
+              className="w-full h-full "
             >
               <defs>
                 <clipPath id="a">
@@ -92,18 +97,25 @@ function Profile() {
                 clipPath="url(#a)"
                 width="100%"
                 height="100%"
+                // strech image size
               />
             </svg>
           </div>
           {/* add glow */}
           <div
-            className="blop  ml-20 absolute -z-10"
-            style={{ filter: "blur(30px)" }}
+            className="blop  w-4/5 md:w-3/5 lg:w-2/5  h-auto absolute -z-10 "
+            // style={{ filter: "blur(15px)" }}
+            style={{
+              filter:
+                theme === "light"
+                  ? "blur(15px)"
+                  : "blur(15px) brightness(5.6) saturate(.5) hue-rotate(40deg)",
+            }}
           >
             <svg
               viewBox="0 0 1000 1000"
               xmlns="http://www.w3.org/2000/svg"
-              style={{ width: "100%", height: "100%" }}
+              className="w-full h-full "
             >
               <defs>
                 <clipPath id="a">
@@ -151,26 +163,26 @@ function Profile() {
             </svg>
           </div>
           <div className="info">
-            <h1 className="my-8 text-5xl text-gray-700">My profile</h1>
+            <h1 className="my-8 text-5xl ">My profile</h1>
 
-            <div className="name-div mb-4 text-gray-700">
+            <div className="name-div mb-4 ">
               <h3>
                 Name: <span className="font-semibold">{profile.name}</span>
               </h3>
             </div>
 
-            <div className="age-div mb-4 text-gray-700">
+            <div className="age-div mb-4 ">
               <h3>
                 Age:<span className="font-semibold">{profile.age}</span>
               </h3>
             </div>
-            <div className="breed-div mb-4 text-gray-700">
+            <div className="breed-div mb-4 ">
               <h3>
                 Breed: <span className="font-semibold">{profile.breed}</span>
               </h3>
             </div>
 
-            <div className="city-div mb-4 text-gray-700">
+            <div className="city-div mb-4 ">
               <h3>
                 City: <span className="font-semibold">{profile.city}</span>
               </h3>
@@ -178,7 +190,7 @@ function Profile() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

@@ -12,12 +12,12 @@ function Hangout() {
   const { id } = useParams();
   const [hangout, setHangout] = useState(null);
   const { user } = useContext(UserContext);
-  useEffect(() => {
-    // if user is null, redirect to login page
-    if (!user) {
-      window.location.href = "/login";
-    }
-  }, [user]);
+  // useEffect(() => {
+  // if user is null, redirect to login page
+  if (!user) {
+    window.location.href = "/mainpage";
+  }
+  // }, [user]);
   const getHangoutUser = async (id) => {
     const response = await fetch(
       `https://high-paw-production.up.railway.app/profile/${id}`,
@@ -116,10 +116,10 @@ function Hangout() {
   };
 
   return (
-    <div className="parent-container h-screen">
+    <div className="parent-container w-screen   md:flex-1  m-auto mt-14 ">
       {hangout && (
         <div
-          className="parent  w-10/12 m-auto mt-8 flex justify-between"
+          className="parent  w-full m-auto mt-8 flex justify-between"
           key={hangout._id}
         >
           <div className="hangout  w-10/12 m-auto ">
@@ -141,11 +141,11 @@ function Hangout() {
                 {/* joiners */}
                 <div className="joiners mt-10">
                   {hangout.joining.map((joiner) => (
-                    <div className="joiner" key={joiner}>
+                    <div className="joiner -mt-2" key={joiner}>
                       {joiners[joiner] && (
                         <Link to={`/profile/${joiner}`} className="flex">
                           <p className="text-xs">
-                            <em className="font-bold underline cursor-pointer mr-5">
+                            <em className="font-bold text-green-600 underline cursor-pointer mr-5">
                               {joiners[joiner].name}
                             </em>
                           </p>
@@ -192,7 +192,7 @@ function Hangout() {
                       to={`/profile/${hangout.userId}`}
                       className="flex ml-4"
                     >
-                      <em className="font-bold underline cursor-pointer">
+                      <em className="font-bold underline text-green-600 cursor-pointer">
                         {profile.name}
                       </em>
                       <div className="avatar w-8 h-8 rounded-full ">
@@ -215,7 +215,7 @@ function Hangout() {
                 <Link to={`/update_hangout/${id}`}>
                   {" "}
                   <button
-                    className="btn my-8 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl w-96"
+                    className="btn my-8 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl md:w-32  "
                     onClick={() => updateHangout(hangout._id)}
                   >
                     Update
@@ -223,7 +223,7 @@ function Hangout() {
                 </Link>
 
                 <button
-                  className="btn my-8 bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl w-96 "
+                  className="btn my-8 bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded shadow-gray-800 shadow-2xl md:w-32 "
                   onClick={() => deleteHangout(hangout._id)}
                 >
                   Delete

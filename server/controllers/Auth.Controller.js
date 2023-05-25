@@ -1,5 +1,5 @@
 const User = require("../Models/User.model");
-const UserToken = require("../Models/Token.model")
+const UserToken = require("../Models/Token.model");
 const createError = require("http-errors");
 const { authSchema, loginSchema } = require(`../helpers/validation_schema`);
 const {
@@ -56,12 +56,13 @@ module.exports = {
   logout: async (req, res, next) => {
     try {
       const { refreshToken } = req.body;
+      console.log(req.body);
+      console.log(refreshToken);
       if (!refreshToken) throw createError.BadRequest();
       const userId = await verifyRefreshToken(refreshToken);
 
-      const deleteToken = await UserToken.deleteOne({userId});
-      res.send({deleteToken, message: "User logged out successfully"})
-
+      const deleteToken = await UserToken.deleteOne({ userId });
+      res.send({ deleteToken, message: "User logged out successfully" });
     } catch (error) {
       next(error);
     }

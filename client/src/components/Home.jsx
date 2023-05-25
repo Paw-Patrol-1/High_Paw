@@ -1,6 +1,6 @@
 import { MapContainer } from "react-leaflet/MapContainer";
 import { TileLayer } from "react-leaflet/TileLayer";
-import { useMap } from "react-leaflet/hooks";
+// import { useMap } from "react-leaflet/hooks";
 import { Marker } from "react-leaflet/Marker";
 import { Popup } from "react-leaflet/Popup";
 
@@ -24,12 +24,13 @@ function Home() {
   // console.log(import.meta.env.VITE_MAPBOX_API);
 
   const { user } = useContext(UserContext);
-  useEffect(() => {
-    // if user is null, redirect to login page
-    if (!user) {
-      window.location.href = "/login";
-    }
-  }, [user]);
+  console.log(user);
+  // useEffect(() => {
+  // if user is null, redirect to login page
+  if (!user) {
+    window.location.href = "/mainpage";
+  }
+  // }, [user]);
 
   useEffect(() => {
     const getHangouts = async () => {
@@ -49,44 +50,37 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <div className="containerMapAndCommunity   w-3/4  m-auto mt-14 bg-slate-50 ">
-        <div
-          className="mapContainer shadow-xl  justify-center "
-          // style={{ marginTop: "8em" }}
+    <div className="containerMap w-screen md:flex-1 z-0  m-auto mt-14   md:pt-0">
+      {/* if user exists show map, otherwise no map*/}
+      {user.user && (
+        <MapContainer
+          center={user.user.latLong}
+          zoom={14}
+          scrollWheelZoom={false}
+          style={{ height: "80vh", width: "100%" }}
         >
-          <MapContainer
-            center={user.user.latLong}
-            zoom={14}
-            scrollWheelZoom={false}
-            style={{ height: "80vh", width: "100%" }}
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={user.user.latLong} icon={icon}></Marker>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={user.user.latLong} icon={icon}></Marker>
 
-            {hangouts.map((hangout) => (
-              <div key={hangout._id} className="bg-slate-500">
-                <span style={{ zIndex: "1000 !important", background: "red" }}>
-                  {hangout.joining.length}
-                </span>
-                <Marker position={hangout.latLong}>
-                  <Popup>
-                    <h2 className="title">{hangout.title}</h2>
-                    <p className="description">
-                      {hangout.description.slice(0, 100)}...
-                    </p>
+          {hangouts.map((hangout) => (
+            <div key={hangout._id} className="bg-slate-500">
+              <Marker position={hangout.latLong}>
+                <Popup>
+                  <h2 className="title">{hangout.title}</h2>
+                  <p className="description">
+                    {hangout.description.slice(0, 100)}...
+                  </p>
 
-                    <Link to={`/hangout/${hangout._id}`}>See more details</Link>
-                  </Popup>
-                </Marker>
-              </div>
-            ))}
-          </MapContainer>
-        </div>
-      </div>
+                  <Link to={`/hangout/${hangout._id}`}>See more details</Link>
+                </Popup>
+              </Marker>
+            </div>
+          ))}
+        </MapContainer>
+      )}
     </div>
   );
 }
