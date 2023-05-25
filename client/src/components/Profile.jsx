@@ -5,12 +5,14 @@ import { useContext, useEffect } from "react";
 import { useState } from "react";
 
 import { useParams } from "react-router-dom";
+import { useThemeContext } from "./ThemeProvider";
 // import Community from "./Community";
 
 function Profile() {
   const [profile, setProfile] = useState(null);
   let { id } = useParams();
   const { user } = useContext(UserContext);
+  const { theme } = useThemeContext();
   // useEffect(() => {
   // if user is null, redirect to login page
   if (!user) {
@@ -33,7 +35,6 @@ function Profile() {
       );
       const data = await response.json();
       setProfile(data);
-      console.log(data);
     };
     getProfile();
   }, []);
@@ -41,7 +42,11 @@ function Profile() {
   const userStorage = localStorage.getItem("user");
 
   return (
-    <div className="w-screen  -z-30  md:flex-1  m-auto mt-14 ">
+    <div
+      className={`w-screen  z-0 ${
+        theme === "light" ? "bg-white text-gray-700" : "bg-black text-white"
+      }   md:flex-1  m-auto mt-14 `}
+    >
       {profile && (
         <div className="parent_div md:flex-col  lg:flex-row items-center h-auto justify-start m-0 px-0 flex flex-col relative">
           <div className="blop  w-4/5 md:w-3/5 lg:w-2/5  h-auto ">
@@ -98,8 +103,14 @@ function Profile() {
           </div>
           {/* add glow */}
           <div
-            className="blop  w-4/5 md:w-3/5 lg:w-2/5  h-auto border border-red-400 absolute -z-10"
-            style={{ filter: "blur(15px)" }}
+            className="blop  w-4/5 md:w-3/5 lg:w-2/5  h-auto absolute -z-10 "
+            // style={{ filter: "blur(15px)" }}
+            style={{
+              filter:
+                theme === "light"
+                  ? "blur(15px)"
+                  : "blur(15px) brightness(5.6) saturate(.5) hue-rotate(40deg)",
+            }}
           >
             <svg
               viewBox="0 0 1000 1000"
@@ -152,26 +163,26 @@ function Profile() {
             </svg>
           </div>
           <div className="info">
-            <h1 className="my-8 text-5xl text-gray-700">My profile</h1>
+            <h1 className="my-8 text-5xl ">My profile</h1>
 
-            <div className="name-div mb-4 text-gray-700">
+            <div className="name-div mb-4 ">
               <h3>
                 Name: <span className="font-semibold">{profile.name}</span>
               </h3>
             </div>
 
-            <div className="age-div mb-4 text-gray-700">
+            <div className="age-div mb-4 ">
               <h3>
                 Age:<span className="font-semibold">{profile.age}</span>
               </h3>
             </div>
-            <div className="breed-div mb-4 text-gray-700">
+            <div className="breed-div mb-4 ">
               <h3>
                 Breed: <span className="font-semibold">{profile.breed}</span>
               </h3>
             </div>
 
-            <div className="city-div mb-4 text-gray-700">
+            <div className="city-div mb-4 ">
               <h3>
                 City: <span className="font-semibold">{profile.city}</span>
               </h3>
