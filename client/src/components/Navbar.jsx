@@ -63,13 +63,15 @@ function Navbar() {
         className={`links gap-5  text-stone-600 z-50   absolute ${
           showLinks ? "top-10" : "-top-96"
         } ${
-          theme === "light" ? "bg-white" : "bg-black text-white"
+          theme === "light"
+            ? "bg-white text-stone-700"
+            : "bg-black text-green-100"
         } right-0 flex flex-col  opacity-90 md:static text-sm md:text-base px-4  md:flex-row md:mx-auto transition-all duration-500`}
       >
         <Link
           onClick={() => handleClick("profile")}
           to="/profile"
-          className={`text-stone-700 hover:font-semibold transition duration-300 hover:bg-green-400 my-2 mx-2 px-2 rounded-lg hover:text-white  hover:shadow-xl ${
+          className={` hover:font-semibold transition duration-300 hover:bg-green-400 my-2 mx-2 px-2 rounded-lg hover:text-white  hover:shadow-xl ${
             clickedLink === "profile" ? "bg-green-500 text-white shadow-xl" : ""
           }`}
         >
@@ -92,7 +94,7 @@ function Navbar() {
         <Link
           onClick={() => handleClick("hangouts")}
           to="/hangouts"
-          className={`text-stone-700 hover:font-semibold transition duration-300 hover:bg-green-400 my-2 mx-2 px-2 rounded-lg hover:text-white  hover:shadow-xl ${
+          className={` hover:font-semibold transition duration-300 hover:bg-green-400 my-2 mx-2 px-2 rounded-lg hover:text-white  hover:shadow-xl ${
             clickedLink === "hangouts"
               ? "bg-green-500 text-white shadow-xl"
               : ""
@@ -118,7 +120,7 @@ function Navbar() {
         <Link
           onClick={() => handleClick("create_hangout")}
           to="/create_hangout"
-          className={`text-stone-700  hover:font-semibold transition duration-300 hover:bg-green-400 my-2 mx-2 px-2 rounded-lg hover:text-white  hover:shadow-xl ${
+          className={`  hover:font-semibold transition duration-300 hover:bg-green-400 my-2 mx-2 px-2 rounded-lg hover:text-white  hover:shadow-xl ${
             clickedLink === "create_hangout"
               ? "bg-green-500 text-white shadow-xl"
               : ""

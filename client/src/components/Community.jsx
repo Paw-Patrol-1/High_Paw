@@ -1,15 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useThemeContext } from "./ThemeProvider";
 
 function Community() {
+  const { theme, toggleTheme } = useThemeContext();
   return (
-    <div className="communityContainer flex flex-col items-start  bg-white  h-3/4 w-full md:w-48 md:h-3/4 px-4 pb-0 m-auto">
-      <h1 className="h1 mb-2 font-bold md:text-2xl text-xl text-stone-800">
-        Community
-      </h1>
+    <div
+      className={`communityContainer flex flex-col items-start ${
+        theme === "light"
+          ? "bg-white text-stone-700"
+          : "bg-black text-green-100"
+      }   h-3/4 w-full md:w-48 md:h-3/4 px-4 pb-0 m-auto`}
+    >
+      <h1 className="h1 mb-2 font-bold md:text-2xl text-xl ">Community</h1>
       <Link
         to="/recipes"
-        className="md:text-lg text-sm text-stone-700 cursor-pointer hover:scale-125 transition hover:text-green-600 hover:overline mb-1 flex"
+        className="md:text-lg text-sm  cursor-pointer hover:scale-125 transition hover:text-green-600 hover:overline mb-1 flex"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +35,7 @@ function Community() {
       </Link>
       <Link
         to="/lifestyle"
-        className="md:text-lg text-sm text-stone-700 cursor-pointer hover:scale-125 transition hover:text-green-600 hover:overline mb-1 flex"
+        className="md:text-lg text-sm  cursor-pointer hover:scale-125 transition hover:text-green-600 hover:overline mb-1 flex"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +56,7 @@ function Community() {
       </Link>
       <Link
         to="/facts"
-        className="md:text-lg text-sm text-stone-700 cursor-pointer hover:scale-125 transition hover:text-green-600 hover:overline mb-1 flex "
+        className="md:text-lg text-sm  cursor-pointer hover:scale-125 transition hover:text-green-600 hover:overline mb-1 flex "
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

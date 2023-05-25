@@ -103,8 +103,14 @@ function Profile() {
           </div>
           {/* add glow */}
           <div
-            className="blop  w-4/5 md:w-3/5 lg:w-2/5  h-auto border border-red-400 absolute -z-10"
-            style={{ filter: "blur(15px)" }}
+            className="blop  w-4/5 md:w-3/5 lg:w-2/5  h-auto absolute -z-10 "
+            // style={{ filter: "blur(15px)" }}
+            style={{
+              filter:
+                theme === "light"
+                  ? "blur(15px)"
+                  : "blur(15px) brightness(5.6) saturate(.5) hue-rotate(40deg)",
+            }}
           >
             <svg
               viewBox="0 0 1000 1000"
