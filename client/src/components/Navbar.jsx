@@ -21,20 +21,22 @@ function Navbar() {
   const handleLogout = () => {
     //send refresh token to backend to blacklist it
 
-    // fetch("https://high-paw-production.up.railway.app/auth/refresh-token", {
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: `Bearer ${user.refreshToken}`,
-    //   },
-    //   body: JSON.stringify({ refreshToken: user.refreshToken }),
-    // });
-
+    fetch("https://high-paw-production.up.railway.app/auth/logout", {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, DELETE"
+      },
+      body: JSON.stringify({ refreshToken: user.refreshToken.token })
+    })
     // remove user from state
     setUser(null);
     // remove user from local storage
     localStorage.removeItem("user");
     navigate("/login");
   };
+
+  
 
   const toggleNavbar = () => {
     setShowLinks(!showLinks);
