@@ -50,7 +50,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="containerMap w-screen pt-28  md:flex-1 -z-50  m-auto mt-14 bg-slate-50  md:pt-0">
+    <div className="containerMap w-screen md:flex-1 -z-50  m-auto mt-14   md:pt-0">
       {/* if user exists show map, otherwise no map*/}
       {user.user && (
         <MapContainer

@@ -33,7 +33,6 @@ function Profile() {
       );
       const data = await response.json();
       setProfile(data);
-      console.log(data);
     };
     getProfile();
   }, []);
@@ -41,7 +40,7 @@ function Profile() {
   const userStorage = localStorage.getItem("user");
 
   return (
-    <div className="w-screen  -z-30  md:flex-1  m-auto mt-14 ">
+    <div className="w-screen  -z-30    md:flex-1  m-auto mt-14 ">
       {profile && (
         <div className="parent_div md:flex-col  lg:flex-row items-center h-auto justify-start m-0 px-0 flex flex-col relative">
           <div className="blop  w-4/5 md:w-3/5 lg:w-2/5  h-auto ">

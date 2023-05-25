@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 // testing
 import { ReactComponent as Logo } from "./assets/Paw_Print.svg";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 function Navbar() {
@@ -12,10 +12,11 @@ function Navbar() {
   const [showLinks, setShowLinks] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     //send refresh token to backend to blacklist it
-    console.log(user);
+
     // fetch("https://high-paw-production.up.railway.app/auth/refresh-token", {
     //   method: "POST",
     //   headers: {
@@ -38,6 +39,9 @@ function Navbar() {
   const handleClick = (link) => {
     setClickedLink(link);
   };
+  useEffect(() => {
+    setShowLinks(false);
+  }, [location]);
 
   return (
     <div className=" flex flex-row  w-full justify-between shadow-green-500 shadow-lg">
@@ -53,7 +57,7 @@ function Navbar() {
 
       <div
         className={`links gap-5  text-stone-600 z-50   absolute ${
-          showLinks ? "top-10" : "-top-72"
+          showLinks ? "top-10" : "-top-96"
         } right-0 flex flex-col bg-white opacity-70 md:static text-lg px-4  md:flex-row md:mx-auto transition-all duration-500`}
       >
         <Link

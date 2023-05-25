@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Community() {
   return (
     <div className="communityContainer flex flex-col items-start  bg-white  h-3/4 w-full md:w-48 md:h-3/4 px-4 pb-0 m-auto">
-      <h1 className="h1 mb-2 font-bold md:text-3xl text:2xl text-stone-800">
+      <h1 className="h1 mb-2 font-bold md:text-2xl text-xl text-stone-800">
         Community
       </h1>
       <Link
