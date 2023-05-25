@@ -63,7 +63,7 @@ function Login() {
       {/* <div className='parentSvg' style={{border: "1px solid red", height: "100vh", width: "100vw"}}> 
         <PawSteps style={{height: "100%"}} > */}
       <form
-        className="bg-white shadow-md rounded md:px-8 md:pt-6 px-2 pb-8 mb-4  md:w-4/5 flex flex-col mx-auto md:my-20 z-80 xl:w-2/5 lg:w-3/5"
+        className="bg-white shadow-md rounded md:px-8 md:pt-6 px-2 pb-8 mb-4  md:w-4/5 flex flex-col mx-auto md:my-20 z-80 xl:w-2/5 lg:w-3/5 mt-60"
         onSubmit={handleSubmit}
       >
         <h1 className="login font-semibold mb-4 text-2xl text-stone-700">

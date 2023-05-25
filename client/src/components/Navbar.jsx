@@ -60,12 +60,12 @@ function Navbar() {
       </div>
 
       <div
-        className={`links gap-5  text-stone-600 z-50   absolute ${
+        className={`links gap-5   z-50   absolute ${
           showLinks ? "top-10" : "-top-96"
         } ${
           theme === "light"
             ? "bg-white text-stone-700"
-            : "bg-black text-green-100"
+            : "bg-black text-green-100 z-50"
         } right-0 flex flex-col  opacity-90 md:static text-sm md:text-base px-4  md:flex-row md:mx-auto transition-all duration-500`}
       >
         <Link
@@ -185,7 +185,7 @@ function Navbar() {
         </div>
       </div>
       <button
-        className="text-2xl text-green-500 absolute md:right-16 md:top-4 top-2 right-14"
+        className="text-2xl text-green-500 absolute md:right-40 z-50 md:top-4 top-2 right-14"
         onClick={toggleTheme}
       >
         {theme === "light" ? <FaMoon /> : <BsSunFill />}
