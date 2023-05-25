@@ -12,7 +12,6 @@ import Hangouts from "./components/Hangouts";
 import Hangout from "./components/Hangout";
 import UpdateHangout from "./components/UpdateHangout";
 import ImageUpload from "./components/ImageUpload";
-import UpdateProfile from "./components/UpdateProfile";
 // import ThemeSwitcher from "./components/ThemeSwitcher";
 import LifeStyle from "./components/LifeStyle";
 import Recipes from "./components/Recipes";
@@ -58,7 +57,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/:id" element={<Profile />} />
-            <Route path="/update_profile/:id" element={<UpdateProfile />} />
             <Route path="/create_hangout" element={<CreateHangout />} />
             <Route path="/hangouts" element={<Hangouts />} />
             <Route path="/lifestyle" element={<LifeStyle />} />

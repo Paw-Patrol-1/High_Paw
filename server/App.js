@@ -6,17 +6,15 @@ require("dotenv").config(".env");
 require("./config/db.config");
 const cookieParser = require("cookie-parser");
 
-
-
-const AuthRoute = require("./routes/Auth.route");
-const HangoutRoute = require("./routes/Hangout.route");
-const ProfileRoute = require("./routes/Profile.route");
-
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+const AuthRoute = require("./routes/Auth.route");
+const HangoutRoute = require("./routes/Hangout.route");
+const ProfileRoute = require("./routes/Profile.route");
 
 app.use("/auth", AuthRoute);
 app.use("/hangout", HangoutRoute);
