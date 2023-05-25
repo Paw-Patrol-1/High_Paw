@@ -19,9 +19,12 @@ import Recipes from "./components/Recipes";
 import Facts from "./components/Facts";
 import SingleFact from "./components/SingleFact";
 
+import { useThemeContext } from "./components/ThemeProvider";
+
 export const UserContext = createContext();
 
 function App() {
+  const { theme } = useThemeContext();
   // check for user info in local storage
   const userStorage = JSON.parse(localStorage.getItem("user"));
   // if userstorage = null -> user = null, else user = userStorage
@@ -30,7 +33,13 @@ function App() {
   const API_KEY = import.meta.env.VITE_MAPBOX_API;
 
   return (
-    <div className="parent-container">
+    <div
+      className={`parent-container -z-10 min-h-screen ${
+        theme === "light" ? "bg-white text-gray-700" : "bg-black text-white"
+      }`}
+      // className="parent-container  -z-10 bg-white"
+    >
+      {/* <ThemeProvider> */}
       <UserContext.Provider
         value={{
           user: user,
@@ -61,6 +70,7 @@ function App() {
           <Community />
         </div>
       </UserContext.Provider>
+      {/* </ThemeProvider> */}
     </div>
   );
 }

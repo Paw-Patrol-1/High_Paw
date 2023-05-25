@@ -6,6 +6,9 @@ import { UserContext } from "../App";
 import { useContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
+import { FaMoon } from "react-icons/fa";
+import { BsSunFill } from "react-icons/bs";
+import { useThemeContext } from "./ThemeProvider";
 
 function Navbar() {
   const [clickedLink, setClickedLink] = useState("");
@@ -13,6 +16,7 @@ function Navbar() {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const { theme, toggleTheme } = useThemeContext();
 
   const handleLogout = () => {
     //send refresh token to backend to blacklist it
@@ -44,7 +48,7 @@ function Navbar() {
   }, [location]);
 
   return (
-    <div className=" flex flex-row  w-screen justify-between shadow-green-500 shadow-lg">
+    <div className=" flex flex-row z-50  w-screen justify-between shadow-green-500 shadow-lg">
       {/* set dimension to div holding the svg */}
       <div className="logo" style={{ height: "40px", width: "40px" }}>
         {/* give 100% w / h for the svg to fill its parent */}
@@ -58,7 +62,9 @@ function Navbar() {
       <div
         className={`links gap-5  text-stone-600 z-50   absolute ${
           showLinks ? "top-10" : "-top-96"
-        } right-0 flex flex-col bg-white opacity-90 md:static text-lg px-4  md:flex-row md:mx-auto transition-all duration-500`}
+        } ${
+          theme === "light" ? "bg-white" : "bg-black text-white"
+        } right-0 flex flex-col  opacity-90 md:static text-sm md:text-base px-4  md:flex-row md:mx-auto transition-all duration-500`}
       >
         <Link
           onClick={() => handleClick("profile")}
@@ -176,6 +182,12 @@ function Navbar() {
           )}
         </div>
       </div>
+      <button
+        className="text-2xl text-green-500 absolute md:right-16 md:top-4 top-2 right-14"
+        onClick={toggleTheme}
+      >
+        {theme === "light" ? <FaMoon /> : <BsSunFill />}
+      </button>
       <button
         className="md:hidden  text-2xl text-green-500"
         onClick={toggleNavbar}
