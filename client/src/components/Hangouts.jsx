@@ -59,7 +59,7 @@ function Hangouts() {
       console.log(users);
       // remove duplicates
       const uniqueUsers = [...new Set(users)];
-      console.log(uniqueUsers);
+      // console.log(uniqueUsers);
 
       for (let userId of uniqueUsers) {
         getUserName(userId);
