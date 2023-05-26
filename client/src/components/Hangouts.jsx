@@ -56,7 +56,7 @@ function Hangouts() {
       for (let hangout of data.hangouts) {
         users.push(hangout.userId);
       }
-      // console.log(users);
+
       // remove duplicates
       const uniqueUsers = [...new Set(users)];
       // console.log(uniqueUsers);

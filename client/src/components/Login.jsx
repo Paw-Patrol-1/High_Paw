@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { ReactComponent as PawSteps } from "./assets/pawsteps.svg";
 import { useState, useContext } from "react";
 import { UserContext } from "../App";
@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
-  const [err, setErr] = useState({ email: null, password: null });
+  const [err, setErr] = useState({});
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -36,25 +36,27 @@ function Login() {
   };
 
   const validateForm = () => {
+    // create an empty object to hold the errors, this will be updated with each if statement, if there is an error, the error message will be added to the object and the object will be returned, if there are no errors, the object will be empty and the function will return false
+    const err = {};
     let noErr = true;
     if (!form.email) {
       // err.email = "Please enter email";
-      setErr({ ...err, email: "Please enter email" });
+      err.email = "Please enter email";
       noErr = false;
     }
 
     if (!form.password) {
       // err.password = "Please enter password";
-      setErr({ ...err, password: "Please enter password" });
+
+      err.password = "Please enter password";
       noErr = false;
     }
     if (form.password.length < 8) {
-      setErr({
-        ...err,
-        password: "Password must be at least 8 characters long",
-      });
+      err.password = "Password must be at least 8 characters long";
       noErr = false;
     }
+    setErr(err);
+
     return noErr;
   };
 

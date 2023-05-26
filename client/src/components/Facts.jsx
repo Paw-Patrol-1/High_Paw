@@ -12,6 +12,7 @@ function Facts() {
       try {
         const res = await fetch("https://api.thedogapi.com/v1/breeds");
         const data = await res.json();
+        console.log(data);
         setDogs(data);
       } catch (error) {
         console.error(error);
@@ -28,6 +29,7 @@ function Facts() {
         `https://api.thedogapi.com/v1/breeds/search?q=${text}`
       );
       const data = await res.json();
+
       setDogs(data);
     } catch (error) {
       console.error(error);
@@ -42,29 +44,35 @@ function Facts() {
   };
 
   return (
-    <>
+    <div className="w-screen">
       {!dogs ? (
         <h1 className="flex items-center justify-center text-black text-center px-5 text-3xl h-screen font-bold uppercase">
           Loading...
         </h1>
       ) : (
         <>
-          <section className="p-8 max-w-7xl mx-auto">
-            <div className="text-center">
+          <section className="p-8 w-full">
+            <div className=" h-20 flex justify-center  my-auto border border-red-600">
               <form
                 onSubmit={handleSubmit}
-                className="max-w-xl mx-auto"
+                className="flex justify-center items-center w-full "
                 autoComplete="off"
               >
                 <input
                   type="text"
                   name="search"
                   id="search"
-                  placeholder="Search for a dog by breed"
-                  className="py-2 px-4 rounded shadow w-full bg-white text-black placeholder-black"
+                  placeholder="Search for a dog by breed..."
+                  className="w-11/12 md:w-8/12 border rounded-md p-2  h-10 text-sm focus:outline-green-500 transition  shadow-md cursor-pointer hover:border-green-400"
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                 />
+                {/* <input
+                  type="text"
+                  placeholder="Search hangouts by user..."
+                  className="w-11/12 md:w-8/12 border rounded-md px-4 py-2 mt-10 focus:outline-green-500 transition text-xs shadow-md cursor-pointer hover:border-green-400"
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                /> */}
               </form>
             </div>
 
@@ -127,7 +135,7 @@ function Facts() {
           </section>
         </>
       )}
-    </>
+    </div>
   );
 }
 export default Facts;
