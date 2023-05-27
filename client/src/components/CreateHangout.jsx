@@ -47,12 +47,34 @@ function CreateHangout() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [marker, setMarker] = useState(null);
+  const [err, setErr] = useState({});
+
+  const validate = () => {
+    const err = {};
+    let noErr = true;
+    if (!title) {
+      err.title = "Title is required";
+      noErr = false;
+    }
+    if (!description) {
+      err.description = "Description is required";
+      noErr = false;
+    }
+    if (!marker) {
+      err.marker = "Location is required";
+      noErr = false;
+    }
+    setErr(err); // set error object
+    return noErr;
+  };
 
   const saveMarker = (newMarkerCoords) => {
     setMarker(newMarkerCoords);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // validate hangout
+    if (!validate()) return;
     const newHangout = {
       title,
       description,
@@ -97,6 +119,9 @@ function CreateHangout() {
             className="input-title shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:shadow-outline text"
             placeholder="add your title here..."
           />
+          {err.title && (
+            <p className="text-red-500 text-xs italic">{err.title}</p>
+          )}
         </div>
 
         <div className="description-div mb-4">
@@ -116,6 +141,9 @@ function CreateHangout() {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-sm"
             placeholder="add your description here..."
           ></textarea>
+          {err.description && (
+            <p className="text-red-500 text-xs italic">{err.description}</p>
+          )}
         </div>
         <div className="div-map">
           <p className="block text-gray-700 text-sm font-bold mb-2">
@@ -135,6 +163,9 @@ function CreateHangout() {
               />
               <MyComponent saveMarker={saveMarker} />
             </MapContainer>
+            {err.marker && (
+              <p className="text-red-500 text-xs italic">{err.marker}</p>
+            )}
           </div>
         </div>
         <button className="btn bg-green-700 hover:bg-green-900 text-white font-medium py-2 px-4 rounded w-full">
