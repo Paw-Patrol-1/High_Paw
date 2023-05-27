@@ -180,26 +180,10 @@ function Hangouts() {
         previousLinkClassName="text-green-500 border border-green-500 rounded-md px-4 py-2 m-2 hover:bg-green-500 hover:text-white transition-all"
         nextClassName="page-item"
         nextLinkClassName="text-green-500 border border-green-500 rounded-md px-4 py-2 m-2 hover:bg-green-500 hover:text-white transition-all"
+        breakLabel="..."
+        pageRangeDisplayed={0}
+        marginPagesDisplayed={2}
       />
-
-      {/* <ReactPaginate
-        className="flex justify-center mt-6 gap-4 "
-        pageCount={Math.ceil(filteredHangouts.length / itemsPerPage)}
-        onPageChange={handlePageChange}
-        containerClassName="pagination"
-        activeClassName="text-green-500 font-bold scale-150"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="text-green-500 border border-green-500 rounded-md px-4 py-2 m-2 hover:bg-green-500 hover:text-white transition-all"
-        nextClassName="page-item"
-        nextLinkClassName="text-green-500 border border-green-500 rounded-md px-4 py-2 m-2 hover:bg-green-500 hover:text-white transition-all"
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        breakLabel={"..."}
-      /> */}
     </div>
   );
 }

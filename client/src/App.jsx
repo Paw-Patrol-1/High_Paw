@@ -15,7 +15,7 @@ import ImageUpload from "./components/ImageUpload";
 // import ThemeSwitcher from "./components/ThemeSwitcher";
 import LifeStyle from "./components/LifeStyle";
 import Recipes from "./components/Recipes";
-import Facts from "./components/Facts";
+import FactsPaginate from "./components/FactsPaginate";
 import SingleFact from "./components/SingleFact";
 
 import { useThemeContext } from "./components/ThemeProvider";
@@ -61,7 +61,7 @@ function App() {
             <Route path="/hangouts" element={<Hangouts />} />
             <Route path="/lifestyle" element={<LifeStyle />} />
             <Route path="/recipes" element={<Recipes />} />
-            <Route path="/facts" element={<Facts />} />
+            <Route path="/facts" element={<FactsPaginate itemsPerPage={4} />} />
             <Route path="/:name" element={<SingleFact />} />
           </Routes>
 

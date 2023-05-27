@@ -64,7 +64,9 @@ function Navbar() {
         className={`links gap-5   z-50   absolute ${
           showLinks ? "top-10" : "-top-96"
         } ${
-          theme === "light" ? " text-stone-700" : " text-green-100 z-50"
+          theme === "light"
+            ? "bg-white text-stone-700"
+            : "bg-black opacity-80 text-green-100 z-50"
         } right-0 flex flex-col  opacity-90 md:static text-sm md:text-base px-4  md:flex-row md:mx-auto transition-all duration-500`}
       >
         <Link
