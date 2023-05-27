@@ -12,13 +12,14 @@ import Hangouts from "./components/Hangouts";
 import Hangout from "./components/Hangout";
 import UpdateHangout from "./components/UpdateHangout";
 import ImageUpload from "./components/ImageUpload";
-// import ThemeSwitcher from "./components/ThemeSwitcher";
+
 import LifeStyle from "./components/LifeStyle";
 import Recipes from "./components/Recipes";
 import FactsPaginate from "./components/FactsPaginate";
 import SingleFact from "./components/SingleFact";
 
 import { useThemeContext } from "./components/ThemeProvider";
+import NotFound404 from "./components/NotFound404";
 
 export const UserContext = createContext();
 
@@ -63,7 +64,8 @@ function App() {
             <Route path="/lifestyle" element={<LifeStyle />} />
             <Route path="/recipes" element={<Recipes />} />
             <Route path="/facts" element={<FactsPaginate itemsPerPage={4} />} />
-            <Route path="/:name" element={<SingleFact />} />
+            <Route path="/facts/:name" element={<SingleFact />} />
+            <Route path="*" element={<NotFound404 />} />
           </Routes>
 
           <Community />

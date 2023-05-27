@@ -94,7 +94,7 @@ function Facts({ filteredDogs }) {
     <>
       {filteredDogs.map((dog) => (
         <Link
-          to={`/${dog.name}`}
+          to={`/facts/${dog.name}`}
           key={dog.id}
           className="p-4 rounded hover:bg-slate-200 transition-all duration-200"
         >
