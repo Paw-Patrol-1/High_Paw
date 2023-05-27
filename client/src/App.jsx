@@ -24,6 +24,7 @@ export const UserContext = createContext();
 
 function App() {
   const { theme } = useThemeContext();
+
   // check for user info in local storage
   const userStorage = JSON.parse(localStorage.getItem("user"));
   // if userstorage = null -> user = null, else user = userStorage
