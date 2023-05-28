@@ -26,7 +26,6 @@ const signAccessToken = (userId) => {
 
 // middleware to protect routes
 const verifyAccessToken = (req, res, next) => {
-  console.log("hello");
   if (!req.header("Authorization")) return next(createError.Unauthorized());
   const authHeader = req.header("Authorization");
   const splitToken = authHeader.split(" ");
@@ -62,7 +61,7 @@ const signRefreshToken = (userId) => {
       const userToken = new UserToken({ userId, token });
 
       const saveToken = await userToken.save();
-      console.log(saveToken);
+
       if (err) {
         console.log(err.message);
         reject(createError.InternalServerError());

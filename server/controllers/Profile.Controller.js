@@ -12,7 +12,6 @@ module.exports = {
   profileDetails: async (req, res, next) => {
     try {
       const user = await User.findById(req.params.id);
-      console.log("user", user);
 
       if (user) {
         res.send({
@@ -34,9 +33,7 @@ module.exports = {
   editProfile: async (req, res, next) => {
     try {
       const result = await profileSchema.validateAsync(req.body);
-      // console.log("result", result);
       const user = await User.findById(req.params.id);
-      // console.log("user", user);
 
       if (result && user) {
         user.name = result.name || user.name;

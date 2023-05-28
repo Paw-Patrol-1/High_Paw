@@ -14,7 +14,6 @@ module.exports = {
   register: async (req, res, next) => {
     try {
       const result = await authSchema.validateAsync(req.body);
-      console.log(result);
 
       const doesExist = await User.findOne({ email: result.email });
       if (doesExist)
@@ -56,8 +55,7 @@ module.exports = {
   logout: async (req, res, next) => {
     try {
       const { refreshToken } = req.body;
-      console.log(req.body);
-      console.log(refreshToken);
+
       if (!refreshToken) throw createError.BadRequest();
       const userId = await verifyRefreshToken(refreshToken);
 
