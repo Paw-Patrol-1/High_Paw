@@ -59,7 +59,7 @@ function FactsPaginate({ itemsPerPage }) {
               name="search"
               id="search"
               placeholder="Search for a dog by breed..."
-              className="w-11/12 md:w-8/12 border rounded-md p-2  h-10 text-sm focus:outline-green-500 transition  shadow-md cursor-pointer hover:border-green-400"
+              className="w-11/12 md:w-8/12 border rounded-md p-2  h-10 text-sm focus:outline-green-500 transition  shadow-md cursor-pointer hover:border-green-400 text-gray-700"
               value={input}
               onChange={(e) => setInput(e.target.value)}
             />
@@ -89,7 +89,7 @@ function FactsPaginate({ itemsPerPage }) {
 }
 
 function Facts({ filteredDogs }) {
-  const { theme, toggleTheme } = useThemeContext();
+  const { theme } = useThemeContext();
   return (
     <>
       {filteredDogs.map((dog) => (
@@ -100,7 +100,7 @@ function Facts({ filteredDogs }) {
         >
           <article>
             <img
-              className={`rounded md:h-72 w-full object-cover shadow-lg ${
+              className={`rounded md:h-80 w-full object-fit shadow-lg  ${
                 theme === "light" ? "shadow-gray-600" : "shadow-green-200"
               }`}
               src={dog.image.url}
