@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Default from "../components/assets/Default.jpg";
-
 import ReactPaginate from "react-paginate";
+import { useThemeContext } from "./ThemeProvider";
 
 function FactsPaginate({ itemsPerPage }) {
   const [itemOffset, setItemOffset] = useState(0);
   const [dogs, setDogs] = useState([]);
   const [input, setInput] = useState("");
-
   const [filteredDogs, setFilteredDogs] = useState([]);
 
   useEffect(() => {
@@ -28,7 +27,7 @@ function FactsPaginate({ itemsPerPage }) {
   }, []);
 
   useEffect(() => {
-    console.log("input", input);
+    // console.log("input", input);
     const filtered = dogs.filter((dog) => {
       return dog.name.toLowerCase().includes(input.toLowerCase());
     });
@@ -50,7 +49,7 @@ function FactsPaginate({ itemsPerPage }) {
   return (
     <div className="w-screen">
       <section className="p-8 w-full">
-        <div className=" h-20 flex justify-center  my-auto border border-red-600">
+        <div className=" h-20 flex justify-center  my-auto ">
           <form
             className="flex justify-center items-center w-full "
             autoComplete="off"
@@ -71,7 +70,7 @@ function FactsPaginate({ itemsPerPage }) {
           <Facts filteredDogs={currentItems} />
         </div>
         <ReactPaginate
-          className="flex justify-center mt-10 md:gap-4 gap-2 mb-6 w-full m-auto border border-red-600"
+          className="flex justify-center mt-10 md:gap-4 gap-2 mb-6 w-full m-auto "
           activeClassName="text-green-500 font-bold scale-150"
           previousLinkClassName="text-green-500 border border-green-500 rounded-md px-4 py-2 m-2 hover:bg-green-500 hover:text-white transition-all"
           nextLinkClassName="text-green-500 border border-green-500 rounded-md px-4 py-2 m-2 hover:bg-green-500 hover:text-white transition-all"
@@ -90,28 +89,45 @@ function FactsPaginate({ itemsPerPage }) {
 }
 
 function Facts({ filteredDogs }) {
+  const { theme, toggleTheme } = useThemeContext();
   return (
     <>
       {filteredDogs.map((dog) => (
         <Link
           to={`/facts/${dog.name}`}
           key={dog.id}
-          className="p-4 rounded hover:bg-slate-200 transition-all duration-200"
+          className="p-4 rounded hover:bg-green-500 transition-all duration-200"
         >
           <article>
             <img
+              className={`rounded md:h-72 w-full object-cover shadow-lg ${
+                theme === "light" ? "shadow-gray-600" : "shadow-green-200"
+              }`}
               src={dog.image.url}
               alt={dog.name}
               loading="lazy"
-              className="rounded md:h-72 w-full object-cover"
               onError={(e) => {
                 e.target.src = Default;
               }}
             />
-            <h3 className="text-black text-lg font-bold mt-4">
-              {dog.name + " hello"}
+            <h3
+              className={`text-lg font-bold mt-4 ${
+                theme === "light"
+                  ? "bg-white text-stone-700"
+                  : "bg-black opacity-80 text-green-100 z-50"
+              }`}
+            >
+              {dog.name}
             </h3>
-            <p className=" text-slate-800">Bred For: {dog.bred_for}</p>
+            <p
+              className={` ${
+                theme === "light"
+                  ? "bg-white text-stone-700"
+                  : "bg-black opacity-80 text-green-100 z-50"
+              }`}
+            >
+              Bred For: {dog.bred_for}
+            </p>
           </article>
         </Link>
       ))}
