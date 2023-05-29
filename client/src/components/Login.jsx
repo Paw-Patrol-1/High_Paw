@@ -6,14 +6,16 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
+  // form validation frontend
   const [err, setErr] = useState({});
-  const { user, setUser } = useContext(UserContext);
+  // import  setUser from context
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-
+  // for controlling the inputs, we need to add name attribute to each input and set the value to the state
   const handleChange = (e) => {
     setForm((prevState) => ({
       ...prevState,
@@ -23,16 +25,21 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // if form is not valid(return false), return and do not submit form
     if (!validateForm()) return;
-
+    // form = body of the request
     axios
+      // conn to backend
       .post("https://high-paw-production.up.railway.app/auth/login", form)
       .then((res) => {
+        // set user in context and local storage
         setUser(res.data);
         localStorage.setItem("user", JSON.stringify(res.data));
         navigate("/profile");
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const validateForm = () => {

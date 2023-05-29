@@ -5,11 +5,9 @@ import axios from "axios";
 import adressToLatLong from "../../utils/adressToLatLong";
 import { useNavigate, Link } from "react-router-dom";
 
-// import UploadWidget from "./UploadImage";
-
 function Signup() {
   const [err, setErr] = useState({});
-
+  // for cloudinary
   const preset_key = "rmfpv4pk";
 
   const validateForm = () => {
@@ -66,7 +64,7 @@ function Signup() {
 
     return noErr;
   };
-
+  // for cloudinary to upload image
   function handleFile(event) {
     const selectedImages = event.target.files[0];
     const formData = new FormData();
@@ -75,10 +73,12 @@ function Signup() {
     axios
       .post("https://api.cloudinary.com/v1_1/dhknz3izf/image/upload", formData)
       .then((response) =>
+        // add img to current state of the form
         setForm({ ...form, picture: response.data.secure_url })
       )
       .catch((error) => console.log(error));
   }
+
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
@@ -102,6 +102,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
+
     const latLong = await adressToLatLong(form.address, form.city);
     if (!latLong || !latLong.length) {
       return alert("Please enter a valid address");

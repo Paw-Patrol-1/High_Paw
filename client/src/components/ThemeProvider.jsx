@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext } from "react";
-import { FaMoon } from "react-icons/fa";
-import { BsSunFill } from "react-icons/bs";
+import { useState, useContext } from "react";
+
 import { createContext } from "react";
 
 export const ThemeContext = createContext();
 // ThemeProvider component that wraps the entire app and provides the theme context to all components
+// children is the prop that is passed to all components
 function ThemeProvider({ children }) {
   // get theme from local storage or set to light if no theme is set in local storage
   const storageTheme = localStorage.getItem("theme");

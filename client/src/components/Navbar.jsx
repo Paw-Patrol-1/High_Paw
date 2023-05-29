@@ -40,12 +40,10 @@ function Navbar() {
   const toggleNavbar = () => {
     setShowLinks(!showLinks);
   };
-  //if a link is clicked, set bg color to green
-  const handleClick = (link) => {
-    setClickedLink(link);
-  };
+  // when url change set clicked link to the first part of the url
   useEffect(() => {
     setShowLinks(false);
+    setClickedLink(location.pathname.split("/")[1]);
   }, [location]);
 
   return (
@@ -70,7 +68,7 @@ function Navbar() {
         } right-0 flex flex-col  opacity-90 md:static text-sm md:text-base px-4  md:flex-row md:mx-auto transition-all duration-500`}
       >
         <Link
-          onClick={() => handleClick("profile")}
+          // onClick={() => handleClick("profile")}
           to="/profile"
           className={` hover:font-semibold transition duration-300 hover:bg-green-400 my-2 mx-2 px-2 rounded-lg hover:text-white  hover:shadow-xl ${
             clickedLink === "profile" ? "bg-green-500 text-white shadow-xl" : ""
@@ -93,7 +91,7 @@ function Navbar() {
           profile
         </Link>
         <Link
-          onClick={() => handleClick("hangouts")}
+          // onClick={() => handleClick("hangouts")}
           to="/hangouts"
           className={` hover:font-semibold transition duration-300 hover:bg-green-400 my-2 mx-2 px-2 rounded-lg hover:text-white  hover:shadow-xl ${
             clickedLink === "hangouts"
@@ -119,7 +117,7 @@ function Navbar() {
         </Link>
 
         <Link
-          onClick={() => handleClick("create_hangout")}
+          // onClick={() => handleClick("create_hangout")}
           to="/create_hangout"
           className={`  hover:font-semibold transition duration-300 hover:bg-green-400 my-2 mx-2 px-2 rounded-lg hover:text-white  hover:shadow-xl ${
             clickedLink === "create_hangout"

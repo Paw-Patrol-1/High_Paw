@@ -10,6 +10,8 @@ import { useThemeContext } from "./ThemeProvider";
 
 function Profile() {
   const [profile, setProfile] = useState(null);
+  // use inside of chlidren to the browser router
+  // get the the id of the prpofile from the url params (id is the name of the variable in the url)
   let { id } = useParams();
   const { user } = useContext(UserContext);
   const { theme } = useThemeContext();

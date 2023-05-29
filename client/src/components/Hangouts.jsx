@@ -14,13 +14,11 @@ function Hangouts() {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 2; // Change this value to the desired number of items per page
 
-  // useEffect(() => {
-  // if user is null, redirect to login page
-  // delete later
+  // if user is null, redirect to main page
   if (!user) {
     window.location.href = "/mainpage";
   }
-  // }, [user]);
+
   // get user name for a userId
   const getUserName = async (id) => {
     const response = await fetch(

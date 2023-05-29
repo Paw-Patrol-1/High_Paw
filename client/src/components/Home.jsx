@@ -9,34 +9,36 @@ import { UserContext } from "../App";
 import { Link } from "react-router-dom";
 
 const icon = L.icon({
-  iconSize: [25, 41],
+  // home icon
+  iconSize: [71, 41],
+
   iconAnchor: [10, 41],
-  popupAnchor: [2, -40],
+  // popupAnchor: [2, -40],
+  //HOME ICON
   iconUrl:
-    "https://www.pngkit.com/png/detail/41-413073_5422c3418a632d4241caa626-home-icon-home-icons-for-website-png.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
+    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.1nio6F_1gDPgs8F1dDJEaAHaER%26pid%3DApi&f=1&ipt=50e0067ffb106784e4031bd8f5f9cbabca036596922acece27d0d8f90990934b&ipo=images",
+  // shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
 });
 
 function Home() {
   const [hangouts, setHangouts] = useState([]);
   // importing env variables(need no installation of dotenv package for this to work, just need to add .env file in root directory, because of VITE_ prefix)
-  const API_KEY = import.meta.env.VITE_MAPBOX_API;
+  // const API_KEY = import.meta.env.VITE_MAPBOX_API;
   // console.log(import.meta.env.VITE_MAPBOX_API);
 
   const { user } = useContext(UserContext);
-  console.log(user);
-  // useEffect(() => {
+
   // if user is null, redirect to login page
   if (!user) {
     window.location.href = "/mainpage";
   }
-  // }, [user]);
 
   useEffect(() => {
     const getHangouts = async () => {
       const response = await fetch(
         "https://high-paw-production.up.railway.app/hangout/all",
         {
+          // allows you to be authorized to see the hangouts
           headers: {
             Authorization: `Bearer ${user.accessToken}`,
           },
@@ -64,7 +66,7 @@ function Home() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Marker position={user.user.latLong} icon={icon}></Marker>
-
+          {/* map over all hangouts and pin marker position for each hangout */}
           {hangouts.map((hangout) => (
             <div key={hangout._id} className="bg-slate-500">
               <Marker position={hangout.latLong}>
@@ -73,7 +75,7 @@ function Home() {
                   <p className="description">
                     {hangout.description.slice(0, 100)}...
                   </p>
-
+                  {/* send you to the specific hangout of a certain user */}
                   <Link to={`/hangout/${hangout._id}`}>See more details</Link>
                 </Popup>
               </Marker>

@@ -13,10 +13,10 @@ const icon = L.icon({
   shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
 });
 
-function MyComponent({ saveMarker, marker }) {
+function MyComponent({ setMarker, marker }) {
   useEffect(() => {
     const newMarker = L.marker(marker, { icon }).addTo(map);
-    saveMarker([marker[0], marker[1], newMarker]);
+    setMarker([marker[0], marker[1], newMarker]);
   }, []);
 
   const map = useMapEvents({
@@ -32,7 +32,7 @@ function MyComponent({ saveMarker, marker }) {
 
       // Add a new marker to the map
       const newMarker = L.marker([lat, lng], { icon }).addTo(map);
-      saveMarker([lat, lng, newMarker]);
+      setMarker([lat, lng, newMarker]);
     },
   });
 
@@ -48,12 +48,11 @@ function UpdateHangout() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  // useEffect(() => {
+
   // if user is null, redirect to login page
   if (!user) {
     window.location.href = "/login";
   }
-  // }, [user]);
 
   useEffect(() => {
     const getHangout = async () => {
@@ -76,9 +75,9 @@ function UpdateHangout() {
     getHangout();
   }, []);
 
-  const saveMarker = (newMarkerCoords) => {
-    setMarker(newMarkerCoords);
-  };
+  // const saveMarker = (newMarkerCoords) => {
+  //   setMarker(newMarkerCoords);
+  // };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -165,7 +164,7 @@ function UpdateHangout() {
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
 
-                <MyComponent saveMarker={saveMarker} marker={marker} />
+                <MyComponent setMarker={setMarker} marker={marker} />
               </MapContainer>
             )}
           </div>

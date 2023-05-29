@@ -20,9 +20,9 @@ function Hangout() {
     window.location.href = "/mainpage";
   }
   // }, [user]);
-  const getHangoutUser = async (id) => {
+  const getHangoutUser = async (userId) => {
     const response = await fetch(
-      `https://high-paw-production.up.railway.app/profile/${id}`,
+      `https://high-paw-production.up.railway.app/profile/${userId}`,
       {
         headers: {
           Authorization: `Bearer ${user.accessToken}`,
