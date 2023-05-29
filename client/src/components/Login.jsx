@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { ReactComponent as PawSteps } from "./assets/pawsteps.svg";
 import { useState, useContext } from "react";
 import { UserContext } from "../App";
@@ -6,14 +6,16 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
-  const [err, setErr] = useState({ email: null, password: null });
-  const { user, setUser } = useContext(UserContext);
+  // form validation frontend
+  const [err, setErr] = useState({});
+  // import  setUser from context
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-
+  // for controlling the inputs, we need to add name attribute to each input and set the value to the state
   const handleChange = (e) => {
     setForm((prevState) => ({
       ...prevState,
@@ -23,38 +25,45 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // if form is not valid(return false), return and do not submit form
     if (!validateForm()) return;
-
+    // form = body of the request
     axios
+      // conn to backend
       .post("https://high-paw-production.up.railway.app/auth/login", form)
       .then((res) => {
+        // set user in context and local storage
         setUser(res.data);
         localStorage.setItem("user", JSON.stringify(res.data));
         navigate("/profile");
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const validateForm = () => {
+    // create an empty object to hold the errors, this will be updated with each if statement, if there is an error, the error message will be added to the object and the object will be returned, if there are no errors, the object will be empty and the function will return false
+    const err = {};
     let noErr = true;
     if (!form.email) {
       // err.email = "Please enter email";
-      setErr({ ...err, email: "Please enter email" });
+      err.email = "Please enter email";
       noErr = false;
     }
 
     if (!form.password) {
       // err.password = "Please enter password";
-      setErr({ ...err, password: "Please enter password" });
+
+      err.password = "Please enter password";
       noErr = false;
     }
     if (form.password.length < 8) {
-      setErr({
-        ...err,
-        password: "Password must be at least 8 characters long",
-      });
+      err.password = "Password must be at least 8 characters long";
       noErr = false;
     }
+    setErr(err);
+
     return noErr;
   };
 
