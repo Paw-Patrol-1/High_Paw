@@ -12,10 +12,7 @@ router.get("/:id", verifyAccessToken, HangoutController.singleHangout);
 router.post("/create", verifyAccessToken, HangoutController.newHangout);
 
 router.delete("/:id", verifyAccessToken, HangoutController.deleteHangout);
-// edit a hangout
-router.put("/:id", verifyAccessToken, HangoutController.editHangout);
 
-// when hangout is cancelled or no lonfer needed in db
-router.delete("/:id", verifyAccessToken, HangoutController.deleteHangout);
+router.put("/:id", verifyAccessToken, HangoutController.editHangout);
 
 module.exports = router;
