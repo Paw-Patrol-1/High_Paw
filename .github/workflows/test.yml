@@ -26,3 +26,6 @@ jobs:
         working-directory: ./server
       - run: npm test
         working-directory: ./server
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          DB_NAME: ${{ secrets.DB_NAME }}
