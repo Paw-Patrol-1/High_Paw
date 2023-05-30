@@ -1,4 +1,3 @@
-require("dotenv").config(".env");
 const request = require("supertest");
 const { app } = require("./App");
 require("./config/db.config");
@@ -21,30 +20,32 @@ describe("Endpoints", () => {
     address: "1234 Street, USA",
     latLong: [1232, 12],
   };
-  
+
   let newHangout = {
-    title:"Meet up at Hillside Dog Park",
-    description:"Cinnamon is looking forward to hanging out with all his pals.", 
+    title: "Meet up at Hillside Dog Park",
+    description:
+      "Cinnamon is looking forward to hanging out with all his pals.",
     userId: "",
-    latLong:[123, 456],
-    joining : []
-  }
+    latLong: [123, 456],
+    joining: [],
+  };
 
   let secondNewHangout = {
-    title:"Meet up at Test Dog Park",
-    description:"Hercules is looking forward to hanging out with all his new pals.", 
+    title: "Meet up at Test Dog Park",
+    description:
+      "Hercules is looking forward to hanging out with all his new pals.",
     userId: "",
-    latLong:[789, 112],
-    joining : []
-  }
+    latLong: [789, 112],
+    joining: [],
+  };
 
   let editedHangout = {
-    title:"Meet up at Bayou Dog Park",
-    description:"Hercules can't wait to hang out with all his new pals.", 
+    title: "Meet up at Bayou Dog Park",
+    description: "Hercules can't wait to hang out with all his new pals.",
     latLong: [3345, 4456],
     userId: "",
-    joining: []
-  }
+    joining: [],
+  };
 
   let testUserLogin = {
     email: "test@gmail.com",
@@ -78,11 +79,11 @@ describe("Endpoints", () => {
       globalAccessToken = text.accessToken;
       globalRefreshToken = text.refreshToken;
 
-      secondNewHangout.userId = text.refreshToken.userId
-      secondNewHangout.joining.push(text.refreshToken.userId)
+      secondNewHangout.userId = text.refreshToken.userId;
+      secondNewHangout.joining.push(text.refreshToken.userId);
 
-      newHangout.userId = text.refreshToken.userId
-      newHangout.joining.push(text.refreshToken.userId)
+      newHangout.userId = text.refreshToken.userId;
+      newHangout.joining.push(text.refreshToken.userId);
 
       expect(response.status).toBe(200);
       expect(text.user.email).toBe(testUserLogin.email);
@@ -94,12 +95,12 @@ describe("Endpoints", () => {
     it("creates a new hangout", async () => {
       const response = await request(app)
         .post("/hangout/create")
-        .send( newHangout )
-        .set('Authorization', `Bearer ${globalAccessToken}`)
+        .send(newHangout)
+        .set("Authorization", `Bearer ${globalAccessToken}`)
         .set("Accept", "application/json");
 
       const text = await JSON.parse(response.text);
-      globalHangout = text.savedHangout
+      globalHangout = text.savedHangout;
 
       expect(response.status).toBe(200);
       expect(text.savedHangout.title).toBe(newHangout.title);
@@ -112,15 +113,14 @@ describe("Endpoints", () => {
     it("creates a new hangout", async () => {
       const response = await request(app)
         .post("/hangout/create")
-        .send( secondNewHangout )
-        .set('Authorization', `Bearer ${globalAccessToken}`)
+        .send(secondNewHangout)
+        .set("Authorization", `Bearer ${globalAccessToken}`)
         .set("Accept", "application/json");
 
       const text = await JSON.parse(response.text);
-      secondGlobalHangout = text.savedHangout
-      editedHangout.userId = text.savedHangout.userId
-      editedHangout.joining = text.savedHangout.joining
-
+      secondGlobalHangout = text.savedHangout;
+      editedHangout.userId = text.savedHangout.userId;
+      editedHangout.joining = text.savedHangout.joining;
 
       expect(response.status).toBe(200);
       expect(text.savedHangout.title).toBe(secondNewHangout.title);
@@ -133,7 +133,7 @@ describe("Endpoints", () => {
     it("obtains all hangouts", async () => {
       const response = await request(app)
         .get("/hangout/all")
-        .set('Authorization', `Bearer ${globalAccessToken}`)
+        .set("Authorization", `Bearer ${globalAccessToken}`)
         .set("Accept", "application/json");
 
       const text = await JSON.parse(response.text);
@@ -147,8 +147,8 @@ describe("Endpoints", () => {
     it("obtains a created hangout", async () => {
       const response = await request(app)
         .get(`/hangout/${globalHangout._id}`)
-        
-        .set('Authorization', `Bearer ${globalAccessToken}`)
+
+        .set("Authorization", `Bearer ${globalAccessToken}`)
         .set("Accept", "application/json");
 
       const text = await JSON.parse(response.text);
@@ -156,7 +156,6 @@ describe("Endpoints", () => {
       expect(response.status).toBe(200);
       expect(text.hangout.description).toBe(newHangout.description);
       expect(text.hangout.joining[0]).toBe(globalHangout.userId);
-
     });
   });
 
@@ -164,8 +163,8 @@ describe("Endpoints", () => {
     it("edits a created hangout", async () => {
       const response = await request(app)
         .put(`/hangout/${secondGlobalHangout._id}`)
-        .send( editedHangout )
-        .set('Authorization', `Bearer ${globalAccessToken}`)
+        .send(editedHangout)
+        .set("Authorization", `Bearer ${globalAccessToken}`)
         .set("Accept", "application/json");
 
       const text = await JSON.parse(response.text);
@@ -181,7 +180,7 @@ describe("Endpoints", () => {
     it("deletes a created hangout", async () => {
       const response = await request(app)
         .delete(`/hangout/${globalHangout._id}`)
-        .set('Authorization', `Bearer ${globalAccessToken}`)
+        .set("Authorization", `Bearer ${globalAccessToken}`)
         .set("Accept", "application/json");
 
       const text = await JSON.parse(response.text);
@@ -195,7 +194,7 @@ describe("Endpoints", () => {
     it("deletes second created hangout", async () => {
       const response = await request(app)
         .delete(`/hangout/${secondGlobalHangout._id}`)
-        .set('Authorization', `Bearer ${globalAccessToken}`)
+        .set("Authorization", `Bearer ${globalAccessToken}`)
         .set("Accept", "application/json");
 
       const text = await JSON.parse(response.text);
