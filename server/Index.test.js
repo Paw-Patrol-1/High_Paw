@@ -2,6 +2,7 @@ const request = require("supertest");
 const { app } = require("./App");
 require("./config/db.config");
 const User = require("./Models/User.model");
+const mongoose = require("mongoose");
 
 describe("Endpoints", () => {
   let globalAccessToken;
@@ -217,5 +218,6 @@ describe("Endpoints", () => {
 
   afterAll(async () => {
     const user = await User.findOneAndDelete(testUserRegister.email);
+    await mongoose.connection.close();
   });
 });
