@@ -4,7 +4,7 @@ import { ReactComponent as Logo } from "./assets/Paw_Print.svg";
 import { useThemeContext } from "./ThemeProvider";
 
 function MainPage() {
-  const { theme, toggleTheme } = useThemeContext();
+  const { theme } = useThemeContext();
   return (
     <div className="w-screen  h-[70vh] ">
       <section className="   h-full flex flex-col justify-center items-center">
@@ -33,6 +33,8 @@ function MainPage() {
             {/* give 100% w / h for the svg to fill its parent */}
 
             <Logo style={{ width: "100%", height: "100%" }} />
+            {/* adding img from public folder */}
+            {/* <img src="Paw_Print.svg" /> */}
           </div>
         </div>
         <div className="btn ml-6 w-auto space-x-3 md:mt-4">

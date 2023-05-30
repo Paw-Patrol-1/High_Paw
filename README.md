@@ -28,7 +28,7 @@ Install High Paw with npm
   npm install my-project
   cd my-project
 ```
-
+  
 ## Authors
 
 - [Kharmalina Tong](https://www.github.com/Kharmalina)

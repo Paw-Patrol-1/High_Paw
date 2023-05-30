@@ -14,13 +14,11 @@ function Hangouts() {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 2; // Change this value to the desired number of items per page
 
-  // useEffect(() => {
-  // if user is null, redirect to login page
-  // delete later
+  // if user is null, redirect to main page
   if (!user) {
     window.location.href = "/mainpage";
   }
-  // }, [user]);
+
   // get user name for a userId
   const getUserName = async (id) => {
     const response = await fetch(
@@ -56,7 +54,7 @@ function Hangouts() {
       for (let hangout of data.hangouts) {
         users.push(hangout.userId);
       }
-      console.log(users);
+
       // remove duplicates
       const uniqueUsers = [...new Set(users)];
       // console.log(uniqueUsers);
@@ -180,26 +178,10 @@ function Hangouts() {
         previousLinkClassName="text-green-500 border border-green-500 rounded-md px-4 py-2 m-2 hover:bg-green-500 hover:text-white transition-all"
         nextClassName="page-item"
         nextLinkClassName="text-green-500 border border-green-500 rounded-md px-4 py-2 m-2 hover:bg-green-500 hover:text-white transition-all"
+        breakLabel="..."
+        pageRangeDisplayed={0}
+        marginPagesDisplayed={2}
       />
-
-      {/* <ReactPaginate
-        className="flex justify-center mt-6 gap-4 "
-        pageCount={Math.ceil(filteredHangouts.length / itemsPerPage)}
-        onPageChange={handlePageChange}
-        containerClassName="pagination"
-        activeClassName="text-green-500 font-bold scale-150"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="text-green-500 border border-green-500 rounded-md px-4 py-2 m-2 hover:bg-green-500 hover:text-white transition-all"
-        nextClassName="page-item"
-        nextLinkClassName="text-green-500 border border-green-500 rounded-md px-4 py-2 m-2 hover:bg-green-500 hover:text-white transition-all"
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        breakLabel={"..."}
-      /> */}
     </div>
   );
 }

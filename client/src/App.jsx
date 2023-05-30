@@ -12,34 +12,36 @@ import Hangouts from "./components/Hangouts";
 import Hangout from "./components/Hangout";
 import UpdateHangout from "./components/UpdateHangout";
 import ImageUpload from "./components/ImageUpload";
-// import ThemeSwitcher from "./components/ThemeSwitcher";
+
 import LifeStyle from "./components/LifeStyle";
 import Recipes from "./components/Recipes";
-import Facts from "./components/Facts";
+import FactsPaginate from "./components/FactsPaginate";
 import SingleFact from "./components/SingleFact";
 
 import { useThemeContext } from "./components/ThemeProvider";
-
+import NotFound404 from "./components/NotFound404";
+// create context for user info
 export const UserContext = createContext();
 
 function App() {
+  // import theme context and destructuring theme
   const { theme } = useThemeContext();
-  // check for user info in local storage
+
+  // check for user info in local storage (this allow the user to stay logged in after refreshing the page, also when exit the page and come back later)
   const userStorage = JSON.parse(localStorage.getItem("user"));
   // if userstorage = null -> user = null, else user = userStorage
   const [user, setUser] = useState(userStorage);
   // importing env variables(need no installation of dotenv package for this to work, just need to add .env file in root directory, because of VITE_ prefix)
-  const API_KEY = import.meta.env.VITE_MAPBOX_API;
 
   return (
     <div
       className={`parent-container -z-10 min-h-screen ${
         theme === "light" ? "bg-white text-gray-700" : "bg-black text-white"
       }`}
-      // className="parent-container  -z-10 bg-white"
     >
       {/* <ThemeProvider> */}
       <UserContext.Provider
+        // passing user and setUser to all components(props drilling)
         value={{
           user: user,
           setUser: setUser,
@@ -61,14 +63,14 @@ function App() {
             <Route path="/hangouts" element={<Hangouts />} />
             <Route path="/lifestyle" element={<LifeStyle />} />
             <Route path="/recipes" element={<Recipes />} />
-            <Route path="/facts" element={<Facts />} />
-            <Route path="/:name" element={<SingleFact />} />
+            <Route path="/facts" element={<FactsPaginate itemsPerPage={4} />} />
+            <Route path="/facts/:name" element={<SingleFact />} />
+            <Route path="*" element={<NotFound404 />} />
           </Routes>
 
           <Community />
         </div>
       </UserContext.Provider>
-      {/* </ThemeProvider> */}
     </div>
   );
 }
