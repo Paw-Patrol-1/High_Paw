@@ -4,6 +4,7 @@ const app = express();
 const morgan = require("morgan");
 require("dotenv").config(".env");
 const cookieParser = require("cookie-parser");
+require("./config/db.config");
 
 app.use(cors());
 app.use(morgan("dev"));
