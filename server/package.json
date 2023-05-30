@@ -4,7 +4,7 @@
   "description": "",
   "main": "App.js",
   "scripts": {
-    "test": "jest index.test.js --detectOpenHandles --forceExit",
+    "test": "jest App.test.js",
     "start": "nodemon server.js"
   },
   "keywords": [],
