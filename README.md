@@ -16,17 +16,39 @@ Stretch Goals
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`API_KEY`
+Client folder:
 
-`ANOTHER_API_KEY`
+`VITE_MAPBOX_API`
+
+Server folder:
+
+`PORT`
+
+`MONGODB_URI`
+
+`DB_NAME`
+
+`ACCESS_TOKEN_SECRET`
+
+`REFRESH_TOKEN_SECRET`
 
 ## Installation
 
 Install High Paw with npm
 
 ```bash
-  npm install my-project
-  cd my-project
+  cd server
+  npm install
+  npm start
+  cd client
+  npm install
+  npm run dev
+```
+
+Install High Paw with Docker Compose
+
+```bash
+  docker-compose up
 ```
   
 ## Authors
