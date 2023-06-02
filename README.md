@@ -37,12 +37,15 @@ Server folder:
 Install High Paw with npm
 
 ```bash
-  cd server
-  npm install
-  npm start
   cd client
   npm install
   npm run dev
+```
+
+```bash
+  cd server
+  npm install
+  npm start
 ```
 
 Install High Paw with Docker Compose
