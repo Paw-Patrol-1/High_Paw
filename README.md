@@ -2,8 +2,7 @@
 
 High Paw! 🐾 A Full Stack application where users can create and attend puppy playdates with geolocation.
 
-## Situation
-
+<<<<<<< HEAD
 High Paw is a deployed, full-stack application, where the main idea is that users can create, attend and modify playdates for their furry companions via geolocation, and the profile page contains the furry companion info.
 
 ## Task
@@ -45,7 +44,8 @@ Worked and collaborated with the backend (Patrick and Kharmalina) to connect the
 ## Result && Video presentation of the project
 
 - [High Paw App](https://high-paw-ugau.onrender.com/mainpage)
-- [Project presentation](https://www.youtube.com/watch?v=b6yPHPoDQ2Y)
+- # [Project presentation](https://www.youtube.com/watch?v=b6yPHPoDQ2Y)
+  > > > > > > > origin/main
 
 ## Features
 
