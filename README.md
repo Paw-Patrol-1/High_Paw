@@ -6,7 +6,7 @@ High Paw is a deployed, full-stack application, where the main idea is that user
 
 ## View project
 
-- [High Paw App](https://high-paw-ugau.onrender.com/mainpage)
+- [High Paw App](https://highpaw.onrender.com/mainpage)
 
 
 ## Features
